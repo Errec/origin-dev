@@ -1,3 +1,5 @@
+import { set } from "sanity";
+
 export default {
     name: 'blog',
     title: 'Blog',
@@ -15,6 +17,15 @@ export default {
         options: {
             source: 'title',
         },
+        },
+        {
+        title: 'Release date',
+        name: 'releaseDate',
+        type: 'date',
+        options: {
+            dateFormat: 'YYYY-MM-DD',
+            calendarTodayLabel: 'Today'
+        }
         },
         {
         name: 'coverImage',
