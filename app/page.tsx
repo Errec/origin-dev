@@ -1,7 +1,13 @@
+import Footer from './components/layout/Footer';
+import Header from './components/layout/Header';
+import Main from './components/layout/Main';
+
 export default function Home() {
   return (
-    <main>
-      <h1>Start Page</h1>
-    </main>
+    <>
+      <Header />
+      <Main />
+      <Footer />
+    </>
   );
 }
