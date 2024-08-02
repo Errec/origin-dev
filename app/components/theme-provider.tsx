@@ -24,7 +24,7 @@ export function ThemeProvider({
 
   if (!mounted) {
     // Prevent mismatches by rendering nothing until the client is fully mounted
-    return <div style={{ visibility: "hidden" }}>{children}</div>;
+    return null;
   }
 
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
