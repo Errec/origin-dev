@@ -66,6 +66,5 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
-  }
+    @apply bg-background text-foreground m-4 sm:m-8 md:m-10 lg:m-12 xl:m-16}
 }
