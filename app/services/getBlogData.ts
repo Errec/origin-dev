@@ -6,7 +6,8 @@ export async function getBlogData() {
             *[_type == 'blog'] {
                 title, 
                 'currentSlug': slug.current,
-                titleImage
+                titleImage,
+                description
             }
         `;
         const response = await sanityClient.fetch(query);
