@@ -5,7 +5,8 @@ export async function getBlogData() {
         const query = `
             *[_type == 'blog'] | order(releaseDate desc){
                 title, 
-                'currentSlug': slug.current
+                'currentSlug': slug.current,
+                'coverImage': coverImage.asset->url,
             }
         `;
         const response = await sanityClient.fetch(query);

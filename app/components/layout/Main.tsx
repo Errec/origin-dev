@@ -1,7 +1,9 @@
+import BlogGrid from "./section/BlogGrid";
+
 export default function Main() {
   return (
     <main>
-      <h1>Main</h1>
+      <BlogGrid />
     </main>
   );
 }
