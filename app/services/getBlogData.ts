@@ -3,10 +3,10 @@ import { sanityClient } from '../../sanity/lib/sanityClient';
 export async function getBlogData() {
     try {
         const query = `
-            *[_type == 'blog'] | order(releaseDate desc){
+            *[_type == 'blog'] {
                 title, 
                 'currentSlug': slug.current,
-                'coverImage': coverImage.asset->url,
+                titleImage
             }
         `;
         const response = await sanityClient.fetch(query);
