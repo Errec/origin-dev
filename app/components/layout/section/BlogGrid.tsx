@@ -13,7 +13,7 @@ export default async function BlogGrid() {
     const aboveFoldThreshold = itemsPerRow * 2; // This assumes the first two rows are above the fold
 
     return (
-    <section className="rounded-t-l overflow-hidden grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-4">
+    <section className="rounded-t-l overflow-hidden grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-32 mx-4 sm:mx-8 md:mx-10 lg:mx-12 xl:mx-16">
         {blogData.map((post, idx) => (
           <Card key={idx} className="cursor-pointer border-slate-400 dark:border-slate-600 flex flex-col">
             {post.titleImage ? (
