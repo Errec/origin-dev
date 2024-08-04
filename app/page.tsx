@@ -1,9 +1,11 @@
-import Main from './components/layout/Main';
+import Link from 'next/link';
 
-export default async function Home() {
+export default function Main() {
   return (
-    <>
-      <Main />
-    </>
+    <main>
+      <div className="flex items-center justify-center min-h-screen">
+        <Link href={"/blog/blog-grid"}>Blog</Link>
+      </div>
+    </main>
   );
 }
