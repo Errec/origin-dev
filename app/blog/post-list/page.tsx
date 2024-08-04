@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 
-export default async function BlogGrid() {
+export default async function PostList() {
 
     const blogData: blogCard[] = await getBlogData();
     const itemsPerRow = 4; // Assuming 4 items per row on large screens, adjust as necessary
@@ -34,7 +34,7 @@ export default async function BlogGrid() {
               <p className="line-clamp-4 dark:font-extralight text-sm mt-2">{post.description}</p>
             </div>
             <Button asChild className="w-full mt-auto">
-                <Link href={`/blog/${post.currentSlug}`}>Read More</Link>
+                <Link href={`/blog/post-list/${post.currentSlug}`}>Read More</Link>
             </Button>
           </CardContent>
           </Card>
