@@ -7,7 +7,8 @@ export async function getArticleData(slug: string) {
             "currentSlut": slug.current,
                 title,
                 content,
-                titleImage
+                titleImage,
+                releaseDate
             }[0]
         `;
         const response = await sanityClient.fetch(query);

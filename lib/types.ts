@@ -10,4 +10,5 @@ export type articleData = {
     content: any;
     titleImage: any;
     currentSlug: string;
+    releaseDate: string;
 }
