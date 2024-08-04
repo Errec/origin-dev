@@ -28,8 +28,8 @@ export default {
         }
         },
         {
-        name: 'coverImage',
-        title: 'Cover Image',
+        name: 'titleImage',
+        title: 'Title Image',
         type: 'image',
         },
         {

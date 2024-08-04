@@ -1,13 +1,11 @@
-import Footer from './components/layout/Footer';
-import Header from './components/layout/Header';
-import Main from './components/layout/Main';
+import Link from 'next/link';
 
-export default function Home() {
+export default function Main() {
   return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </>
+    <main>
+      <div className="flex items-center justify-center min-h-screen">
+        <Link href={"/blog/post-list"}> Blog </Link>
+      </div>
+    </main>
   );
 }
