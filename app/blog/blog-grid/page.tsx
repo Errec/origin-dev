@@ -1,10 +1,10 @@
 import { getBlogData } from "@/app/services/getBlogData";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { blogCard } from "@/lib/types";
 import { urlFor } from "@/sanity/lib/sanityClient";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent } from "../../components/ui/card";
 
 export default async function BlogGrid() {
 

@@ -4,7 +4,7 @@ export default function Main() {
   return (
     <main>
       <div className="flex items-center justify-center min-h-screen">
-        <Link href={"/blog/blog-grid"}>Blog </Link>
+        <Link href={"/blog/blog-grid"}> Blog </Link>
       </div>
     </main>
   );
