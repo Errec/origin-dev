@@ -13,9 +13,9 @@ export default async function PostList() {
     const aboveFoldThreshold = itemsPerRow * 2; // This assumes the first two rows are above the fold
 
     return (
-    <section className="rounded-t-l overflow-hidden grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-32 mx-4 sm:mx-8 md:mx-10 lg:mx-12 xl:mx-16">
+    <section className="rounded-t-l overflow-hidden grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-28 mx-4 sm:mx-8 md:mx-10 lg:mx-12 xl:mx-16">
         {blogData.map((post, idx) => (
-          <Card key={idx} className="cursor-pointer border-slate-400 dark:border-slate-600 flex flex-col">
+          <Card key={idx} className="border-slate-400 dark:border-slate-600 flex flex-col">
             {post.titleImage ? (
               <Image
                   src={urlFor(post.titleImage).url()} 
@@ -29,7 +29,7 @@ export default async function PostList() {
               <p>No image available</p>
             )}
           <CardContent className="flex flex-col flex-grow justify-between pb-4">
-            <div className="mb-4">
+            <div className="mb-4 cursor-default">
               <h3 className="mt-2 text-xl line-clamp-2 leading-tight font-semibold">{post.title}</h3>
               <p className="line-clamp-4 dark:font-extralight text-sm mt-2">{post.description}</p>
             </div>

@@ -9,7 +9,7 @@ export default async function BlogArticle({params}: {params: {slug: string}}) {
     
   const articleData: articleData = await getArticleData(params.slug);
   return (
-    <main className="max-w-3xl mx-auto py-28 px-6">
+    <main className="max-w-3xl mx-auto py-24 px-6">
     <article>
         <header className="mb-8">
             <Image
