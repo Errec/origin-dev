@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'do-not-say-multi-blog',
 
-  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
@@ -16,4 +16,3 @@ export default defineConfig({
     types: schemaTypes,
   },
 })
-  
