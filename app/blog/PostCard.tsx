@@ -2,8 +2,8 @@ import { blogCard } from "@/lib/types";
 import { urlFor } from "@/sanity/lib/sanityClient";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../../components/ui/button";
-import { Card, CardContent } from "../../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
 
 type PostCardProps = {
   post: blogCard;
@@ -31,7 +31,7 @@ export default function PostCard({ post, priority }: PostCardProps) {
           <p className="line-clamp-4 dark:font-extralight text-sm mt-2">{post.description}</p>
         </div>
         <Button asChild className="w-full mt-auto">
-          <Link href={`/blog/post-list/${post.currentSlug}`}>Read More</Link>
+          <Link href={`/blog/${post.currentSlug}`}>Read More</Link>
         </Button>
       </CardContent>
     </Card>
