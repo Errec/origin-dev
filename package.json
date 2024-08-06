@@ -1,5 +1,5 @@
 {
-  "name": "do-not-say",
+  "name": "do-not-say-multi-blog",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@sanity/image-url": "^1.0.2",
     "@tailwindcss/typography": "^0.5.13",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.419.0",
@@ -23,6 +24,7 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-syntax-highlighter": "^15.5.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
   },
