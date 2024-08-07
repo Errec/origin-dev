@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "../../lib/sanityClient";
 import { blogCard } from "../../lib/types";
-import { urlFor } from "../../sanity/lib/sanityClient";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 
