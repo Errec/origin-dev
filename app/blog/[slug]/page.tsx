@@ -4,6 +4,9 @@ import Image from "next/image";
 import { getArticleData } from "../../../app/services/getArticleData";
 import { urlFor } from "../../../lib/sanityClient";
 import { articleData } from "../../../lib/types";
+
+export const revalidate = 30; // Revalidate every 30 seconds
+
 export default async function BlogArticle({params}: {params: {slug: string}}) {
     
     const articleData: articleData = await getArticleData(params.slug);
