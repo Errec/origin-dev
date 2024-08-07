@@ -44,5 +44,34 @@ export default {
         },
       ],
     },
+    {
+      name: 'technologiesSection',
+      title: 'Technologies Section',
+      type: 'object',
+      fields: [
+        {
+          name: 'title',
+          title: 'Section Title',
+          type: 'string',
+          description: 'Title for the Technologies section',
+        },
+        {
+          name: 'logos',
+          title: 'Technology Logos',
+          type: 'array',
+          of: [
+            {
+              type: 'image',
+              options: {
+                accept: 'image/svg+xml',
+              },
+            },
+          ],
+          options: {
+            layout: 'grid',
+          },
+        },
+      ],
+    },
   ],
 };

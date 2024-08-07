@@ -1,5 +1,3 @@
-import { set } from "sanity";
-
 export default {
     name: 'blog',
     title: 'Blog',
