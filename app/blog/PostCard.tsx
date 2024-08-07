@@ -1,7 +1,7 @@
-import { blogCard } from "@/lib/types";
-import { urlFor } from "@/sanity/lib/sanityClient";
 import Image from "next/image";
 import Link from "next/link";
+import { blogCard } from "../../lib/types";
+import { urlFor } from "../../sanity/lib/sanityClient";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 

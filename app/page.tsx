@@ -1,5 +1,5 @@
-import { getMainPageData } from "@/app/services/getMainPageData";
 import Image from "next/image";
+import { getMainPageData } from "../app/services/getMainPageData";
 
 export default async function Main() {
   const mainPageData = await getMainPageData();
@@ -10,8 +10,8 @@ export default async function Main() {
         <Image
           src={mainPageData.heroBackgroundImage}
           alt="Hero Background"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="z-0"
           priority
         />
