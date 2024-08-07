@@ -2,14 +2,13 @@ import { getArticleData } from "@/app/services/getArticleData";
 import { articleData } from "@/lib/types";
 import { urlFor } from "@/sanity/lib/sanityClient";
 import { PortableText } from "@portabletext/react";
-import { format } from "date-fns"; // Import the 'format' function from date-fns
-import Image from "next/image"; // Import the 'Image' component
-
+import { format } from "date-fns";
+import Image from "next/image";
 export default async function BlogArticle({params}: {params: {slug: string}}) {
     
     const articleData: articleData = await getArticleData(params.slug);
     return (
-    <main className="max-w-3xl mx-auto py-24 px-6">
+    <main className="max-w-3xl mx-auto py-24 px-4">
     <article>
         <header className="mb-8">
             <Image
