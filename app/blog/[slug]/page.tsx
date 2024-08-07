@@ -1,9 +1,9 @@
-import { getArticleData } from "@/app/services/getArticleData";
-import { articleData } from "@/lib/types";
-import { urlFor } from "@/sanity/lib/sanityClient";
 import { PortableText } from "@portabletext/react";
 import { format } from "date-fns";
 import Image from "next/image";
+import { getArticleData } from "../../../app/services/getArticleData";
+import { articleData } from "../../../lib/types";
+import { urlFor } from "../../../sanity/lib/sanityClient";
 export default async function BlogArticle({params}: {params: {slug: string}}) {
     
     const articleData: articleData = await getArticleData(params.slug);

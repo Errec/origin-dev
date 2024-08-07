@@ -1,5 +1,5 @@
-import { getBlogData } from "@/app/services/getBlogData";
-import { blogCard } from "@/lib/types";
+import { getBlogData } from "../../app/services/getBlogData";
+import { blogCard } from "../../lib/types";
 import PostCard from "./PostCard";
 
 export default async function PostList() {
