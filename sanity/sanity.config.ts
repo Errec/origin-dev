@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'do-not-say-multi-blog',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  projectId: 'f93vz2nu',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
