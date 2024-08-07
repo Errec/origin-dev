@@ -1,4 +1,4 @@
-import { PersonIcon, ReaderIcon } from "@radix-ui/react-icons";
+import { ReaderIcon } from "@radix-ui/react-icons";
 import { CodeIcon, Handshake, HomeIcon } from "lucide-react";
 import Link from "next/link";
 import { ButtonLink } from "../../components/ui/button-link";
