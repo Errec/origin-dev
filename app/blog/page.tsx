@@ -2,9 +2,11 @@ import { getBlogData } from "../../app/services/getBlogData";
 import { blogCard } from "../../lib/types";
 import PostCard from "./PostCard";
 
+export const revalidate = 30; // Revalidate every 30 seconds
+
 export default async function PostList() {
   const blogData: blogCard[] = await getBlogData();
-  const itemsPerRow = 4; // Adjust as necessary
+  const itemsPerRow = 4;
   const aboveFoldThreshold = itemsPerRow * 2; // Assumes the first two rows are above the fold
 
   return (
