@@ -54,7 +54,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   const buttonClasses = cn(
     buttonVariants({ variant: isDisabled ? "outline" : variant, size }), 
     className,
-    isDisabled && "bg-amber-400 text-black pointer-events-none" // Apply yellow color and prevent interactions without changing cursor
+    isDisabled && "bg-amber-200 text-black pointer-events-none" // Apply yellow color and prevent interactions without changing cursor
   );
 
   return (
