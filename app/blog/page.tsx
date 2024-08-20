@@ -1,5 +1,5 @@
-import { getBlogData } from "../../app/services/getBlogData";
-import { blogCard } from "../../lib/types";
+import { blogCard } from "@/lib/types";
+import { getBlogData } from "@/services/getBlogData";
 import PostCard from "./PostCard";
 
 export const revalidate = 30; // Revalidate every 30 seconds
