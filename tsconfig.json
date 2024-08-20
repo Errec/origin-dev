@@ -16,7 +16,7 @@
     "paths": {
       "@/components/*": ["app/components/*"],
       "@/services/*": ["app/services/*"],
-      "@/content/*": ["app/(pages)/*"],
+      "@/content/*": ["app/(subpages)/*"],
       "@/lib/*": ["lib/*"],
       "@/public/*": ["public/*"],
     },
