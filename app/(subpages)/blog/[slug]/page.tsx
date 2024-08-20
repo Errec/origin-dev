@@ -1,9 +1,9 @@
+import { urlFor } from "@/lib/sanityClient";
+import { articleData } from "@/lib/types";
+import { getArticleData } from "@/services/getArticleData";
 import { PortableText } from "@portabletext/react";
 import { format } from "date-fns";
 import Image from "next/image";
-import { getArticleData } from "../../../app/services/getArticleData";
-import { urlFor } from "../../../lib/sanityClient";
-import { articleData } from "../../../lib/types";
 
 export const revalidate = 30; // Revalidate every 30 seconds
 

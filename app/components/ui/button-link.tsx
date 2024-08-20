@@ -30,13 +30,15 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
 export interface ButtonLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof buttonVariants> {
   href: string;
   icon: React.ReactNode;
+  ariaLabel?: string; // Add ariaLabel prop
+  tooltip?: string;   // Add tooltip prop
 }
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({ 
@@ -44,7 +46,9 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   href, 
   icon,
   variant = "default",
-  size = "icon", 
+  size = "icon",
+  ariaLabel,  // Descriptive label for accessibility
+  tooltip,    // Tooltip text
   ...props 
 }) => {
   const currentPath = usePathname().split("/")[1];
@@ -58,13 +62,19 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   );
 
   return (
-    <Link href={href} className={buttonClasses} aria-disabled={isDisabled} {...props}>
+    <Link 
+      href={href} 
+      className={buttonClasses} 
+      aria-disabled={isDisabled} 
+      aria-label={ariaLabel}   // Apply aria-label
+      title={tooltip}          // Apply tooltip
+      {...props}
+    >
       {React.cloneElement(icon as React.ReactElement, { className: "h-4 w-4" })}
     </Link>
-  )
+  );
 }
 
-ButtonLink.displayName = "ButtonLink"
+ButtonLink.displayName = "ButtonLink";
 
 export { ButtonLink };
-

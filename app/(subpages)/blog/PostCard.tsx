@@ -35,7 +35,7 @@ export default function PostCard({ post, priority }: PostCardProps) {
               {post.description}
             </p>
           </div>
-          <Button asChild className="w-full mt-auto text-base">
+          <Button tooltip="Read More" aria-label="read more" asChild className="w-full mt-auto text-base">
             <Link href={`/blog/${post.currentSlug}`}>Read More</Link>
           </Button>
         </CardContent>

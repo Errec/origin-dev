@@ -1,4 +1,4 @@
-import Navbar from '../common/Navbar';
+import Navbar from '@/components/common/Navbar';
 
 export default function Header() {
   return (
