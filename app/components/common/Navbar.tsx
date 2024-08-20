@@ -1,10 +1,10 @@
+import { ButtonLink } from "@/components/ui/button-link";
 import SmallLogo from '@/public/origindev-logo-sm.svg';
 import LargeLogo from '@/public/origindev-logo.svg';
 import { ReaderIcon } from "@radix-ui/react-icons";
 import { CodeIcon, Handshake, HomeIcon } from "lucide-react";
 import Image from 'next/image';
 import Link from "next/link";
-import { ButtonLink } from "../../components/ui/button-link";
 import { ModeToggle } from "./ModeToggle";
 
 export default function Navbar() {
