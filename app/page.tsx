@@ -1,5 +1,5 @@
+import { getMainPageData } from "@/services/getMainPageData";
 import Image from "next/image";
-import { getMainPageData } from "../app/services/getMainPageData";
 
 export const revalidate = 30; // Revalidate every 30 seconds
 

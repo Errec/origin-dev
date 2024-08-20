@@ -1,4 +1,4 @@
-import { sanityClient } from '../../lib/sanityClient';
+import { sanityClient } from '@/lib/sanityClient';
 
 export async function getArticleData(slug: string) {
     try {
