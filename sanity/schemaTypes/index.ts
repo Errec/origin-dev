@@ -1,5 +1,9 @@
-import blog from './blog';
-import landingPage from './landingPage';
-import projects from './projects';
+import blog from './documents/blog';
+import landingPage from './documents/landingPage';
+import projects from './documents/projects';
 
-export const schemaTypes = [blog, landingPage, projects];
+export const schemaTypes = [
+    blog,
+    landingPage,
+    projects
+];
