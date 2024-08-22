@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -13,14 +15,10 @@ const config = {
       }
     ],
   },
-  webpack(config, { dev }) {
-    if (dev) { 
-      config.devtool = 'eval-source-map';
-    } else {
-      config.devtool = 'source-map';
-    }
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.resolve.alias['@'] = path.resolve(__dirname, './app');
     return config;
   },
 };
 
-export default config;
+module.exports = config;
