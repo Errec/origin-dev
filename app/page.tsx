@@ -1,4 +1,4 @@
-import { getLandingPageData } from "@/api/sanityApi";
+import { getLandingPageData } from "@/api/sanity";
 
 export const revalidate = 30; // Revalidate every 30 seconds
 
