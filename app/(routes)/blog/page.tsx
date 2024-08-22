@@ -1,11 +1,11 @@
-import { blogCard } from "@/lib/types";
-import { getBlogData } from "@/services/getBlogData";
-import PostCard from "./PostCard";
+import { getBlogData } from "@/api/sanity";
+import { BlogCard } from "@/types";
+import PostCard from "./components/PostCard";
 
 export const revalidate = 30; // Revalidate every 30 seconds
 
 export default async function PostList() {
-  const blogData: blogCard[] = await getBlogData();
+  const blogData: BlogCard[] = await getBlogData();
   const itemsPerRow = 4;
   const aboveFoldThreshold = itemsPerRow * 2; // Assumes the first two rows are above the fold
 

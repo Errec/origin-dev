@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { urlFor } from "@/lib/sanityClient";
-import { blogCard } from "@/lib/types";
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/ui/Card";
+import { urlFor } from "app/lib/sanityClient";
+import { BlogCard } from "app/types";
 import Image from "next/image";
 import Link from "next/link";
 
 type PostCardProps = {
-  post: blogCard;
+  post: BlogCard;
   priority: boolean;
 };
 

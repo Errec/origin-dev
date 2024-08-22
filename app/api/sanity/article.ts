@@ -11,8 +11,7 @@ export async function getArticleData(slug: string) {
                 releaseDate
             }[0]
         `;
-        const response = await sanityClient.fetch(query);
-        return response;
+        return await sanityClient.fetch(query);
     } catch (error) {
         console.error('Error fetching article data:', error);
         throw error;
