@@ -1,4 +1,4 @@
-import { getBlogData } from "@/api/sanity";
+import { getBlogData } from "@/api/sanityApi";
 import { BlogCard } from "@/types";
 import PostCard from "./components/PostCard";
 
