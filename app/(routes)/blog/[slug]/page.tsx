@@ -1,7 +1,7 @@
-import { urlFor } from "@/lib/sanityClient";
-import { articleData } from "@/lib/types";
-import { getArticleData } from "@/services/getArticleData";
+import { getArticleData } from "@/api/sanity";
+import { ArticleData } from "@/types/index";
 import { PortableText } from "@portabletext/react";
+import { urlFor } from "app/lib/sanityClient";
 import { format } from "date-fns";
 import Image from "next/image";
 
@@ -9,26 +9,26 @@ export const revalidate = 30; // Revalidate every 30 seconds
 
 export default async function BlogArticle({params}: {params: {slug: string}}) {
     
-    const articleData: articleData = await getArticleData(params.slug);
+    const ArticleData: ArticleData = await getArticleData(params.slug);
     return (
     <main className="max-w-3xl mx-auto py-24 px-4">
     <article>
         <header className="mb-8">
             <Image
                 priority
-                src={urlFor(articleData.titleImage).url()} 
-                alt={articleData.title}
+                src={urlFor(ArticleData.titleImage).url()} 
+                alt={ArticleData.title}
                 width={800}
                 height={400}
                 className="w-full rounded-lg shadow-md h-[600px] object-cover"
             />
-            <h1 className="text-3xl font-bold mt-6">{articleData.title}</h1>
+            <h1 className="text-3xl font-bold mt-6">{ArticleData.title}</h1>
             <p className="text-gray-500 mt-2">
-                {format(new Date(articleData.releaseDate), "MMMM dd, yyyy")}
+                {format(new Date(ArticleData.releaseDate), "MMMM dd, yyyy")}
             </p>
         </header>
         <section className="prose prose-slate dark:prose-invert prose-lg py-4">
-            <PortableText value={articleData.content} />
+            <PortableText value={ArticleData.content} />
         </section>
     </article>
 </main>

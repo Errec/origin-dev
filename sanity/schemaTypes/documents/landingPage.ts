@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
 
-export default defineType({
+export const landingPage = defineType({
   name: 'landingPage',
   title: 'Landing Page',
   type: 'document',
@@ -16,14 +16,14 @@ export default defineType({
       type: 'heroSection',
     }),
     defineField({
-      name: 'technologiesSection',
-      title: 'Technologies Section',
-      type: 'technologiesSection',
-    }),
-    defineField({
       name: 'projectsSection',
       title: 'Projects Section',
       type: 'projectsSection',
+    }),
+    defineField({
+      name: 'technologiesSection',
+      title: 'Technologies Section',
+      type: 'technologiesSection',
     }),
     defineField({
       name: 'blogPreviewSection',
@@ -34,6 +34,11 @@ export default defineType({
       name: 'footerSection',
       title: 'Footer Section',
       type: 'footerSection',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
     }),
   ],
 })

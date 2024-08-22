@@ -14,10 +14,13 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@/api/*": ["app/api/*"],
       "@/components/*": ["app/components/*"],
-      "@/services/*": ["app/services/*"],
-      "@/content/*": ["app/(subpages)/*"],
-      "@/lib/*": ["lib/*"],
+      "@/content/*": ["app/(routes)/*"],
+      "@/lib/*": ["app/lib/*"],
+      "@/styles/*": ["app/styles/*"],
+      "@/types/*": ["app/types/*"],
+      "@/utils/*": ["app/utils/*"],
       "@/public/*": ["public/*"],
     },
     "plugins": [

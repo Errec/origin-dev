@@ -1,4 +1,4 @@
-import { ButtonLink } from "@/components/ui/button-link";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import SmallLogo from '@/public/origindev-logo-sm.svg';
 import LargeLogo from '@/public/origindev-logo.svg';
 import { ReaderIcon } from "@radix-ui/react-icons";
