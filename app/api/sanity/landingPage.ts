@@ -11,7 +11,11 @@ export async function getLandingPageData() {
                         }
                     },
                     title,
-                    subtitle
+                    subtitle,
+                    ctaButton {
+                        text,
+                        link
+                    }
                 }
             }
         `;
