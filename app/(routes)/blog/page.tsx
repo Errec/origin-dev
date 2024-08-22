@@ -1,5 +1,5 @@
-import { getBlogData } from "@/api/sanity/blog";
-import { BlogCard } from "@/types/index";
+import { getBlogData } from "@/api/sanity";
+import { BlogCard } from "@/types";
 import PostCard from "./components/PostCard";
 
 export const revalidate = 30; // Revalidate every 30 seconds
