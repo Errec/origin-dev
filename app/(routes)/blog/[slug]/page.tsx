@@ -1,7 +1,7 @@
-import { getArticleData } from "@/api/sanity/index";
+import { getArticleData } from "@/api/sanity";
+import { urlFor } from "@/lib/sanityClient";
 import { ArticleData } from "@/types/index";
 import { PortableText } from "@portabletext/react";
-import { urlFor } from "app/lib/sanityClient";
 import { format } from "date-fns";
 import Image from "next/image";
 
