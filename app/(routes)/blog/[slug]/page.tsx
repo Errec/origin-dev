@@ -1,4 +1,4 @@
-import { getArticleData } from "@/api/sanity";
+import { getArticleData } from "@/api/sanity/article";
 import { urlFor } from "@/lib/sanityClient";
 import { ArticleData } from "@/types/index";
 import { PortableText } from "@portabletext/react";
