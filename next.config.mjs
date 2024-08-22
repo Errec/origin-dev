@@ -1,5 +1,10 @@
+/** @type {import('next').NextConfig} */
 const config = {
-  images : {
+  reactStrictMode: true,
+  experimental: {
+    esmExternals: 'loose',
+  },
+  images: {
     remotePatterns: [
       { 
         protocol: 'https',
@@ -10,9 +15,9 @@ const config = {
   },
   webpack(config, { dev }) {
     if (dev) { 
-      config.devtool = 'eval-source-map'; // Fast source maps for development
+      config.devtool = 'eval-source-map';
     } else {
-      config.devtool = 'source-map'; // Full source maps for production
+      config.devtool = 'source-map';
     }
     return config;
   },

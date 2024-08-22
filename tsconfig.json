@@ -14,14 +14,15 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/api/*": ["app/api/*"],
-      "@/components/*": ["app/components/*"],
-      "@/content/*": ["app/(routes)/*"],
-      "@/lib/*": ["app/lib/*"],
-      "@/styles/*": ["app/styles/*"],
-      "@/types/*": ["app/types/*"],
-      "@/utils/*": ["app/utils/*"],
-      "@/public/*": ["public/*"],
+      "@/*": ["./app/*"],
+      "@/api/*": ["./app/api/*"],
+      "@/components/*": ["./app/components/*"],
+      "@/content/*": ["./app/(routes)/*"],
+      "@/lib/*": ["./app/lib/*"],
+      "@/styles/*": ["./app/styles/*"],
+      "@/types/*": ["./app/types/*"],
+      "@/utils/*": ["./app/utils/*"],
+      "@/public/*": ["./public/*"]
     },
     "plugins": [
       {

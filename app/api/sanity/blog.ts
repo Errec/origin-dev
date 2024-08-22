@@ -1,4 +1,4 @@
-import { sanityClient } from 'app/lib/sanityClient';
+import { sanityClient } from '@/lib/sanityClient';
 
 export async function getBlogData() {
     try {
