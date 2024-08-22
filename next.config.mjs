@@ -1,16 +1,5 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-/** @type {import('next').NextConfig} */
 const config = {
-  reactStrictMode: true,
-  experimental: {
-    esmExternals: 'loose',
-  },
-  images: {
+  images : {
     remotePatterns: [
       { 
         protocol: 'https',
@@ -19,8 +8,12 @@ const config = {
       }
     ],
   },
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    config.resolve.alias['@'] = path.resolve(__dirname, './app');
+  webpack(config, { dev }) {
+    if (dev) { 
+      config.devtool = 'eval-source-map'; // Fast source maps for development
+    } else {
+      config.devtool = 'source-map'; // Full source maps for production
+    }
     return config;
   },
 };
