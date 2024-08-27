@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
-import { urlFor } from "app/lib/sanityClient";
+import { urlFor } from "app/lib/sanity-client";
 import { BlogCard } from "app/types";
 import Image from "next/image";
 import Link from "next/link";

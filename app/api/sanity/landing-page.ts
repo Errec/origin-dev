@@ -1,4 +1,4 @@
-import { sanityClient } from '@/lib/sanityClient';
+import { sanityClient } from '@/lib/sanity-client';
 
 export async function getLandingPageData() {
     try {
