@@ -1,4 +1,9 @@
-export { urlFor } from '@/lib/sanityClient';
+export { urlFor } from '@/lib/sanity-client';
 export { getArticleData } from './article';
 export { getBlogData } from './blog';
-export { getLandingPageData } from './landingPage';
+
+export {
+    getHeroSectionData,
+    getTechnologiesSectionData
+} from './landingPage';
+

@@ -5,8 +5,8 @@ export default function Footer() {
 
   return (
     <footer
-      className="fixed z-10 bottom-0 left-0 right-0 h-16 p-4 dark:bg-stone-800 bg-stone-600 opacity-90 flex flex-col items-center justify-center"
-      role="contentinfo"  // Add role for screen readers
+      className="fixed z-10 bottom-0 left-0 right-0 h-16 p-4 flex flex-col items-center justify-center dark:bg-stone-800 bg-stone-600 bg-opacity-80 dark:bg-opacity-50" 
+      role="contentinfo"
     >
       <div className="flex gap-6 mb-1">
         <a

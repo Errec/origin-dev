@@ -1,6 +1,6 @@
-import { sanityClient } from '@/lib/sanityClient';
+import { sanityClient } from '@/lib/sanity-client';
 
-export async function getLandingPageData() {
+export async function getHeroSectionData() {
     try {
         const query = `
             *[_type == "landingPage"][0] {
@@ -21,7 +21,7 @@ export async function getLandingPageData() {
         `;
         return await sanityClient.fetch(query);
     } catch (error) {
-        console.error('Error fetching landing page data:', error);
+        console.error('Error fetching hero section data:', error);
         throw error;
     }
 }

@@ -1,5 +1,5 @@
 import { getArticleData } from "@/api/sanity";
-import { urlFor } from "@/lib/sanityClient";
+import { urlFor } from "@/lib/sanity-client";
 import { ArticleData } from "@/types";
 import { PortableText } from "@portabletext/react";
 import { format } from "date-fns";
