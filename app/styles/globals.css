@@ -57,13 +57,30 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
 
-@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar for all browsers */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+  }
+
   * {
     @apply border-border;
   }
+  
   body {
-    @apply bg-background text-foreground
+    @apply bg-background text-foreground;
+  }
+
+  .svg-white {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);
   }
 }

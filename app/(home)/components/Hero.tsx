@@ -1,7 +1,7 @@
 import CTAButton from "@/components/ui/CTAButton";
 import { HeroSection } from "@/types";
 
-interface HeroProps {
+type HeroProps = {
     heroSection: HeroSection;
 }
 
