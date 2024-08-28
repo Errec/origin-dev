@@ -40,8 +40,8 @@ export default function Technologies({ technologiesSection }: TechnologiesProps)
   }, [randomizedTechnologies]);
 
   return (
-    <section className="pt-16 pb-44 bg-black">
-      <h2 className="text-[3.5vw] md:text-[2.5vw] lg:text-[1.5vw] text-center mb-20 text-amber-400 font-medium">
+    <section className="pt-32 pb-64 bg-black">
+      <h2 className="text-[3.5vw] md:text-[2.5vw] lg:text-[1.5vw] text-center mb-28 text-amber-400 font-medium">
         {technologiesSection.title.toLocaleUpperCase()}
       </h2>
       <div className="relative overflow-hidden">
@@ -54,7 +54,7 @@ export default function Technologies({ technologiesSection }: TechnologiesProps)
                   alt={tech.name}
                   width={80} // Set width to 80px
                   height={80} // Set height to 80px
-                  className="w-auto h-[80px] max-w-none"
+                  className="w-auto h-20 max-w-none"
                 />
               </div>
             ))}
