@@ -1,6 +1,6 @@
 import { getHeroSectionData, getTechnologiesSectionData } from "@/api/sanity";
-import Hero from "./components/Hero";
-import Technologies from "./components/Technologies";
+import Hero from "./sections/Hero";
+import Technologies from "./sections/Technologies";
 
 export default async function HomePage() {
   const heroData = await getHeroSectionData();

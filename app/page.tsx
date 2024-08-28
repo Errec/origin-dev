@@ -1,4 +1,4 @@
-import HomePage from './components/home/page';
+import HomePage from './components/home/HomePage';
 
 export const revalidate = 30; // Revalidate every 30 seconds
 
