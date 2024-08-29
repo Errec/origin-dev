@@ -23,7 +23,7 @@ export default function Technologies({ technologiesSection }: TechnologiesProps)
     const scrollElement = scrollRef.current;
     if (!scrollElement || randomizedTechnologies.length === 0) return;
 
-    // Clone the items to create a seamless loop
+    // Clone the items to create a constant flow loop
     const originalItems = scrollElement.children[0];
     const clonedItems = originalItems.cloneNode(true);
     scrollElement.appendChild(clonedItems);
