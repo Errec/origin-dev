@@ -6,6 +6,7 @@ export async function getProjectsSectionData() {
             *[_type == "landingPage"][0] {
                 projectsSection {
                     title,
+                    subtitle,
                     projects[] {
                         title,
                         subtitle,

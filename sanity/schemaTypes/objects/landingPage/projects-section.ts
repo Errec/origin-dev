@@ -11,6 +11,11 @@ export const projectsSection = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'subtitle',
+      title: 'Section Subtitle',
+      type: 'string',
+    }),
+    defineField({
       name: 'projects',
       title: 'Projects',
       type: 'array',
