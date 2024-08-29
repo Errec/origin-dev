@@ -1,6 +1,6 @@
 import CTAButton from "@/components/ui/CTAButton";
 import { HeroSection } from "@/types";
-
+// TODO: implement lazy loading for the video - splash screen
 type HeroProps = {
     heroSection: HeroSection;
 }
