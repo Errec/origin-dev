@@ -1,13 +1,13 @@
 import CTAButton from "@/components/ui/CTAButton";
 import { HeroSection } from "@/types";
-
+// TODO: implement lazy loading for the video - splash screen
 type HeroProps = {
     heroSection: HeroSection;
 }
 
 export default function Hero({ heroSection }: HeroProps) {
     return (
-        <div className="relative w-full h-screen">
+        <section className="relative w-full h-screen">
             {heroSection?.backgroundVideo && (
                 <video
                     src={heroSection.backgroundVideo.asset.url}
@@ -40,6 +40,6 @@ export default function Hero({ heroSection }: HeroProps) {
             </div>
         </div>
         </div>
-    </div>
+    </section>
     );
 }

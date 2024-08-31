@@ -3,7 +3,6 @@ export { getArticleData } from './article';
 export { getBlogData } from './blog';
 
 export {
-    getHeroSectionData,
-    getTechnologiesSectionData
+    getHeroSectionData, getProjectsSectionData, getTechnologiesSectionData
 } from './landingPage';
 

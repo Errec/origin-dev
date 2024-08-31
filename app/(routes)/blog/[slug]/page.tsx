@@ -4,7 +4,7 @@ import { ArticleData } from "@/types";
 import { PortableText } from "@portabletext/react";
 import { format } from "date-fns";
 import Image from "next/image";
-
+// TODO: implement lazy loading for the images
 export const revalidate = 30; // Revalidate every 30 seconds
 
 export default async function BlogArticle({ params }: { params: { slug: string } }) {

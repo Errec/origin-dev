@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
 };
-
+// TODO: add error boundary
 export default function RootLayout({
   children,
 }: Readonly<{
