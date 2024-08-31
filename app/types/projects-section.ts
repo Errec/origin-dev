@@ -15,5 +15,6 @@ export type Project = {
 
 export type ProjectsSection = {
     title: string;
+    subtitle: string;
     projects: Project[];
 };

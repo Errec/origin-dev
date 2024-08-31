@@ -52,8 +52,8 @@ export default function Technologies({ technologiesSection }: TechnologiesProps)
                 <Image
                   src={tech.logo.asset.url}
                   alt={tech.name}
-                  width={80} // Set width to 80px
-                  height={80} // Set height to 80px
+                  width={80}
+                  height={80}
                   className="w-auto h-20 max-w-none"
                 />
               </div>
