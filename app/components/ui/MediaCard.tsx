@@ -33,7 +33,7 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
 
     gsap.to(imageRef.current, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
     gsap.to(videoRef.current, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(titleRef.current, { yPercent: -100, duration: 0.4, ease: "power2.out" });
+    gsap.to(titleRef.current, { yPercent: -100, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.0)" });
     gsap.to(subtitleRef.current, { yPercent: 0, opacity: 1, duration: 0.4, ease: "power2.out" });
     gsap.to(bgRef.current, { opacity: 1, duration: 0.4, ease: "power2.inOut", delay: 0.2 });
   };
@@ -45,7 +45,7 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
       videoRef.current.currentTime = 0;
     }
 
-    gsap.to(titleRef.current, { yPercent: 0, duration: 0.4, ease: "power2.out" });
+    gsap.to(titleRef.current, { yPercent: 0, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.3)" });
     gsap.to(subtitleRef.current, { yPercent: 100, opacity: 0, duration: 0.4, ease: "power2.out", onStart: () => {
       gsap.to(subtitleRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
     }});
