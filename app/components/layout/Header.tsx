@@ -7,34 +7,33 @@ import React, { useEffect, useRef, useState } from 'react';
 export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
 
-        if (scrollTimeout.current) return;
+        if (currentScrollY + windowHeight >= documentHeight - 50) {
+          // Near the bottom of the page, show the header
+          gsap.to(headerRef.current, { y: '0%', duration: 0, ease: 'power2.out' });
+        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          // Scrolling down, hide header
+          gsap.to(headerRef.current, { y: '-100%', duration: 0, ease: 'power2.out' });
+        } else {
+          // Scrolling up, show header
+          gsap.to(headerRef.current, { y: '0%', duration: 0, ease: 'power2.out' });
+        }
 
-        scrollTimeout.current = setTimeout(() => {
-          if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            // Scrolling down, hide header
-            gsap.to(headerRef.current, { y: '-100%', duration: 0.3, ease: 'power3.out' });
-          } else {
-            // Scrolling up, show header
-            gsap.to(headerRef.current, { y: '0%', duration: 0.3, ease: 'power3.out' });
-          }
-
-          setLastScrollY(currentScrollY);
-          scrollTimeout.current = null;
-        }, 100); // Adjust this delay (100ms) as needed
+        setLastScrollY(currentScrollY);
       };
 
       const handleKeydown = (event: KeyboardEvent) => {
         if (event.key === 'ArrowDown') {
-          gsap.to(headerRef.current, { y: '-100%', duration: 0.3, ease: 'power3.out' });
+          gsap.to(headerRef.current, { y: '-100%', duration: 0, ease: 'power2.out' });
         } else if (event.key === 'ArrowUp') {
-          gsap.to(headerRef.current, { y: '0%', duration: 0.3, ease: 'power3.out' });
+          gsap.to(headerRef.current, { y: '0%', duration: 0, ease: 'power2.out' });
         }
       };
 
