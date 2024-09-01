@@ -1,3 +1,4 @@
+import ScrollToTopButton from '@/components/ui/ScrollToTopButton'; // Import the new component
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 
 export default function Footer() {
@@ -5,15 +6,18 @@ export default function Footer() {
 
   return (
     <footer
-      className="fixed z-10 bottom-0 left-0 right-0 h-16 p-4 flex flex-col items-center justify-center dark:bg-stone-800 bg-stone-600 bg-opacity-80 dark:bg-opacity-50" 
+      className="h-10 px-10 flex justify-between cursor-default"
       role="contentinfo"
+      style={{ backgroundColor: "transparent" }}
     >
-      <div className="flex gap-6 mb-1">
+      <p className="font-light">
+        <span className="bg-white text-black">ORIGIN</span>DEV<span className="text-[0.7em] relative left-[0.08em] -top-[0.6em] font">®</span> ©{currentYear}
+      </p>
+      <div className="flex space-x-6">
         <a
           href="https://github.com/Errec"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-stone-200"
           aria-label="Visit Raniro Coelho's GitHub profile"
         >
           <GitHubLogoIcon className="w-5 h-5" />
@@ -22,15 +26,12 @@ export default function Footer() {
           href="https://www.linkedin.com/in/raniro/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-stone-200"
           aria-label="Visit Raniro Coelho's LinkedIn profile"
         >
           <LinkedInLogoIcon className="w-5 h-5" />
         </a>
+        <ScrollToTopButton />
       </div>
-      <p className="text-sm dark:text-stone-200 text-stone-50">
-        Copyright © {currentYear} Raniro Coelho, Errec Inc.
-      </p>
     </footer>
   );
 }

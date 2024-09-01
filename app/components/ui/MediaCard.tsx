@@ -33,7 +33,7 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
 
     gsap.to(imageRef.current, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
     gsap.to(videoRef.current, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(titleRef.current, { yPercent: -100, duration: 0.4, ease: "power2.out" });
+    gsap.to(titleRef.current, { yPercent: -100, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.0)" });
     gsap.to(subtitleRef.current, { yPercent: 0, opacity: 1, duration: 0.4, ease: "power2.out" });
     gsap.to(bgRef.current, { opacity: 1, duration: 0.4, ease: "power2.inOut", delay: 0.2 });
   };
@@ -45,7 +45,7 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
       videoRef.current.currentTime = 0;
     }
 
-    gsap.to(titleRef.current, { yPercent: 0, duration: 0.4, ease: "power2.out" });
+    gsap.to(titleRef.current, { yPercent: 0, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.6)" });
     gsap.to(subtitleRef.current, { yPercent: 100, opacity: 0, duration: 0.4, ease: "power2.out", onStart: () => {
       gsap.to(subtitleRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
     }});
@@ -83,7 +83,7 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
       </div>
       <div 
         ref={bgRef}
-        className="absolute inset-x-0 bottom-0 bg-black bg-opacity-80 transition-opacity duration-400 ease-in-out opacity-0"
+        className="absolute inset-x-0 bottom-0 bg-black bg-opacity-60 transition-opacity duration-400 ease-in-out opacity-0"
         style={{ height: '20%' }}
       ></div>
       <div 
@@ -93,7 +93,7 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
       >
         <h3 
           ref={titleRef} 
-          className="text-white bg-black bg-opacity-30 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center leading-tight p-1 sm:p-2 mb-2 sm:mb-3 md:mb-4 lg:mb-5 w-full transition-transform duration-400 ease-out"
+          className="text-white bg-black bg-opacity-60 text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-center leading-tight p-1 sm:p-2 mb-2 sm:mb-3 md:mb-4 lg:mb-5 w-full transition-transform duration-400 ease-out"
         >
           {title}
         </h3>
