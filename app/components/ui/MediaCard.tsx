@@ -93,7 +93,7 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
       >
         <h3 
           ref={titleRef} 
-          className="text-white bg-black bg-opacity-60 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center leading-tight p-1 sm:p-2 mb-2 sm:mb-3 md:mb-4 lg:mb-5 w-full transition-transform duration-400 ease-out"
+          className="text-white bg-black bg-opacity-60 text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-center leading-tight p-1 sm:p-2 mb-2 sm:mb-3 md:mb-4 lg:mb-5 w-full transition-transform duration-400 ease-out"
         >
           {title}
         </h3>
