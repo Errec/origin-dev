@@ -16,8 +16,7 @@ export default function Technologies({ technologiesSection }: TechnologiesProps)
       </h2>
       <InfiniteCarousel 
         data={technologiesSection.technologies} 
-        random 
-        duration={30} // Optional: Adjust duration to control scroll speed
+        duration={30}
       />
     </section>
   );
