@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import { DoubleArrowUpIcon } from "@radix-ui/react-icons";
 
-export default function ScrollToTopButton() {
+export default function ButtonScrollToTop() {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };

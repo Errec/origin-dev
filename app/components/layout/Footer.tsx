@@ -1,4 +1,4 @@
-import ScrollToTopButton from '@/components/ui/ScrollToTopButton'; // Import the new component
+import ButtonScrollToTop from '@/components/ui/ButtonScrollToTop'; // Import the new component
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 
 export default function Footer() {
@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="h-10 px-10 flex justify-between cursor-default"
+      className="h-10 px-10 flex justify-between cursor-default border-t border-black pt-4"
       role="contentinfo"
       style={{ backgroundColor: "transparent" }}
     >
@@ -30,7 +30,7 @@ export default function Footer() {
         >
           <LinkedInLogoIcon className="w-5 h-5" />
         </a>
-        <ScrollToTopButton />
+        <ButtonScrollToTop />
       </div>
     </footer>
   );

@@ -1,5 +1,3 @@
-'use client';
-
 import InfiniteCarousel from '@/components/ui/InfiniteCarousel';
 import { TechnologiesSection } from '@/types';
 import React from 'react';
