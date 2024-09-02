@@ -3,55 +3,55 @@
 import { ProjectsSection } from '@/types';
 import { gsap } from 'gsap';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 type Project = ProjectsSection['projects'][number];
 
-const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) => {
+const MediaCardContent: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (cardRef.current && textContainerRef.current && titleRef.current && subtitleRef.current && bgRef.current && videoRef.current) {
+    if (titleRef.current && subtitleRef.current && bgRef.current) {
       gsap.set(subtitleRef.current, { yPercent: 100, opacity: 0 });
       gsap.set(bgRef.current, { opacity: 0 });
-      gsap.set(videoRef.current, { opacity: 0 });
     }
   }, []);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => console.error('Error playing video:', error));
-    }
 
-    gsap.to(imageRef.current, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(videoRef.current, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(titleRef.current, { yPercent: -100, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.0)" });
-    gsap.to(subtitleRef.current, { yPercent: 0, opacity: 1, duration: 0.4, ease: "power2.out" });
-    gsap.to(bgRef.current, { opacity: 1, duration: 0.4, ease: "power2.inOut", delay: 0.2 });
+    if (imageRef.current && titleRef.current && subtitleRef.current && bgRef.current && videoRef.current) {
+      gsap.to(imageRef.current, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
+      gsap.to(videoRef.current, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
+      gsap.to(titleRef.current, { yPercent: -100, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.0)" });
+      gsap.to(subtitleRef.current, { yPercent: 0, opacity: 1, duration: 0.4, ease: "power2.out" });
+      gsap.to(bgRef.current, { opacity: 1, duration: 0.4, ease: "power2.inOut", delay: 0.2 });
+
+      if (videoRef.current) {
+        videoRef.current.play().catch(error => console.error('Error playing video:', error));
+      }
+    }
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    if (videoRef.current) {
+
+    if (titleRef.current && subtitleRef.current && bgRef.current && imageRef.current && videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
+      gsap.to(titleRef.current, { yPercent: 0, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.6)" });
+      gsap.to(subtitleRef.current, { yPercent: 100, opacity: 0, duration: 0.4, ease: "power2.out" });
+      gsap.to(imageRef.current, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
+      gsap.to(videoRef.current, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
+      gsap.to(bgRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
     }
-
-    gsap.to(titleRef.current, { yPercent: 0, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.6)" });
-    gsap.to(subtitleRef.current, { yPercent: 100, opacity: 0, duration: 0.4, ease: "power2.out", onStart: () => {
-      gsap.to(subtitleRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
-    }});
-    gsap.to(imageRef.current, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(videoRef.current, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(bgRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
   };
 
   return (
@@ -105,6 +105,14 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
         </p>
       </div>
     </div>
+  );
+};
+
+const MediaCard: React.FC<Project> = (props) => {
+  return (
+    <Suspense fallback={<Image src={props.image.asset.url} alt={props.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />}>
+      <MediaCardContent {...props} />
+    </Suspense>
   );
 };
 
