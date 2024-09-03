@@ -1,7 +1,9 @@
 import { getHeroSectionData, getProjectsSectionData, getTechnologiesSectionData } from "@/api/sanity";
-import Hero from "./hero-section/page";
-import Projects from "./projects-section/page";
-import Technologies from "./technologies-section/page";
+import Hero from "./sections/Hero";
+import Projects from "./sections/Projects";
+import Technologies from "./sections/Technologies";
+
+export const revalidate = 30; // Revalidate every 30 seconds
 
 export default async function HomePage() {
   const heroData = await getHeroSectionData();
