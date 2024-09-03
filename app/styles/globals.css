@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +6,7 @@
   :root {
     --accent: 60 4.8% 95.9%;
     --accent-foreground: 24 9.8% 10%;
-    --background: 0 0% 100%;
+    --background: 0 0% 0%;
     --border: 20 5.9% 90%;
     --card: 0 0% 100%;
     --card-foreground: 20 14.3% 4.1%;
@@ -57,18 +56,25 @@
     --primary-foreground: 24 9.8% 10%;
     --radius: 0.3rem;
     --ring: 24 5.7% 82.9%;
-    --scale-factor: 1.44%;
+    --scale-factor: 1.44;
     --secondary: 12 6.5% 15.1%;
     --secondary-foreground: 60 9.1% 97.8%;
   }
-}
 
-@layer base {
-  * {
+  /* General Reset and Consistency */
+  *, *::before, *::after {
     @apply border-border;
+    box-sizing: border-box; /* Ensure padding and border are included in width/height */
+    margin: 0;
+    padding: 0;
   }
+
   body {
-    @apply bg-background text-foreground
+    @apply bg-background text-foreground;
+    line-height: 1.6; /* Set a consistent line-height */
+    -webkit-font-smoothing: antialiased; /* Improve font rendering on Webkit-based browsers */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-rendering: optimizeLegibility;
   }
 
   /* Hide scrollbar for all browsers */
@@ -81,15 +87,14 @@
     -ms-overflow-style: none; /* Internet Explorer and Edge */
   }
 
-  * {
-    @apply border-border;
-  }
-  
-  body {
-    @apply bg-background text-foreground;
-  }
-
+  /* Consistent SVG rendering */
   .svg-white {
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);
+  }
+
+  /* Accessible focus states */
+  button:focus, a:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
   }
 }
