@@ -1,20 +1,20 @@
 export type Project = {
-    title: string;
-    subtitle: string;
-    image: {
-        asset: {
-            url: string;
-        };
+  title: string;
+  subtitle: string;
+  image: {
+    asset: {
+      url: string;
     };
-    hoverVideo?: {
-        asset: {
-            url: string;
-        };
+  };
+  hoverVideo?: {
+    asset: {
+      url: string;
     };
+  };
 };
 
 export type ProjectsSection = {
-    title: string;
-    subtitle: string;
-    projects: Project[];
+  title: string;
+  subtitle: string;
+  projects: Project[];
 };

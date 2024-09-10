@@ -9,7 +9,12 @@ const VideoPlayer = React.lazy(() => import('@/components/ui/VideoPlayer'));
 
 type Project = ProjectsSection['projects'][number];
 
-const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) => {
+const MediaCard: React.FC<Project> = ({
+  title,
+  subtitle,
+  image,
+  hoverVideo,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
@@ -19,7 +24,13 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
   const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (cardRef.current && textContainerRef.current && titleRef.current && subtitleRef.current && bgRef.current) {
+    if (
+      cardRef.current &&
+      textContainerRef.current &&
+      titleRef.current &&
+      subtitleRef.current &&
+      bgRef.current
+    ) {
       gsap.set(subtitleRef.current, { yPercent: 100, opacity: 0 });
       gsap.set(bgRef.current, { opacity: 0 });
     }
@@ -27,24 +38,62 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    gsap.to(imageRef.current, { opacity: 0, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(titleRef.current, { yPercent: -100, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.0)" });
-    gsap.to(subtitleRef.current, { yPercent: 0, opacity: 1, duration: 0.4, ease: "power2.out" });
-    gsap.to(bgRef.current, { opacity: 1, duration: 0.4, ease: "power2.inOut", delay: 0.2 });
+    gsap.to(imageRef.current, {
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power2.inOut',
+    });
+    gsap.to(titleRef.current, {
+      yPercent: -100,
+      duration: 0.4,
+      ease: 'power2.out',
+      backgroundColor: 'rgba(0, 0, 0, 0.0)',
+    });
+    gsap.to(subtitleRef.current, {
+      yPercent: 0,
+      opacity: 1,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+    gsap.to(bgRef.current, {
+      opacity: 1,
+      duration: 0.4,
+      ease: 'power2.inOut',
+      delay: 0.2,
+    });
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    gsap.to(titleRef.current, { yPercent: 0, duration: 0.4, ease: "power2.out", backgroundColor: "rgba(0, 0, 0, 0.6)" });
-    gsap.to(subtitleRef.current, { yPercent: 100, opacity: 0, duration: 0.4, ease: "power2.out", onStart: () => {
-      gsap.to(subtitleRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
-    }});
-    gsap.to(imageRef.current, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
-    gsap.to(bgRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
+    gsap.to(titleRef.current, {
+      yPercent: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    });
+    gsap.to(subtitleRef.current, {
+      yPercent: 100,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+      onStart: () => {
+        gsap.to(subtitleRef.current, {
+          opacity: 0,
+          duration: 0.4,
+          ease: 'power2.inOut',
+        });
+      },
+    });
+    gsap.to(imageRef.current, {
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power2.inOut',
+    });
+    gsap.to(bgRef.current, { opacity: 0, duration: 0.4, ease: 'power2.inOut' });
   };
 
   return (
-    <div 
+    <div
       ref={cardRef}
       className="relative w-full aspect-[472/511] overflow-hidden cursor-pointer"
       onMouseEnter={handleMouseEnter}
@@ -60,10 +109,11 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
           className="object-cover transition-opacity duration-600 ease-in-out"
         />
         {hoverVideo && (
-          <Suspense fallback={
-            <div className="absolute inset-0 flex items-center justify-center bg-black animate-pulse">
-            </div>
-          }>
+          <Suspense
+            fallback={
+              <div className="absolute inset-0 flex items-center justify-center bg-black animate-pulse"></div>
+            }
+          >
             <VideoPlayer
               src={hoverVideo.asset.url}
               isPlaying={isHovered}
@@ -74,24 +124,24 @@ const MediaCard: React.FC<Project> = ({ title, subtitle, image, hoverVideo }) =>
           </Suspense>
         )}
       </div>
-      <div 
+      <div
         ref={bgRef}
         className="absolute inset-x-0 bottom-0 bg-black bg-opacity-60 transition-opacity duration-400 ease-in-out opacity-0"
         style={{ height: '20%' }}
       ></div>
-      <div 
+      <div
         ref={textContainerRef}
         className="absolute inset-x-0 bottom-0 px-2 sm:px-4 flex flex-col justify-end items-center"
         style={{ height: '20%' }}
       >
-        <h3 
-          ref={titleRef} 
+        <h3
+          ref={titleRef}
           className="text-white bg-black bg-opacity-60 text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-center leading-tight p-1 sm:p-2 mb-2 sm:mb-3 md:mb-4 lg:mb-5 w-full transition-transform duration-400 ease-out"
         >
           {title}
         </h3>
-        <p 
-          ref={subtitleRef} 
+        <p
+          ref={subtitleRef}
           className="text-white text-sm sm:text-base md:text-lg lg:text-xl text-center w-full absolute left-0 right-0 bottom-1 sm:bottom-2 opacity-0 px-2 sm:px-4 transition-all duration-400 ease-out"
         >
           {subtitle}

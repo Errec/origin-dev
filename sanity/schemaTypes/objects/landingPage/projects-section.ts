@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const projectsSection = defineType({
   name: 'projectsSection',
@@ -23,13 +23,13 @@ export const projectsSection = defineType({
         {
           type: 'object',
           fields: [
-            { name: 'title', type: 'string', title: 'Project Title' },
-            { name: 'subtitle', type: 'string', title: 'Project Subtitle' },
-            { name: 'image', type: 'image', title: 'Project Image' },
-            { name: 'hoverVideo', type: 'file', title: 'Hover Video', options: { accept: 'video/*' } }
-          ]
-        }
-      ]
-    })
-  ]
+            {name: 'title', type: 'string', title: 'Project Title'},
+            {name: 'subtitle', type: 'string', title: 'Project Subtitle'},
+            {name: 'image', type: 'image', title: 'Project Image'},
+            {name: 'hoverVideo', type: 'file', title: 'Hover Video', options: {accept: 'video/*'}},
+          ],
+        },
+      ],
+    }),
+  ],
 })

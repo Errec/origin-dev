@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const technologiesSection = defineType({
   name: 'technologiesSection',
@@ -18,11 +18,11 @@ export const technologiesSection = defineType({
         {
           type: 'object',
           fields: [
-            { name: 'name', type: 'string', title: 'Technology Name' },
-            { name: 'logo', type: 'image', title: 'Logo', options: { accept: 'image/svg+xml' } }
-          ]
-        }
-      ]
-    })
-  ]
+            {name: 'name', type: 'string', title: 'Technology Name'},
+            {name: 'logo', type: 'image', title: 'Logo', options: {accept: 'image/svg+xml'}},
+          ],
+        },
+      ],
+    }),
+  ],
 })

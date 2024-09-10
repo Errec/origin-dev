@@ -62,7 +62,9 @@
   }
 
   /* General Reset and Consistency */
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     @apply border-border;
     box-sizing: border-box; /* Ensure padding and border are included in width/height */
     margin: 0;
@@ -73,7 +75,8 @@
     @apply bg-background text-foreground;
     line-height: 1.6; /* Set a consistent line-height */
     -webkit-font-smoothing: antialiased; /* Improve font rendering on Webkit-based browsers */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, sans-serif;
     text-rendering: optimizeLegibility;
   }
 
@@ -89,11 +92,13 @@
 
   /* Consistent SVG rendering */
   .svg-white {
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(180deg)
+      brightness(100%) contrast(100%);
   }
 
   /* Accessible focus states */
-  button:focus, a:focus {
+  button:focus,
+  a:focus {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
   }

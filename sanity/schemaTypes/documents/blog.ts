@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const blog = defineType({
   name: 'blog',
@@ -24,7 +24,7 @@ export const blog = defineType({
       type: 'date',
       options: {
         dateFormat: 'YYYY-MM-DD',
-      }
+      },
     }),
     defineField({
       name: 'titleImage',
@@ -40,7 +40,7 @@ export const blog = defineType({
       name: 'content',
       title: 'Content of Article',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [{type: 'block'}],
     }),
   ],
 })

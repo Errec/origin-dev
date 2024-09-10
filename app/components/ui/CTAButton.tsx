@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from "@/components/ui/Button";
-import { gsap } from "gsap";
-import { ArrowRight } from "lucide-react";
+import { Button } from '@/components/ui/Button';
+import { gsap } from 'gsap';
+import { ArrowRight } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 
 interface CTAButtonProps {
@@ -21,12 +21,16 @@ const CTAButton: React.FC<CTAButtonProps> = ({ text, link }) => {
     if (!button || !yellowBg) return;
 
     const onEnter = () => {
-      gsap.to(yellowBg, { yPercent: -100, duration: 0.3, ease: "power2.inOut" });
+      gsap.to(yellowBg, {
+        yPercent: -100,
+        duration: 0.3,
+        ease: 'power2.inOut',
+      });
     };
 
     const onLeave = () => {
       gsap.set(yellowBg, { yPercent: 100 });
-      gsap.to(yellowBg, { yPercent: 0, duration: 0.3, ease: "power2.inOut" });
+      gsap.to(yellowBg, { yPercent: 0, duration: 0.3, ease: 'power2.inOut' });
     };
 
     button.addEventListener('mouseenter', onEnter);
@@ -46,8 +50,15 @@ const CTAButton: React.FC<CTAButtonProps> = ({ text, link }) => {
       asChild
       ariaLabel={text}
     >
-      <a ref={buttonRef} href={link} className="relative flex items-center justify-center px-8 py-4">
-        <span ref={yellowBgRef} className="absolute inset-0 bg-amber-400"></span>
+      <a
+        ref={buttonRef}
+        href={link}
+        className="relative flex items-center justify-center px-8 py-4"
+      >
+        <span
+          ref={yellowBgRef}
+          className="absolute inset-0 bg-amber-400"
+        ></span>
         <span className="relative z-10 flex items-center">
           {text}
           <ArrowRight className="ml-2 h-5 w-5" />

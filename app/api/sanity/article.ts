@@ -1,8 +1,8 @@
 import { sanityClient } from '@/lib/sanity-client';
 
 export async function getArticleData(slug: string) {
-    try {
-        const query = `
+  try {
+    const query = `
             *[_type == "blog" && slug.current == '${slug}'] {
             "currentSlut": slug.current,
                 title,
@@ -11,9 +11,9 @@ export async function getArticleData(slug: string) {
                 releaseDate
             }[0]
         `;
-        return await sanityClient.fetch(query);
-    } catch (error) {
-        console.error('Error fetching article data:', error);
-        throw error;
-    }
+    return await sanityClient.fetch(query);
+  } catch (error) {
+    console.error('Error fetching article data:', error);
+    throw error;
+  }
 }

@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const heroSection = defineType({
   name: 'heroSection',
@@ -10,29 +10,29 @@ export const heroSection = defineType({
       title: 'Background Video',
       type: 'file',
       options: {
-        accept: 'video/*'
-      }
+        accept: 'video/*',
+      },
     }),
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-      description: 'e.g., "The art of modernizing your business"'
+      description: 'e.g., "The art of modernizing your business"',
     }),
     defineField({
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
-      description: 'e.g., "Start your own application journey today"'
+      description: 'e.g., "Start your own application journey today"',
     }),
     defineField({
       name: 'ctaButton',
       title: 'Call to Action Button',
       type: 'object',
       fields: [
-        { name: 'text', type: 'string', title: 'Button Text' },
-        { name: 'link', type: 'string', title: 'Button Link' }
-      ]
-    })
-  ]
+        {name: 'text', type: 'string', title: 'Button Text'},
+        {name: 'link', type: 'string', title: 'Button Link'},
+      ],
+    }),
+  ],
 })

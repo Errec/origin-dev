@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const contactSection = defineType({
   name: 'contactSection',
@@ -8,21 +8,21 @@ export const contactSection = defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
     }),
     defineField({
       name: 'subtitle',
       title: 'Subtitle',
-      type: 'string'
+      type: 'string',
     }),
     defineField({
       name: 'contactButton',
       title: 'Contact Button',
       type: 'object',
       fields: [
-        { name: 'text', type: 'string', title: 'Button Text' },
-        { name: 'link', type: 'string', title: 'Button Link' }
-      ]
+        {name: 'text', type: 'string', title: 'Button Text'},
+        {name: 'link', type: 'string', title: 'Button Link'},
+      ],
     }),
     defineField({
       name: 'linkColumns',
@@ -32,23 +32,23 @@ export const contactSection = defineType({
         {
           type: 'object',
           fields: [
-            { name: 'title', type: 'string', title: 'Column Title' },
-            { 
-              name: 'links', 
-              type: 'array', 
+            {name: 'title', type: 'string', title: 'Column Title'},
+            {
+              name: 'links',
+              type: 'array',
               of: [
                 {
                   type: 'object',
                   fields: [
-                    { name: 'text', type: 'string', title: 'Link Text' },
-                    { name: 'url', type: 'url', title: 'Link URL' }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    })
-  ]
+                    {name: 'text', type: 'string', title: 'Link Text'},
+                    {name: 'url', type: 'url', title: 'Link URL'},
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }),
+  ],
 })

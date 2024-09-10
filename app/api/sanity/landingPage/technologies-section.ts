@@ -1,8 +1,8 @@
 import { sanityClient } from '@/lib/sanity-client';
 
 export async function getTechnologiesSectionData() {
-    try {
-        const query = `
+  try {
+    const query = `
             *[_type == "landingPage"][0] {
                 technologiesSection {
                     title,
@@ -17,9 +17,9 @@ export async function getTechnologiesSectionData() {
                 }
             }
         `;
-        return await sanityClient.fetch(query);
-    } catch (error) {
-        console.error('Error fetching technologies section data:', error);
-        throw error;
-    }
+    return await sanityClient.fetch(query);
+  } catch (error) {
+    console.error('Error fetching technologies section data:', error);
+    throw error;
+  }
 }
