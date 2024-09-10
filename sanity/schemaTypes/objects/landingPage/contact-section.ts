@@ -1,15 +1,10 @@
 import { defineField, defineType } from 'sanity'
 
-export const footerSection = defineType({
-  name: 'footerSection',
-  title: 'Footer Section',
+export const contactSection = defineType({
+  name: 'contactSection',
+  title: 'Contact Section',
   type: 'object',
   fields: [
-    defineField({
-      name: 'logo',
-      title: 'Logo',
-      type: 'image'
-    }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -21,8 +16,8 @@ export const footerSection = defineType({
       type: 'string'
     }),
     defineField({
-      name: 'ctaButton',
-      title: 'Call to Action Button',
+      name: 'contactButton',
+      title: 'Contact Button',
       type: 'object',
       fields: [
         { name: 'text', type: 'string', title: 'Button Text' },
