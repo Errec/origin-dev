@@ -15,7 +15,7 @@ export default function Navbar() {
     >
       <Link
         href="/"
-        className="font-bold text-3xl dark:text-stone-200 text-stone-100"
+        className="font-bold text-3xl bg-black dark:bg-transparent dark:text-stone-200 text-stone-100"
         aria-label="Homepage"
       >
         <div className="hidden sm:block">
