@@ -1,6 +1,6 @@
 import { sanityClient } from '@/lib/sanity-client';
 
-export async function getProjectsSection() {
+export async function getProjectsSectionData() {
   try {
     const query = `
       *[_type == "landingPage"][0] {

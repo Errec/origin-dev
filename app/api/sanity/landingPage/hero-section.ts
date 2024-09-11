@@ -1,6 +1,6 @@
 import { sanityClient } from '@/lib/sanity-client';
 
-export async function getHeroSection() {
+export async function getHeroSectionData() {
   try {
     const query = `
       *[_type == "landingPage"][0] {

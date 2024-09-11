@@ -1,6 +1,6 @@
 import { sanityClient } from '@/lib/sanity-client';
 
-export async function getTechnologiesSection() {
+export async function getTechnologiesSectionData() {
   try {
     const query = `
       *[_type == "landingPage"][0] {

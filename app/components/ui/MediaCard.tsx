@@ -78,13 +78,6 @@ const MediaCard: React.FC<Project> = ({
       opacity: 0,
       duration: 0.4,
       ease: 'power2.out',
-      onStart: () => {
-        gsap.to(subtitleRef.current, {
-          opacity: 0,
-          duration: 0.4,
-          ease: 'power2.inOut',
-        });
-      },
     });
     gsap.to(imageRef.current, {
       opacity: 1,
@@ -102,16 +95,6 @@ const MediaCard: React.FC<Project> = ({
       onMouseLeave={handleMouseLeave}
     >
       <div className="absolute inset-0">
-        {imageUrl && (
-          <Image
-            ref={imageRef as any}
-            src={imageUrl}
-            alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-opacity duration-600 ease-in-out"
-          />
-        )}
         {videoUrl && (
           <Suspense fallback={<div className="absolute inset-0 bg-gray-200" />}>
             <VideoPlayer
@@ -121,6 +104,16 @@ const MediaCard: React.FC<Project> = ({
               className="absolute inset-0 w-full h-full object-cover"
             />
           </Suspense>
+        )}
+        {imageUrl && (
+          <Image
+            ref={imageRef as any}
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
+          />
         )}
       </div>
       <div
