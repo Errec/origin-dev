@@ -1,5 +1,6 @@
 'use client';
 
+import { urlFor } from '@/lib/sanity-client';
 import gsap from 'gsap';
 import Image from 'next/image';
 import React, { memo, useEffect, useRef } from 'react';
@@ -11,7 +12,11 @@ type InfiniteCarouselProps<T> = {
 };
 
 function InfiniteCarousel<
-  T extends { logo: { asset: { url: string } }; name: string },
+  T extends {
+    logo: { asset: { _ref?: string; _id?: string } | null };
+    name: string;
+    logoUrl?: string | null;
+  },
 >({ data, className = '', duration = 50 }: InfiniteCarouselProps<T>) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -45,23 +50,33 @@ function InfiniteCarousel<
     >
       <div ref={scrollRef} className="flex whitespace-nowrap">
         <div className="inline-block">
-          {data.map((item, index) => (
-            <div
-              key={`${item.name}-${index}`}
-              className="inline-block mx-12 svg-white"
-              role="img"
-              aria-label={item.name}
-            >
-              <Image
-                src={item.logo.asset.url}
-                alt={item.name}
-                title={item.name}
-                width={80}
-                height={80}
-                className="w-auto h-20 max-w-none"
-              />
-            </div>
-          ))}
+          {data.map((item, index) => {
+            const imageUrl = item.logoUrl || null;
+
+            return (
+              <div
+                key={`${item.name}-${index}`}
+                className="inline-block mx-12 svg-white"
+                role="img"
+                aria-label={item.name}
+              >
+                {imageUrl ? (
+                  <Image
+                    src={imageUrl}
+                    alt={item.name}
+                    title={item.name}
+                    width={80}
+                    height={80}
+                    className="w-auto h-20 max-w-none"
+                  />
+                ) : (
+                  <div className="w-20 h-20 bg-gray-200 flex items-center justify-center">
+                    {item.name}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

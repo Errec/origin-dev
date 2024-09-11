@@ -1,3 +1,3 @@
-export { getHeroSectionData } from './hero-section';
-export { getProjectsSectionData } from './projects-section';
-export { getTechnologiesSectionData } from './technologies-section';
+export { getHeroSection } from './hero-section';
+export { getProjectsSection } from './projects-section';
+export { getTechnologiesSection } from './technologies-section';

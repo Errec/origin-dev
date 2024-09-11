@@ -7,7 +7,7 @@ export const technologiesSection = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Section Title',
+      title: 'Title',
       type: 'string',
     }),
     defineField({
@@ -18,8 +18,16 @@ export const technologiesSection = defineType({
         {
           type: 'object',
           fields: [
-            {name: 'name', type: 'string', title: 'Technology Name'},
-            {name: 'logo', type: 'image', title: 'Logo', options: {accept: 'image/svg+xml'}},
+            {
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+            },
+            {
+              name: 'logo',
+              title: 'Logo',
+              type: 'image',
+            },
           ],
         },
       ],

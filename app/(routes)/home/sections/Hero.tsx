@@ -1,24 +1,30 @@
-import CTAButton from '@/components/ui/CTAButton';
-import { HeroSection } from '@/types';
+import CTAButton from '@/components/ui/CTAButton'; // Make sure this import is correct
+import { urlFor } from '@/lib/sanity-client';
+import { HeroSection } from '@/types/hero-section';
 import React, { Suspense } from 'react';
 
 const VideoPlayer = React.lazy(() => import('@/components/ui/VideoPlayer'));
 
-type HeroProps = {
+interface HeroProps {
   heroSection: HeroSection;
-};
+}
 
-export default function Hero({ heroSection }: HeroProps) {
+const Hero: React.FC<HeroProps> = ({ heroSection }) => {
+  const imageUrl = heroSection.backgroundImage
+    ? urlFor(heroSection.backgroundImage).url()
+    : null;
+  const videoUrl = heroSection.backgroundVideo?.asset?.url || null;
+
   return (
     <section className="relative w-full h-screen">
-      {heroSection?.backgroundVideo && (
+      {videoUrl && (
         <Suspense
           fallback={
             <div className="absolute top-0 left-0 w-full h-full bg-black animate-pulse flex items-center justify-center"></div>
           }
         >
           <VideoPlayer
-            src={heroSection.backgroundVideo.asset.url}
+            src={videoUrl}
             autoPlay
             loop
             muted
@@ -48,4 +54,6 @@ export default function Hero({ heroSection }: HeroProps) {
       </div>
     </section>
   );
-}
+};
+
+export default Hero;
