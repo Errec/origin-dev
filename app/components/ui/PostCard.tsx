@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/Card";
-import { urlFor } from "app/lib/sanity-client";
-import { BlogCard } from "app/types";
-import Image from "next/image";
-import Link from "next/link";
+import { Button } from '@/components/ui/Button';
+import { Card, CardContent } from '@/components/ui/Card';
+import { urlFor } from 'app/lib/sanity-client';
+import { BlogCard } from 'app/types';
+import Image from 'next/image';
+import Link from 'next/link';
 
 type PostCardProps = {
   post: BlogCard;
@@ -35,7 +35,11 @@ export default function PostCard({ post, priority }: PostCardProps) {
               {post.description}
             </p>
           </div>
-          <Button aria-label="read more" asChild className="w-full mt-auto text-base">
+          <Button
+            aria-label="read more"
+            asChild
+            className="w-full mt-auto text-base"
+          >
             <Link href={`/blog/${post.currentSlug}`}>Read More</Link>
           </Button>
         </CardContent>

@@ -1,8 +1,8 @@
 import { sanityClient } from '@/lib/sanity-client';
 
 export async function getHeroSectionData() {
-    try {
-        const query = `
+  try {
+    const query = `
             *[_type == "landingPage"][0] {
                 heroSection {
                     backgroundVideo {
@@ -19,9 +19,9 @@ export async function getHeroSectionData() {
                 }
             }
         `;
-        return await sanityClient.fetch(query);
-    } catch (error) {
-        console.error('Error fetching hero section data:', error);
-        throw error;
-    }
+    return await sanityClient.fetch(query);
+  } catch (error) {
+    console.error('Error fetching hero section data:', error);
+    throw error;
+  }
 }

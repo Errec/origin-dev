@@ -19,7 +19,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   loop = true,
   muted = true,
   className,
-  style
+  style,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -27,7 +27,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const videoElement = videoRef.current;
     if (videoElement) {
       if (isPlaying) {
-        videoElement.play().catch(error => console.error('Error playing video:', error));
+        videoElement
+          .play()
+          .catch((error) => console.error('Error playing video:', error));
       } else {
         videoElement.pause();
       }

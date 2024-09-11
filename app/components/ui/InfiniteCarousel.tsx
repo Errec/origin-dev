@@ -10,11 +10,9 @@ type InfiniteCarouselProps<T> = {
   duration?: number;
 };
 
-function InfiniteCarousel<T extends { logo: { asset: { url: string } }, name: string }>({
-  data,
-  className = '',
-  duration = 50,
-}: InfiniteCarouselProps<T>) {
+function InfiniteCarousel<
+  T extends { logo: { asset: { url: string } }; name: string },
+>({ data, className = '', duration = 50 }: InfiniteCarouselProps<T>) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,7 +27,7 @@ function InfiniteCarousel<T extends { logo: { asset: { url: string } }, name: st
 
     gsap.to(scrollElement, {
       x: `-${totalWidth}px`,
-      duration: duration * data.length / 10,
+      duration: (duration * data.length) / 10,
       ease: 'none',
       repeat: -1,
     });
@@ -40,11 +38,20 @@ function InfiniteCarousel<T extends { logo: { asset: { url: string } }, name: st
   }, [data, duration]);
 
   return (
-    <div className={`relative overflow-hidden ${className}`} role="region" aria-label="Technology carousel">
+    <div
+      className={`relative overflow-hidden ${className}`}
+      role="region"
+      aria-label="Technology carousel"
+    >
       <div ref={scrollRef} className="flex whitespace-nowrap">
         <div className="inline-block">
           {data.map((item, index) => (
-            <div key={`${item.name}-${index}`} className="inline-block mx-12 svg-white" role="img" aria-label={item.name}>
+            <div
+              key={`${item.name}-${index}`}
+              className="inline-block mx-12 svg-white"
+              role="img"
+              aria-label={item.name}
+            >
               <Image
                 src={item.logo.asset.url}
                 alt={item.name}

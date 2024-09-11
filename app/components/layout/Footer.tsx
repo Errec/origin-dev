@@ -1,5 +1,5 @@
 import ButtonScrollToTop from '@/components/ui/ButtonScrollToTop'; // Import the new component
-import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,10 +8,14 @@ export default function Footer() {
     <footer
       className="h-10 px-10 flex justify-between cursor-default border-t border-black pt-4"
       role="contentinfo"
-      style={{ backgroundColor: "transparent" }}
+      style={{ backgroundColor: 'transparent' }}
     >
       <p className="font-light">
-        <span className="bg-white text-black">ORIGIN</span>DEV<span className="text-[0.7em] relative left-[0.08em] -top-[0.6em] font">®</span> ©{currentYear}
+        <span className="bg-white text-black">ORIGIN</span>DEV
+        <span className="text-[0.7em] relative left-[0.08em] -top-[0.6em] font">
+          ®
+        </span>{' '}
+        ©{currentYear}
       </p>
       <div className="flex space-x-6">
         <a

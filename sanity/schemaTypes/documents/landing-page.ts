@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const landingPage = defineType({
   name: 'landingPage',
@@ -26,14 +26,9 @@ export const landingPage = defineType({
       type: 'technologiesSection',
     }),
     defineField({
-      name: 'blogPreviewSection',
-      title: 'Blog Preview Section',
-      type: 'blogPreviewSection',
-    }),
-    defineField({
-      name: 'footerSection',
-      title: 'Footer Section',
-      type: 'footerSection',
+      name: 'contactSection',
+      title: 'Contact Section',
+      type: 'contactSection',
     }),
     defineField({
       name: 'seo',

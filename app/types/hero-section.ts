@@ -1,13 +1,13 @@
 export type HeroSection = {
-    title: string;
-    subtitle: string;
-    backgroundVideo?: {
-        asset: {
-            url: string;
-        };
+  title: string;
+  subtitle: string;
+  backgroundVideo?: {
+    asset: {
+      url: string;
     };
-    ctaButton?: {
-        text: string;
-        link: string;
-    };
-}
+  };
+  ctaButton?: {
+    text: string;
+    link: string;
+  };
+};

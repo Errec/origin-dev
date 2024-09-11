@@ -17,13 +17,25 @@ export default function Header() {
 
         if (currentScrollY + windowHeight >= documentHeight - 50) {
           // Near the bottom of the page, show the header
-          gsap.to(headerRef.current, { y: '0%', duration: 0, ease: 'power2.out' });
+          gsap.to(headerRef.current, {
+            y: '0%',
+            duration: 0,
+            ease: 'power2.out',
+          });
         } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
           // Scrolling down, hide header
-          gsap.to(headerRef.current, { y: '-100%', duration: 0, ease: 'power2.out' });
+          gsap.to(headerRef.current, {
+            y: '-100%',
+            duration: 0,
+            ease: 'power2.out',
+          });
         } else {
           // Scrolling up, show header
-          gsap.to(headerRef.current, { y: '0%', duration: 0, ease: 'power2.out' });
+          gsap.to(headerRef.current, {
+            y: '0%',
+            duration: 0,
+            ease: 'power2.out',
+          });
         }
 
         setLastScrollY(currentScrollY);
@@ -31,9 +43,17 @@ export default function Header() {
 
       const handleKeydown = (event: KeyboardEvent) => {
         if (event.key === 'ArrowDown') {
-          gsap.to(headerRef.current, { y: '-100%', duration: 0, ease: 'power2.out' });
+          gsap.to(headerRef.current, {
+            y: '-100%',
+            duration: 0,
+            ease: 'power2.out',
+          });
         } else if (event.key === 'ArrowUp') {
-          gsap.to(headerRef.current, { y: '0%', duration: 0, ease: 'power2.out' });
+          gsap.to(headerRef.current, {
+            y: '0%',
+            duration: 0,
+            ease: 'power2.out',
+          });
         }
       };
 

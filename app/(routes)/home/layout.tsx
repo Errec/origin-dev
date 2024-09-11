@@ -1,19 +1,19 @@
 import { ReactNode } from 'react';
 
 export default function HomeLayout({
-    hero,
-    technologies,
-    projects,
+  hero,
+  technologies,
+  projects,
 }: {
-    hero: ReactNode;
-    technologies: ReactNode;
-    projects: ReactNode;
+  hero: ReactNode;
+  technologies: ReactNode;
+  projects: ReactNode;
 }) {
-    return (
-        <main>
-        {hero}
-        {technologies}
-        {projects}
-        </main>
-    );
+  return (
+    <main>
+      {hero}
+      {technologies}
+      {projects}
+    </main>
+  );
 }
