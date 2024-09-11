@@ -9,8 +9,8 @@ import {technologiesSection} from './objects/landingPage/technologies-section'
 
 export const schemaTypes = [
   heroSection,
-  projectsSection,
   technologiesSection,
+  projectsSection,
   contactSection,
   landingPage,
   blog,

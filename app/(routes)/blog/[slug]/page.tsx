@@ -1,10 +1,10 @@
 import { getArticleData } from '@/api/sanity';
 import { urlFor } from '@/lib/sanity-client';
-import { ArticleData } from '@/types';
+import { ArticleData } from '@/types/article-data';
 import { PortableText } from '@portabletext/react';
 import { format } from 'date-fns';
 import Image from 'next/image';
-// TODO: implement lazy loading for the images
+
 export const revalidate = 30; // Revalidate every 30 seconds
 
 export default async function BlogArticle({
@@ -15,13 +15,18 @@ export default async function BlogArticle({
   try {
     const articleData: ArticleData = await getArticleData(params.slug);
 
+    const imageUrl =
+      typeof articleData.titleImage === 'string'
+        ? articleData.titleImage
+        : urlFor(articleData.titleImage).url();
+
     return (
       <main className="max-w-3xl mx-auto py-24 px-4">
         <article>
           <header className="mb-8">
             <Image
               priority
-              src={urlFor(articleData.titleImage).url()}
+              src={imageUrl}
               alt={articleData.title}
               width={800}
               height={400}

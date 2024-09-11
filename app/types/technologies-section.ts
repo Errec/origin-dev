@@ -1,27 +1,14 @@
-export type HeroSection = {
-  title: string;
-  subtitle: string;
-  backgroundVideo?: {
-    asset: {
-      url: string;
-    };
-  };
-  ctaButton?: {
-    text: string;
-    link: string;
-  };
-};
+import { Asset } from './hero-section';
 
-export type Technology = {
+export interface Technology {
   name: string;
   logo: {
-    asset: {
-      url: string;
-    };
+    asset: Asset;
   };
-};
+}
 
-export type TechnologiesSection = {
+export interface TechnologiesSection {
   title: string;
+  subtitle: string;
   technologies: Technology[];
-};
+}

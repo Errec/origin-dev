@@ -1,13 +1,12 @@
 'use client';
 
-import { ProjectsSection } from '@/types';
+import { urlFor } from '@/lib/sanity-client';
+import { Project } from '@/types/projects-section';
 import { gsap } from 'gsap';
 import Image from 'next/image';
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 const VideoPlayer = React.lazy(() => import('@/components/ui/VideoPlayer'));
-
-type Project = ProjectsSection['projects'][number];
 
 const MediaCard: React.FC<Project> = ({
   title,
@@ -22,6 +21,9 @@ const MediaCard: React.FC<Project> = ({
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+
+  const imageUrl = image ? urlFor(image).url() : null;
+  const videoUrl = hoverVideo?.asset?.url || null;
 
   useEffect(() => {
     if (
@@ -76,13 +78,6 @@ const MediaCard: React.FC<Project> = ({
       opacity: 0,
       duration: 0.4,
       ease: 'power2.out',
-      onStart: () => {
-        gsap.to(subtitleRef.current, {
-          opacity: 0,
-          duration: 0.4,
-          ease: 'power2.inOut',
-        });
-      },
     });
     gsap.to(imageRef.current, {
       opacity: 1,
@@ -100,28 +95,25 @@ const MediaCard: React.FC<Project> = ({
       onMouseLeave={handleMouseLeave}
     >
       <div className="absolute inset-0">
-        <Image
-          ref={imageRef as any}
-          src={image.asset.url}
-          alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-opacity duration-600 ease-in-out"
-        />
-        {hoverVideo && (
-          <Suspense
-            fallback={
-              <div className="absolute inset-0 flex items-center justify-center bg-black animate-pulse"></div>
-            }
-          >
+        {videoUrl && (
+          <Suspense fallback={<div className="absolute inset-0 bg-gray-200" />}>
             <VideoPlayer
-              src={hoverVideo.asset.url}
+              src={videoUrl}
               isPlaying={isHovered}
               autoPlay={false}
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-600 ease-in-out"
-              style={{ opacity: isHovered ? 1 : 0 }}
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </Suspense>
+        )}
+        {imageUrl && (
+          <Image
+            ref={imageRef as any}
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
+          />
         )}
       </div>
       <div

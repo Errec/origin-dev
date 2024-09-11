@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="h-10 px-10 flex justify-between cursor-default border-t border-black pt-4"
+      className="h-10 px-10 flex justify-between cursor-default border-black pt-4"
       role="contentinfo"
       style={{ backgroundColor: 'transparent' }}
     >

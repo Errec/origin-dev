@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
-import { urlFor } from 'app/lib/sanity-client';
-import { BlogCard } from 'app/types';
+import { urlFor } from '@/lib/sanity-client';
+import { BlogCard } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,20 +11,23 @@ type PostCardProps = {
 };
 
 export default function PostCard({ post, priority }: PostCardProps) {
+  const imageUrl =
+    typeof post.titleImage === 'string'
+      ? post.titleImage
+      : urlFor(post.titleImage).url();
+
   return (
     <li className="list-none">
       <Card className="border-slate-400 dark:border-slate-600 flex flex-col h-full">
-        {post.titleImage ? (
+        {imageUrl && (
           <Image
-            src={urlFor(post.titleImage).url()}
+            src={imageUrl}
             alt="image"
             height={400}
             width={400}
             className="rounded-t-l h-[400px] w-full object-cover"
             priority={priority}
           />
-        ) : (
-          <p>No image available</p>
         )}
         <CardContent className="flex flex-col flex-grow justify-between pt-2 pb-4">
           <div className="mb-4 cursor-default">
