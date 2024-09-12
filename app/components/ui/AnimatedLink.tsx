@@ -1,5 +1,4 @@
 'use client';
-
 import { gsap } from 'gsap';
 import Link from 'next/link';
 import React, { ReactNode, useEffect, useRef } from 'react';
@@ -24,41 +23,46 @@ const AnimatedLink: React.FC<AnimatedLinkProps> = ({
 
     if (!link || !line) return;
 
-    gsap.set(line, { width: '0%', left: 0 });
-
-    const animateIn = () => {
-      gsap.to(line, { width: '100%', duration: 0.5, ease: 'power2.out' });
+    const resetLine = () => {
+      gsap.set(line, { clipPath: 'inset(0 100% 0 0)', width: '100%' });
     };
 
-    const animateOut = () => {
+    resetLine();
+
+    const expand = () => {
+      resetLine();
       gsap.to(line, {
-        width: '0%',
-        duration: 0.5,
-        ease: 'power2.in',
-        overwrite: true,
+        clipPath: 'inset(0 0% 0 0)',
+        duration: 0.2,
+        ease: 'power2.out',
       });
     };
 
-    link.addEventListener('mouseenter', animateIn);
-    link.addEventListener('mouseleave', animateOut);
+    const shrink = () => {
+      gsap.to(line, {
+        clipPath: 'inset(0 0% 0 100%)',
+        duration: 0.2,
+        ease: 'power2.in',
+      });
+    };
+
+    link.addEventListener('mouseenter', expand);
+    link.addEventListener('mouseleave', shrink);
 
     return () => {
-      link.removeEventListener('mouseenter', animateIn);
-      link.removeEventListener('mouseleave', animateOut);
+      link.removeEventListener('mouseenter', expand);
+      link.removeEventListener('mouseleave', shrink);
     };
   }, []);
 
   return (
-    <Link
-      href={href}
-      className={`relative inline-block ${className}`}
-      ref={linkRef}
-    >
-      <span className="relative inline-block">
+    <Link href={href} className={`relative inline-block ${className}`}>
+      <span className="relative inline-block" ref={linkRef}>
         {children}
         <span
           ref={lineRef}
-          className="absolute bottom-0 left-0 h-[1px] bg-white"
+          className="absolute bottom-0 left-0 w-full h-[1px] bg-white"
+          aria-hidden="true"
         ></span>
       </span>
     </Link>
