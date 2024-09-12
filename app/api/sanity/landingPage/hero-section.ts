@@ -12,6 +12,10 @@ export async function getHeroSectionData() {
           },
           backgroundVideo {
             asset->
+          },
+          ctaButton {
+            text,
+            link
           }
         }
       }

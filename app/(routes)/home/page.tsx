@@ -1,3 +1,4 @@
+import ContactPage from './@contact/page';
 import HeroPage from './@hero/page';
 import ProjectsPage from './@projects/page';
 import TechnologiesPage from './@technologies/page';
@@ -9,6 +10,7 @@ export default function HomePage() {
       hero={<HeroPage />}
       technologies={<TechnologiesPage />}
       projects={<ProjectsPage />}
+      contact={<ContactPage />}
     />
   );
 }
