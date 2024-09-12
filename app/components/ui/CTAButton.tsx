@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
+import { cn } from '@/utils';
 import { gsap } from 'gsap';
 import { ArrowRight } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
@@ -8,9 +9,10 @@ import React, { useEffect, useRef } from 'react';
 interface CTAButtonProps {
   text: string;
   link: string;
+  className?: string;
 }
 
-const CTAButton: React.FC<CTAButtonProps> = ({ text, link }) => {
+const CTAButton: React.FC<CTAButtonProps> = ({ text, link, className }) => {
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const yellowBgRef = useRef<HTMLSpanElement>(null);
 
@@ -46,14 +48,20 @@ const CTAButton: React.FC<CTAButtonProps> = ({ text, link }) => {
     <Button
       variant="default"
       size="lg"
-      className="group relative overflow-hidden bg-white text-black text-[2.2vw] md:text-[1.5vw] lg:text-[1vw] p-0 rounded-full"
+      className={cn(
+        'group relative overflow-hidden bg-white text-black text-[2.2vw] md:text-[1.5vw] lg:text-[1vw] p-0 rounded-full',
+        className
+      )}
       asChild
       ariaLabel={text}
     >
       <a
         ref={buttonRef}
         href={link}
-        className="relative flex items-center justify-center px-8 py-4"
+        className={cn(
+          'relative flex items-center justify-center px-8 py-4',
+          className
+        )}
       >
         <span
           ref={yellowBgRef}

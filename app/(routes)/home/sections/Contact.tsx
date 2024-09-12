@@ -50,6 +50,7 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
               text="Contact Us"
               link="#contact"
               aria-label="Contact us"
+              className="px-4 h-8"
             />
           </div>
         </div>
