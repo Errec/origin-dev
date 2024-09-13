@@ -70,7 +70,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="z-10 fixed top-0 left-0 right-0 h-18 py-4 px-4 md:px-12 lg:px-24 bg-transparent shadow-lg backdrop-blur-sm transition-all duration-500 ease-in-out"
+      className="z-10 fixed top-0 left-0 right-0 h-18 py-4 px-4 bg-transparent shadow-lg backdrop-blur-sm transition-all duration-500 ease-in-out"
     >
       <Navbar />
     </header>
