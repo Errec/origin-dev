@@ -61,7 +61,7 @@ export default function Navbar() {
           className="mr-4"
           tooltip="Contact Us"
           aria-label="Contact Us"
-          href="/about"
+          href="/contact"
           icon={<Handshake />}
         />
         <ModeToggle aria-label="Toggle Dark Mode" />
