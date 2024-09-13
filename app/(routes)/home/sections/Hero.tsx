@@ -1,6 +1,7 @@
 import CTAButton from '@/components/ui/CTAButton'; // Make sure this import is correct
 import { urlFor } from '@/lib/sanity-client';
 import { HeroSection } from '@/types/hero-section';
+import { ArrowRight } from 'lucide-react';
 import React, { Suspense } from 'react';
 
 const VideoPlayer = React.lazy(() => import('@/components/ui/VideoPlayer'));
@@ -10,9 +11,6 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ heroSection }) => {
-  const imageUrl = heroSection.backgroundImage
-    ? urlFor(heroSection.backgroundImage).url()
-    : null;
   const videoUrl = heroSection.backgroundVideo?.asset?.url || null;
 
   return (
@@ -46,6 +44,7 @@ const Hero: React.FC<HeroProps> = ({ heroSection }) => {
                 <CTAButton
                   text={heroSection.ctaButton.text}
                   link={heroSection.ctaButton.link}
+                  icon={<ArrowRight className="h-5 w-5" />}
                 />
               </div>
             )}

@@ -1,48 +1,27 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
+import { useButtonAnimation } from '@/hooks/useButtonAnimation';
 import { cn } from '@/utils';
-import { gsap } from 'gsap';
-import { ArrowRight } from 'lucide-react';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 interface CTAButtonProps {
   text: string;
   link: string;
   className?: string;
+  icon?: React.ReactNode;
 }
 
-const CTAButton: React.FC<CTAButtonProps> = ({ text, link, className }) => {
+const CTAButton: React.FC<CTAButtonProps> = ({
+  text,
+  link,
+  className,
+  icon,
+}) => {
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const yellowBgRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
-    const button = buttonRef.current;
-    const yellowBg = yellowBgRef.current;
-
-    if (!button || !yellowBg) return;
-
-    const onEnter = () => {
-      gsap.to(yellowBg, {
-        yPercent: -100,
-        duration: 0.3,
-        ease: 'power2.inOut',
-      });
-    };
-
-    const onLeave = () => {
-      gsap.set(yellowBg, { yPercent: 100 });
-      gsap.to(yellowBg, { yPercent: 0, duration: 0.3, ease: 'power2.inOut' });
-    };
-
-    button.addEventListener('mouseenter', onEnter);
-    button.addEventListener('mouseleave', onLeave);
-
-    return () => {
-      button.removeEventListener('mouseenter', onEnter);
-      button.removeEventListener('mouseleave', onLeave);
-    };
-  }, []);
+  useButtonAnimation(buttonRef, yellowBgRef);
 
   return (
     <Button
@@ -69,7 +48,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({ text, link, className }) => {
         ></span>
         <span className="relative z-10 flex items-center">
           {text}
-          <ArrowRight className="ml-2 h-5 w-5" />
+          {icon && <span className="ml-2">{icon}</span>}
         </span>
       </a>
     </Button>
