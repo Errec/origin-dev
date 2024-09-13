@@ -53,8 +53,11 @@ const ContactForm: React.FC = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-2 gap-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 sm:space-y-6"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="name"
@@ -63,11 +66,11 @@ const ContactForm: React.FC = () => {
                 <FormControl>
                   <Input
                     placeholder="NAME*"
-                    className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white"
+                    className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white text-sm sm:text-base"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm" />
               </FormItem>
             )}
           />
@@ -80,16 +83,16 @@ const ContactForm: React.FC = () => {
                   <Input
                     type="email"
                     placeholder="EMAIL*"
-                    className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white"
+                    className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white text-sm sm:text-base"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm" />
               </FormItem>
             )}
           />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="topic"
@@ -100,7 +103,7 @@ const ContactForm: React.FC = () => {
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white">
+                    <SelectTrigger className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white text-sm sm:text-base">
                       <SelectValue placeholder="TOPICS*" />
                     </SelectTrigger>
                   </FormControl>
@@ -112,7 +115,7 @@ const ContactForm: React.FC = () => {
                     <SelectItem value="nextjs">Next.js</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm" />
               </FormItem>
             )}
           />
@@ -125,11 +128,11 @@ const ContactForm: React.FC = () => {
                   <Input
                     type="tel"
                     placeholder="PHONE NUMBER"
-                    className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white"
+                    className="border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white text-sm sm:text-base"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm" />
               </FormItem>
             )}
           />
@@ -142,15 +145,18 @@ const ContactForm: React.FC = () => {
               <FormControl>
                 <Textarea
                   placeholder="MESSAGE*"
-                  className="h-40 border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white"
+                  className="h-32 sm:h-40 border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-white text-sm sm:text-base"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-xs sm:text-sm" />
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-white text-black hover:bg-gray-200">
+        <Button
+          type="submit"
+          className="bg-white text-black hover:bg-gray-200 text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3"
+        >
           SUBMIT
         </Button>
       </form>
