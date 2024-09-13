@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },
 };
-// TODO: add error boundary
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="relative">
+      <body className="flex flex-col min-h-screen">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -29,7 +29,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
+          <main className="flex-grow flex flex-col">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
