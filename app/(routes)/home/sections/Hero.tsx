@@ -43,7 +43,7 @@ const Hero: React.FC<HeroProps> = ({ heroSection }) => {
               <div className="ml-4">
                 <CTAButton
                   text={heroSection.ctaButton.text}
-                  link={heroSection.ctaButton.link}
+                  link={'/contact'}
                   icon={<ArrowRight className="h-5 w-5" />}
                 />
               </div>

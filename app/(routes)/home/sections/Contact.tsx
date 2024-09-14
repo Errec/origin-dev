@@ -48,7 +48,7 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
           <div className="transform scale-75 origin-left">
             <CTAButton
               text="Contact Us"
-              link="#contact"
+              link="/contact"
               aria-label="Contact us"
               className="px-4 h-8"
             />

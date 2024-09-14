@@ -183,7 +183,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
         <div className="h-2">
           {showGeneralError && (
             <p className="text-white uppercase text-sm font-semibold">
-              Please fix the errors in the form before submitting.
+              Please try again.
+              <br />
+              Fix the errors in the form before submitting.
             </p>
           )}
         </div>

@@ -45,7 +45,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({
       variant="default"
       size="lg"
       className={cn(
-        'group relative overflow-hidden bg-white text-black text-[2.2vw] md:text-[1.5vw] lg:text-[1vw] p-0 rounded-full',
+        'group relative overflow-hidden bg-white text-black text-[2.2vw] md:text-[1.5vw] lg:text-[1vw] p-0 rounded-full focus:outline-none',
         className
       )}
       type={type}
