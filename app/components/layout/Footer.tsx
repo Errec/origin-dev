@@ -1,4 +1,4 @@
-import ButtonScrollToTop from '@/components/ui/ButtonScrollToTop'; // Import the new component
+import ButtonScrollToTop from '@/components/ui/ButtonScrollToTop';
 import { GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons';
 
 export default function Footer() {
@@ -6,9 +6,8 @@ export default function Footer() {
 
   return (
     <footer
-      className="absolute min-w-full bottom-0 h-10 px-4 flex justify-between cursor-default border-black"
+      className="w-full py-2 px-4 mt-auto flex justify-between items-center cursor-default bg-transparent"
       role="contentinfo"
-      style={{ backgroundColor: 'transparent' }}
     >
       <p className="font-light">
         <span className="bg-white text-black">ORIGIN</span>DEV

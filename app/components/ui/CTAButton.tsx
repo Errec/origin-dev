@@ -1,48 +1,41 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
+import { useButtonAnimation } from '@/hooks/useButtonAnimation';
 import { cn } from '@/utils';
-import { gsap } from 'gsap';
-import { ArrowRight } from 'lucide-react';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 interface CTAButtonProps {
   text: string;
-  link: string;
+  link?: string;
   className?: string;
+  icon?: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: () => void;
 }
 
-const CTAButton: React.FC<CTAButtonProps> = ({ text, link, className }) => {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+const CTAButton: React.FC<CTAButtonProps> = ({
+  text,
+  link,
+  className,
+  icon,
+  type = 'button',
+  onClick,
+}) => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const yellowBgRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
-    const button = buttonRef.current;
-    const yellowBg = yellowBgRef.current;
+  useButtonAnimation(buttonRef, yellowBgRef);
 
-    if (!button || !yellowBg) return;
-
-    const onEnter = () => {
-      gsap.to(yellowBg, {
-        yPercent: -100,
-        duration: 0.3,
-        ease: 'power2.inOut',
-      });
-    };
-
-    const onLeave = () => {
-      gsap.set(yellowBg, { yPercent: 100 });
-      gsap.to(yellowBg, { yPercent: 0, duration: 0.3, ease: 'power2.inOut' });
-    };
-
-    button.addEventListener('mouseenter', onEnter);
-    button.addEventListener('mouseleave', onLeave);
-
-    return () => {
-      button.removeEventListener('mouseenter', onEnter);
-      button.removeEventListener('mouseleave', onLeave);
-    };
-  }, []);
+  const ButtonContent = () => (
+    <>
+      <span ref={yellowBgRef} className="absolute inset-0 bg-amber-400"></span>
+      <span className="relative z-10 flex items-center">
+        {text}
+        {icon && <span className="ml-2">{icon}</span>}
+      </span>
+    </>
+  );
 
   return (
     <Button
@@ -52,26 +45,25 @@ const CTAButton: React.FC<CTAButtonProps> = ({ text, link, className }) => {
         'group relative overflow-hidden bg-white text-black text-[2.2vw] md:text-[1.5vw] lg:text-[1vw] p-0 rounded-full',
         className
       )}
-      asChild
-      ariaLabel={text}
+      type={type}
+      onClick={onClick}
+      ref={buttonRef}
     >
-      <a
-        ref={buttonRef}
-        href={link}
-        className={cn(
-          'relative flex items-center justify-center px-8 py-4',
-          className
-        )}
-      >
-        <span
-          ref={yellowBgRef}
-          className="absolute inset-0 bg-amber-400"
-        ></span>
-        <span className="relative z-10 flex items-center">
-          {text}
-          <ArrowRight className="ml-2 h-5 w-5" />
+      {link ? (
+        <a
+          href={link}
+          className={cn(
+            'relative flex items-center justify-center px-8 py-4 w-full h-full',
+            className
+          )}
+        >
+          <ButtonContent />
+        </a>
+      ) : (
+        <span className="relative flex items-center justify-center px-8 py-4 w-full h-full">
+          <ButtonContent />
         </span>
-      </a>
+      )}
     </Button>
   );
 };
