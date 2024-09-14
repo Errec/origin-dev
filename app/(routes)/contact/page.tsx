@@ -1,6 +1,8 @@
 import { getContactPageData } from '@/api/sanity/contact/contact';
 import { getContactSectionData } from '@/api/sanity/landingPage/contact-section';
 import ContactForm from '@/components/layout/ContactForm';
+import AnimatedUnderline from '@/components/ui/AnimatedUnderline';
+import Link from 'next/link';
 import React from 'react';
 
 export const revalidate = 30; // Revalidate every 30 seconds
@@ -30,23 +32,43 @@ export default async function ContactPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="mb-4 sm:mb-0">
-            <h3 className="font-semibold text-sm sm:text-base md:text-lg">
+            <h3 className="font-semibold text-sm sm:text-base md:text-lg mb-2">
               BUSINESS ENQUIRIES
             </h3>
-            <p className="text-xs sm:text-sm md:text-base">
-              {contactSectionData.businessEnquiries?.email}
-            </p>
-            <p className="text-xs sm:text-sm md:text-base">
-              {contactSectionData.businessEnquiries?.phone}
-            </p>
+            <div className="flex flex-col space-y-2">
+              <Link
+                href={`mailto:${contactSectionData.businessEnquiries?.email ?? ''}`}
+              >
+                <AnimatedUnderline>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    {contactSectionData.businessEnquiries?.email}
+                  </p>
+                </AnimatedUnderline>
+              </Link>
+              <Link
+                href={`tel:${contactSectionData.businessEnquiries?.phone ?? ''}`}
+              >
+                <AnimatedUnderline>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    {contactSectionData.businessEnquiries?.phone}
+                  </p>
+                </AnimatedUnderline>
+              </Link>
+            </div>
           </div>
           <div>
-            <h3 className="font-semibold text-sm sm:text-base md:text-lg">
+            <h3 className="font-semibold text-sm sm:text-base md:text-lg mb-2">
               OPEN POSITIONS
             </h3>
-            <p className="text-xs sm:text-sm md:text-base">
-              {contactSectionData.openPositions?.email}
-            </p>
+            <Link
+              href={`mailto:${contactSectionData.openPositions?.email ?? ''}`}
+            >
+              <AnimatedUnderline>
+                <p className="text-xs sm:text-sm md:text-base">
+                  {contactSectionData.openPositions?.email}
+                </p>
+              </AnimatedUnderline>
+            </Link>
           </div>
         </div>
       </section>

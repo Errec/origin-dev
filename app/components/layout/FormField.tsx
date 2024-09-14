@@ -1,5 +1,5 @@
 'use client';
-
+import AnimatedUnderline from '@/components/ui/AnimatedUnderline';
 import {
   FormControl,
   FormItem,
@@ -63,6 +63,8 @@ const renderField = (
   form: any,
   setIsFocused: (value: boolean) => void
 ) => {
+  const hasError = !!form.formState.errors[field.name];
+
   const commonProps = {
     id: field.name,
     onFocus: () => setIsFocused(true),
@@ -71,11 +73,15 @@ const renderField = (
       form.trigger(field.name);
     },
     className: `border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-foreground text-sm sm:text-base pt-2 transition-all duration-300 ease-out ${
-      form.formState.errors[field.name]
-        ? 'border-[#f44336] border-b-2'
-        : 'border-input'
+      hasError ? 'border-[#f44336] border-b-2' : 'border-input'
     }`,
   };
+
+  const renderInput = (inputElement: React.ReactNode) => (
+    <AnimatedUnderline className="w-full" disabled={hasError}>
+      {inputElement}
+    </AnimatedUnderline>
+  );
 
   switch (field.type) {
     case 'select':
@@ -106,7 +112,7 @@ const renderField = (
         </Select>
       );
     case 'textarea':
-      return (
+      return renderInput(
         <Textarea
           {...formField}
           {...commonProps}
@@ -114,6 +120,8 @@ const renderField = (
         />
       );
     default:
-      return <Input type={field.type} {...formField} {...commonProps} />;
+      return renderInput(
+        <Input type={field.type} {...formField} {...commonProps} />
+      );
   }
 };

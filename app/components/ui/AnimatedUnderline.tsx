@@ -1,27 +1,28 @@
 'use client';
 import { gsap } from 'gsap';
-import Link from 'next/link';
 import React, { ReactNode, useEffect, useRef } from 'react';
 
 interface AnimatedUnderlineProps {
-  href?: string;
-  className?: string;
   children: ReactNode;
+  className?: string;
+  disabled?: boolean;
 }
 
 const AnimatedUnderline: React.FC<AnimatedUnderlineProps> = ({
-  href,
-  className = '',
   children,
+  className = '',
+  disabled = false,
 }) => {
-  const elementRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const element = elementRef.current;
+    if (disabled) return;
+
+    const container = containerRef.current;
     const line = lineRef.current;
 
-    if (!element || !line) return;
+    if (!container || !line) return;
 
     const resetLine = () => {
       gsap.set(line, { clipPath: 'inset(0 100% 0 0)', width: '100%' });
@@ -46,36 +47,26 @@ const AnimatedUnderline: React.FC<AnimatedUnderlineProps> = ({
       });
     };
 
-    element.addEventListener('mouseenter', expand);
-    element.addEventListener('mouseleave', shrink);
+    container.addEventListener('mouseenter', expand);
+    container.addEventListener('mouseleave', shrink);
 
     return () => {
-      element.removeEventListener('mouseenter', expand);
-      element.removeEventListener('mouseleave', shrink);
+      container.removeEventListener('mouseenter', expand);
+      container.removeEventListener('mouseleave', shrink);
     };
-  }, []);
-
-  const content = (
-    <span className="relative inline-block w-full" ref={elementRef}>
-      {children}
-      <span
-        ref={lineRef}
-        className="absolute bottom-0 left-0 w-full h-[1px] bg-white"
-        aria-hidden="true"
-      ></span>
-    </span>
-  );
-
-  if (href) {
-    return (
-      <Link href={href} className={`relative inline-block ${className}`}>
-        {content}
-      </Link>
-    );
-  }
+  }, [disabled]);
 
   return (
-    <span className={`relative inline-block ${className}`}>{content}</span>
+    <span className={`relative inline-block ${className}`} ref={containerRef}>
+      {children}
+      {!disabled && (
+        <span
+          ref={lineRef}
+          className="absolute bottom-0 left-0 w-full h-[1px] bg-white"
+          aria-hidden="true"
+        ></span>
+      )}
+    </span>
   );
 };
 
