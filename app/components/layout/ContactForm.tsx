@@ -25,8 +25,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmit} className="space-y-8 sm:space-y-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-x-4 sm:gap-y-8">
+      <form onSubmit={handleSubmit} className="space-y-10 sm:space-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-x-6 sm:gap-y-10">
           {formFields.map((field) => (
             <FormField key={field.name} field={field} />
           ))}
