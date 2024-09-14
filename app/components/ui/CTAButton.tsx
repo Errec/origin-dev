@@ -7,9 +7,11 @@ import React, { useRef } from 'react';
 
 interface CTAButtonProps {
   text: string;
-  link: string;
+  link?: string;
   className?: string;
   icon?: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: () => void;
 }
 
 const CTAButton: React.FC<CTAButtonProps> = ({
@@ -17,11 +19,23 @@ const CTAButton: React.FC<CTAButtonProps> = ({
   link,
   className,
   icon,
+  type = 'button',
+  onClick,
 }) => {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const yellowBgRef = useRef<HTMLSpanElement>(null);
 
   useButtonAnimation(buttonRef, yellowBgRef);
+
+  const ButtonContent = () => (
+    <>
+      <span ref={yellowBgRef} className="absolute inset-0 bg-amber-400"></span>
+      <span className="relative z-10 flex items-center">
+        {text}
+        {icon && <span className="ml-2">{icon}</span>}
+      </span>
+    </>
+  );
 
   return (
     <Button
@@ -31,26 +45,25 @@ const CTAButton: React.FC<CTAButtonProps> = ({
         'group relative overflow-hidden bg-white text-black text-[2.2vw] md:text-[1.5vw] lg:text-[1vw] p-0 rounded-full',
         className
       )}
-      asChild
-      ariaLabel={text}
+      type={type}
+      onClick={onClick}
+      ref={buttonRef}
     >
-      <a
-        ref={buttonRef}
-        href={link}
-        className={cn(
-          'relative flex items-center justify-center px-8 py-4',
-          className
-        )}
-      >
-        <span
-          ref={yellowBgRef}
-          className="absolute inset-0 bg-amber-400"
-        ></span>
-        <span className="relative z-10 flex items-center">
-          {text}
-          {icon && <span className="ml-2">{icon}</span>}
+      {link ? (
+        <a
+          href={link}
+          className={cn(
+            'relative flex items-center justify-center px-8 py-4 w-full h-full',
+            className
+          )}
+        >
+          <ButtonContent />
+        </a>
+      ) : (
+        <span className="relative flex items-center justify-center px-8 py-4 w-full h-full">
+          <ButtonContent />
         </span>
-      </a>
+      )}
     </Button>
   );
 };

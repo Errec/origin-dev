@@ -15,12 +15,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/Select';
 import { Textarea } from '@/components/ui/Textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import CTAButton from '../ui/CTAButton';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -153,12 +154,7 @@ const ContactForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="bg-white text-black hover:bg-gray-200 text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3"
-        >
-          SUBMIT
-        </Button>
+        <CTAButton text="SUBMIT" type="submit" className="px-0 h-8" />
       </form>
     </Form>
   );
