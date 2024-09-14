@@ -98,7 +98,7 @@ const renderField = (
           }}
         >
           <FormControl>
-            <SelectTrigger {...commonProps}>
+            <SelectTrigger {...commonProps} error={hasError}>
               <SelectValue />
             </SelectTrigger>
           </FormControl>
