@@ -29,7 +29,10 @@ const CTAButton: React.FC<CTAButtonProps> = ({
 
   const ButtonContent = () => (
     <>
-      <span ref={yellowBgRef} className="absolute inset-0 bg-amber-400"></span>
+      <span
+        ref={yellowBgRef}
+        className="absolute -inset-x-full inset-y-0 bg-amber-400"
+      ></span>
       <span className="relative z-10 flex items-center">
         {text}
         {icon && <span className="ml-2">{icon}</span>}
