@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const contact = defineType({
   name: 'contact',
@@ -23,20 +23,20 @@ export const contact = defineType({
         {
           type: 'object',
           fields: [
-            {name: 'name', type: 'string', title: 'Field Name'},
-            {name: 'label', type: 'string', title: 'Field Label'},
-            {name: 'placeholder', type: 'string', title: 'Placeholder'},
+            { name: 'name', type: 'string', title: 'Field Name' },
+            { name: 'label', type: 'string', title: 'Field Label' },
+            { name: 'placeholder', type: 'string', title: 'Placeholder' },
             {
               name: 'type',
               type: 'string',
               title: 'Field Type',
               options: {
                 list: [
-                  {title: 'Text', value: 'text'},
-                  {title: 'Email', value: 'email'},
-                  {title: 'Phone', value: 'tel'},
-                  {title: 'Textarea', value: 'textarea'},
-                  {title: 'Select', value: 'select'},
+                  { title: 'Text', value: 'text' },
+                  { title: 'Email', value: 'email' },
+                  { title: 'Phone', value: 'tel' },
+                  { title: 'Textarea', value: 'textarea' },
+                  { title: 'Select', value: 'select' },
                 ],
               },
             },
@@ -44,10 +44,10 @@ export const contact = defineType({
               name: 'options',
               type: 'array',
               title: 'Select Options',
-              of: [{type: 'string'}],
-              hidden: ({parent}) => parent?.type !== 'select',
+              of: [{ type: 'string' }],
+              hidden: ({ parent }) => parent?.type !== 'select',
             },
-            {name: 'required', type: 'boolean', title: 'Required'},
+            { name: 'required', type: 'boolean', title: 'Required' },
           ],
         },
       ],
