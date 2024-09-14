@@ -13,3 +13,11 @@ export interface ContactPage {
   formFields: FormField[];
   submitButtonText: string;
 }
+
+export interface CustomFormField {
+  name: string;
+  type: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  placeholder: string;
+  required: boolean;
+  options?: string[];
+}
