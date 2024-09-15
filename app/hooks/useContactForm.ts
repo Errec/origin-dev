@@ -5,31 +5,37 @@ import * as z from 'zod';
 
 export const useContactForm = (formFields: CustomFormField[]) => {
   const formSchema = z.object(
-    formFields.reduce(
+    formFields.reduce<Record<string, z.ZodString | z.ZodOptional<z.ZodString>>>(
       (acc, field) => {
-        let validator: z.ZodString | z.ZodOptional<z.ZodString> = z.string();
-        if (field.type === 'tel') {
+        let validator: z.ZodString | z.ZodOptional<z.ZodString>;
+
+        if (field.type === 'select') {
+          validator = z
+            .string()
+            .min(1, { message: `${field.name} is required.` });
+        } else if (field.type === 'tel') {
           validator = z.string().optional();
         } else {
+          validator = z.string();
           if (field.required) {
             validator = validator.min(1, {
               message: `${field.name} is required.`,
             });
           }
           if (field.type === 'email') {
-            validator = (validator as z.ZodString).email({
-              message: 'Invalid email address.',
-            });
+            validator = z.string().email({ message: 'Invalid email address.' });
           }
           if (field.type === 'textarea') {
-            validator = (validator as z.ZodString).min(10, {
-              message: `${field.name} must be at least 10 characters.`,
-            });
+            validator = z
+              .string()
+              .min(10, {
+                message: `${field.name} must be at least 10 characters.`,
+              });
           }
         }
         return { ...acc, [field.name]: validator };
       },
-      {} as Record<string, z.ZodString | z.ZodOptional<z.ZodString>>
+      {}
     )
   );
 

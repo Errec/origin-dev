@@ -90,8 +90,9 @@ const renderField = (
           onValueChange={(value) => {
             formField.onChange(value);
             setIsFocused(false);
+            form.trigger(field.name);
           }}
-          defaultValue={formField.value}
+          value={formField.value}
           onOpenChange={(open) => {
             setIsFocused(open);
             if (!open) form.trigger(field.name);
