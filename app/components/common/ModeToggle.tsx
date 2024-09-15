@@ -2,7 +2,9 @@
 
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
+import { usePathname } from 'next/navigation';
 import * as React from 'react';
+import { useEffect } from 'react';
 
 import { Button } from '@/components/ui/Button';
 import {
@@ -13,7 +15,14 @@ import {
 } from '@/components/ui/DropdownMenu';
 
 export function ModeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!pathname.startsWith('/blog')) {
+      setTheme('dark');
+    }
+  }, [pathname, setTheme]);
 
   return (
     <DropdownMenu>

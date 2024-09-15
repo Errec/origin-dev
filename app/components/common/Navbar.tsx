@@ -5,9 +5,13 @@ import { ReaderIcon } from '@radix-ui/react-icons';
 import { CodeIcon, Handshake, HomeIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ModeToggle } from './ModeToggle';
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isBlogPage = pathname.startsWith('/blog');
+
   return (
     <nav
       className="w-full flex items-center justify-between mx-auto"
@@ -36,8 +40,9 @@ export default function Navbar() {
         </div>
       </Link>
       <div className="flex items-center">
+        {isBlogPage && <ModeToggle aria-label="Toggle Dark Mode" />}
         <ButtonLink
-          className="mr-4"
+          className="mx-4"
           tooltip="Home"
           aria-label="Home"
           href="/"
@@ -58,13 +63,11 @@ export default function Navbar() {
           icon={<ReaderIcon />}
         />
         <ButtonLink
-          className="mr-4"
           tooltip="Contact Us"
           aria-label="Contact Us"
           href="/contact"
           icon={<Handshake />}
         />
-        <ModeToggle aria-label="Toggle Dark Mode" />
       </div>
     </nav>
   );
