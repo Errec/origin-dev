@@ -1,7 +1,7 @@
 'use client';
 
 import { FormField } from '@/components/layout/FormField';
-import CTAButton from '@/components/ui/CTAButton';
+import SubmitButton from '@/components/ui/SubmitButton';
 import { useContactForm } from '@/hooks/useContactForm';
 import { CustomFormField } from '@/types/contact';
 import React, { useState } from 'react';
@@ -40,7 +40,10 @@ const ContactForm: React.FC<ContactFormProps> = ({
             </p>
           )}
         </div>
-        <CTAButton text={submitButtonText} type="submit" className="px-0 h-8" />
+        <SubmitButton
+          coverText="SEND US YOUR IDEA!"
+          buttonText={submitButtonText}
+        />
       </form>
     </FormProvider>
   );
