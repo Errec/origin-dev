@@ -1,71 +1,12 @@
 'use client';
 
 import Navbar from '@/components/common/Navbar';
-import gsap from 'gsap';
-import React, { useEffect, useRef, useState } from 'react';
+import { useHeaderScroll } from '@/hooks/useHeaderScroll';
+import React, { useRef } from 'react';
 
 export default function Header() {
-  const [lastScrollY, setLastScrollY] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-
-        if (currentScrollY + windowHeight >= documentHeight - 50) {
-          // Near the bottom of the page, show the header
-          gsap.to(headerRef.current, {
-            y: '0%',
-            duration: 0,
-            ease: 'power2.out',
-          });
-        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          // Scrolling down, hide header
-          gsap.to(headerRef.current, {
-            y: '-100%',
-            duration: 0,
-            ease: 'power2.out',
-          });
-        } else {
-          // Scrolling up, show header
-          gsap.to(headerRef.current, {
-            y: '0%',
-            duration: 0,
-            ease: 'power2.out',
-          });
-        }
-
-        setLastScrollY(currentScrollY);
-      };
-
-      const handleKeydown = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowDown') {
-          gsap.to(headerRef.current, {
-            y: '-100%',
-            duration: 0,
-            ease: 'power2.out',
-          });
-        } else if (event.key === 'ArrowUp') {
-          gsap.to(headerRef.current, {
-            y: '0%',
-            duration: 0,
-            ease: 'power2.out',
-          });
-        }
-      };
-
-      window.addEventListener('scroll', handleScroll);
-      window.addEventListener('keydown', handleKeydown);
-
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-        window.removeEventListener('keydown', handleKeydown);
-      };
-    }
-  }, [lastScrollY]);
+  useHeaderScroll(headerRef);
 
   return (
     <header
