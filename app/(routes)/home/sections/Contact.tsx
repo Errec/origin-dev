@@ -1,6 +1,7 @@
-import AnimatedLink from '@/components/ui/AnimatedLink';
+import AnimatedUnderline from '@/components/ui/AnimatedUnderline';
 import CTAButton from '@/components/ui/CTAButton';
 import { ContactSection } from '@/types/contact-section';
+import Link from 'next/link';
 import React from 'react';
 
 interface ContactProps {
@@ -22,21 +23,19 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
           {contactSection.smallTitle}
         </p>
         <div className="relative">
-          <AnimatedLink
-            href="/blog"
-            className="text-6xl sm:text-7xl md:text-8xl font-light"
-            aria-label="Go to Blog"
-          >
-            <span className="relative">
-              <h1>{contactSection.bigTitle}</h1>
-              <span
-                className="absolute -top-2 -right-8 text-xl sm:text-2xl"
-                aria-label={`Blog post count: ${formattedBlogCount}`}
-              >
-                {formattedBlogCount}
+          <Link href="/blog" aria-label="Go to Blog">
+            <AnimatedUnderline className="text-6xl sm:text-7xl md:text-8xl font-light">
+              <span className="relative">
+                <h1>{contactSection.bigTitle}</h1>
+                <span
+                  className="absolute -top-2 -right-8 text-xl sm:text-2xl"
+                  aria-label={`Blog post count: ${formattedBlogCount}`}
+                >
+                  {formattedBlogCount}
+                </span>
               </span>
-            </span>
-          </AnimatedLink>
+            </AnimatedUnderline>
+          </Link>
         </div>
       </div>
 
@@ -48,7 +47,7 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
           <div className="transform scale-75 origin-left">
             <CTAButton
               text="Contact Us"
-              link="#contact"
+              link="/contact"
               aria-label="Contact us"
               className="px-4 h-8"
             />
@@ -59,28 +58,29 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
           <div>
             <h2 className="text-sm font-bold mb-4">BUSINESS ENQUIRIES</h2>
             <div className="flex flex-col space-y-2">
-              <AnimatedLink
+              <Link
                 href={`mailto:${contactSection.businessEnquiries?.email ?? ''}`}
-                aria-label="Business enquiry email"
               >
-                {contactSection.businessEnquiries?.email ?? 'N/A'}
-              </AnimatedLink>
-              <AnimatedLink
+                <AnimatedUnderline aria-label="Business enquiry email">
+                  {contactSection.businessEnquiries?.email ?? 'N/A'}
+                </AnimatedUnderline>
+              </Link>
+              <Link
                 href={`tel:${contactSection.businessEnquiries?.phone ?? ''}`}
-                aria-label="Business enquiry phone"
               >
-                {contactSection.businessEnquiries?.phone ?? 'N/A'}
-              </AnimatedLink>
+                <AnimatedUnderline aria-label="Business enquiry phone">
+                  {contactSection.businessEnquiries?.phone ?? 'N/A'}
+                </AnimatedUnderline>
+              </Link>
             </div>
           </div>
           <div>
             <h2 className="text-sm font-bold mb-4">OPEN POSITIONS</h2>
-            <AnimatedLink
-              href={`mailto:${contactSection.openPositions?.email ?? ''}`}
-              aria-label="Open positions email"
-            >
-              {contactSection.openPositions?.email ?? 'N/A'}
-            </AnimatedLink>
+            <Link href={`mailto:${contactSection.openPositions?.email ?? ''}`}>
+              <AnimatedUnderline aria-label="Open positions email">
+                {contactSection.openPositions?.email ?? 'N/A'}
+              </AnimatedUnderline>
+            </Link>
           </div>
           {contactSection.locations?.map((location, index) => (
             <div key={index}>

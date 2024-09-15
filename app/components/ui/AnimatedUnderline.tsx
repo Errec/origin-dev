@@ -1,27 +1,28 @@
 'use client';
 import { gsap } from 'gsap';
-import Link from 'next/link';
 import React, { ReactNode, useEffect, useRef } from 'react';
 
-interface AnimatedLinkProps {
-  href: string;
-  className?: string;
+interface AnimatedUnderlineProps {
   children: ReactNode;
+  className?: string;
+  disabled?: boolean;
 }
 
-const AnimatedLink: React.FC<AnimatedLinkProps> = ({
-  href,
-  className = '',
+const AnimatedUnderline: React.FC<AnimatedUnderlineProps> = ({
   children,
+  className = '',
+  disabled = false,
 }) => {
-  const linkRef = useRef<HTMLAnchorElement>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const link = linkRef.current;
+    if (disabled) return;
+
+    const container = containerRef.current;
     const line = lineRef.current;
 
-    if (!link || !line) return;
+    if (!container || !line) return;
 
     const resetLine = () => {
       gsap.set(line, { clipPath: 'inset(0 100% 0 0)', width: '100%' });
@@ -46,27 +47,27 @@ const AnimatedLink: React.FC<AnimatedLinkProps> = ({
       });
     };
 
-    link.addEventListener('mouseenter', expand);
-    link.addEventListener('mouseleave', shrink);
+    container.addEventListener('mouseenter', expand);
+    container.addEventListener('mouseleave', shrink);
 
     return () => {
-      link.removeEventListener('mouseenter', expand);
-      link.removeEventListener('mouseleave', shrink);
+      container.removeEventListener('mouseenter', expand);
+      container.removeEventListener('mouseleave', shrink);
     };
-  }, []);
+  }, [disabled]);
 
   return (
-    <Link href={href} className={`relative inline-block ${className}`}>
-      <span className="relative inline-block" ref={linkRef}>
-        {children}
+    <span className={`relative inline-block ${className}`} ref={containerRef}>
+      {children}
+      {!disabled && (
         <span
           ref={lineRef}
           className="absolute bottom-0 left-0 w-full h-[1px] bg-white"
           aria-hidden="true"
         ></span>
-      </span>
-    </Link>
+      )}
+    </span>
   );
 };
 
-export default AnimatedLink;
+export default AnimatedUnderline;

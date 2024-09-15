@@ -19,9 +19,11 @@
       "@/components/*": ["./app/components/*"],
       "@/content/*": ["./app/(routes)/*"],
       "@/lib/*": ["./app/lib/*"],
+      "@/schemas/*": ["./app/schemas/*"],
       "@/styles/*": ["./app/styles/*"],
       "@/types/*": ["./app/types/*"],
       "@/utils/*": ["./app/utils/*"],
+      "@/hooks/*": ["./app/hooks/*"],
       "@/public/*": ["./public/*"]
     },
     "plugins": [
