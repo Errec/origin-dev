@@ -72,9 +72,9 @@ const renderField = (
       setIsFocused(false);
       form.trigger(field.name);
     },
-    className: `border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent text-foreground text-sm sm:text-base pt-2 transition-all duration-300 ease-out ${
-      hasError ? 'border-[#f44336] border-b-2' : 'border-input'
-    }`,
+    className: `border-t-0 border-x-0 rounded-none focus:ring-0 bg-transparent 
+      text-foreground text-sm sm:text-base pt-2 transition-all duration-300 
+      ease-out ${hasError ? 'border-[#f44336] border-b-2' : 'border-input'}`,
   };
 
   const renderInput = (inputElement: React.ReactNode) => (
