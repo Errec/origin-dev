@@ -11,7 +11,11 @@ export default async function PostList() {
 
   return (
     <main className="relative pt-44 bottom-16 w-full">
-      <ul className="rounded-t-l overflow-hidden grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-4 sm:mx-8 md:mx-10 lg:mx-12 xl:mx-16">
+      <ul
+        className="rounded-t-l overflow-hidden grid gap-4 grid-cols-1 
+           md:grid-cols-2 lg:grid-cols-4 mx-4 sm:mx-8 
+           md:mx-10 lg:mx-12 xl:mx-16"
+      >
         {blogData.map((post, idx) => (
           <PostCard key={idx} post={post} priority={idx < aboveFoldThreshold} />
         ))}

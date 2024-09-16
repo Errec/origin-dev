@@ -1,6 +1,5 @@
 'use client';
 
-import { urlFor } from '@/lib/sanity-client';
 import gsap from 'gsap';
 import Image from 'next/image';
 import React, { memo, useEffect, useRef } from 'react';

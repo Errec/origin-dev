@@ -1,72 +1,13 @@
-'use client';
-
-import gsap from 'gsap';
-import React, {
-  ReactNode,
-  useCallback,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-
-interface RisingTextAnimationProps {
-  children: ReactNode;
-  delay?: number;
-  duration?: number;
-  stagger?: number;
-  triggerOnChange?: any[]; // Dependencies that trigger the animation when changed
-  className?: string;
-}
+import { useRisingTextAnimation } from '@/hooks/useRisingTextAnimation';
+import { RisingTextAnimationProps } from '@/types/rising-text-animation';
+import React from 'react';
 
 export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
   children,
-  delay = 0,
-  duration = 0.5,
-  stagger = 0.1,
-  triggerOnChange = [],
   className = '',
+  ...hookProps
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isClient, setIsClient] = useState(false);
-
-  const animate = useCallback(() => {
-    if (containerRef.current) {
-      gsap.fromTo(
-        containerRef.current.children,
-        {
-          yPercent: 100,
-          opacity: 0,
-        },
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: duration,
-          stagger: stagger,
-          delay: delay,
-          ease: 'power2.out',
-          clearProps: 'all', // This ensures the animation can be replayed
-        }
-      );
-    }
-  }, [delay, duration, stagger]);
-
-  // Memoize the triggerOnChange array to avoid unnecessary re-renders
-  const memoizedTriggerOnChange = useMemo(
-    () => triggerOnChange,
-    [triggerOnChange]
-  );
-
-  useLayoutEffect(() => {
-    setIsClient(true);
-    animate();
-  }, [animate]);
-
-  useLayoutEffect(() => {
-    if (isClient) {
-      animate();
-    }
-  }, [isClient, animate, memoizedTriggerOnChange]);
+  const { containerRef, isClient } = useRisingTextAnimation(hookProps);
 
   return (
     <div
