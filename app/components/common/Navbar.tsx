@@ -27,9 +27,10 @@ interface NavItem {
 
 interface NavbarProps {
   items: NavItem[];
+  headerVisible: boolean;
 }
 
-export default function Navbar({ items }: NavbarProps) {
+export default function Navbar({ items, headerVisible }: NavbarProps) {
   const pathname = usePathname();
   const isBlogPage = pathname.startsWith('/blog');
 
@@ -45,7 +46,7 @@ export default function Navbar({ items }: NavbarProps) {
       className="w-full flex items-center justify-between mx-auto"
       aria-label="Main navigation"
     >
-      <RisingTextAnimation>
+      <RisingTextAnimation triggerOnVisible isVisible={headerVisible}>
         <Link
           href="/"
           className="font-bold text-3xl bg-black dark:bg-transparent dark:text-stone-200 text-stone-100 focus:outline-none"
@@ -72,7 +73,11 @@ export default function Navbar({ items }: NavbarProps) {
       <div className="flex items-center space-x-4">
         {isBlogPage && <ModeToggle aria-label="Toggle Dark Mode" />}
         <div className="hidden md:block">
-          <RisingTextAnimation triggerOnChange={[pathname]}>
+          <RisingTextAnimation
+            triggerOnChange={[pathname]}
+            triggerOnVisible
+            isVisible={headerVisible}
+          >
             <ul className="flex items-center space-x-8">
               {items.map((item) => {
                 const isActive = isActiveLink(item.href);

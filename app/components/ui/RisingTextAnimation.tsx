@@ -17,6 +17,8 @@ interface RisingTextAnimationProps {
   stagger?: number;
   triggerOnChange?: any[]; // Dependencies that trigger the animation when changed
   className?: string;
+  triggerOnVisible?: boolean; // New optional prop to enable visibility-based triggering
+  isVisible?: boolean; // New optional prop to control visibility-based animation
 }
 
 export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
@@ -26,12 +28,15 @@ export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
   stagger = 0.1,
   triggerOnChange = [],
   className = '',
+  triggerOnVisible = false,
+  isVisible = true,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const animate = useCallback(() => {
-    if (containerRef.current) {
+    if (containerRef.current && (!hasAnimated || !triggerOnVisible)) {
       gsap.fromTo(
         containerRef.current.children,
         {
@@ -45,11 +50,21 @@ export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
           stagger: stagger,
           delay: delay,
           ease: 'power2.out',
-          clearProps: 'all', // This ensures the animation can be replayed
+          clearProps: 'all',
+          onComplete: () => setHasAnimated(true),
         }
       );
     }
-  }, [delay, duration, stagger]);
+  }, [delay, duration, stagger, hasAnimated, triggerOnVisible]);
+
+  const resetAnimation = useCallback(() => {
+    if (containerRef.current) {
+      gsap.set(containerRef.current.children, {
+        yPercent: 0,
+        opacity: 1,
+      });
+    }
+  }, []);
 
   // Memoize the triggerOnChange array to avoid unnecessary re-renders
   const memoizedTriggerOnChange = useMemo(
@@ -59,14 +74,28 @@ export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
 
   useLayoutEffect(() => {
     setIsClient(true);
-    animate();
-  }, [animate]);
-
-  useLayoutEffect(() => {
-    if (isClient) {
+    if (!triggerOnVisible) {
       animate();
     }
-  }, [isClient, animate, memoizedTriggerOnChange]);
+  }, [animate, triggerOnVisible]);
+
+  useLayoutEffect(() => {
+    if (isClient && triggerOnVisible) {
+      if (isVisible) {
+        animate();
+      } else {
+        setHasAnimated(false);
+        resetAnimation();
+      }
+    }
+  }, [
+    isClient,
+    animate,
+    resetAnimation,
+    isVisible,
+    triggerOnVisible,
+    memoizedTriggerOnChange,
+  ]);
 
   return (
     <div

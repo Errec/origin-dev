@@ -1,7 +1,10 @@
 import gsap from 'gsap';
 import { RefObject, useEffect, useState } from 'react';
 
-export function useHeaderScroll(headerRef: RefObject<HTMLElement>) {
+export function useHeaderScroll(
+  headerRef: RefObject<HTMLElement>,
+  onVisibilityChange?: (visible: boolean) => void
+) {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
@@ -10,6 +13,8 @@ export function useHeaderScroll(headerRef: RefObject<HTMLElement>) {
         const currentScrollY = window.scrollY;
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
+
+        let isVisible = true;
 
         if (currentScrollY + windowHeight >= documentHeight - 50) {
           // Near the bottom of the page, show the header
@@ -25,6 +30,7 @@ export function useHeaderScroll(headerRef: RefObject<HTMLElement>) {
             duration: 0,
             ease: 'power2.out',
           });
+          isVisible = false;
         } else {
           // Scrolling up, show header
           gsap.to(headerRef.current, {
@@ -35,6 +41,7 @@ export function useHeaderScroll(headerRef: RefObject<HTMLElement>) {
         }
 
         setLastScrollY(currentScrollY);
+        onVisibilityChange?.(isVisible);
       };
 
       const handleKeydown = (event: KeyboardEvent) => {
@@ -44,12 +51,14 @@ export function useHeaderScroll(headerRef: RefObject<HTMLElement>) {
             duration: 0,
             ease: 'power2.out',
           });
+          onVisibilityChange?.(false);
         } else if (event.key === 'ArrowUp') {
           gsap.to(headerRef.current, {
             y: '0%',
             duration: 0,
             ease: 'power2.out',
           });
+          onVisibilityChange?.(true);
         }
       };
 
@@ -61,5 +70,5 @@ export function useHeaderScroll(headerRef: RefObject<HTMLElement>) {
         window.removeEventListener('keydown', handleKeydown);
       };
     }
-  }, [lastScrollY, headerRef]);
+  }, [lastScrollY, headerRef, onVisibilityChange]);
 }
