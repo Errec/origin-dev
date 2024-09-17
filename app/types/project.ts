@@ -1,14 +1,14 @@
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-export type Project = {
+export type ProjectItem = {
   photo: SanityImageSource;
   subtitle: string;
   description: string;
   link: string;
 };
 
-export type ProjectItem = {
-  sectionTitle: string;
-  sectionSubtitle: string;
-  projects: Project[];
+export type ProjectPage = {
+  pageTitle: string;
+  pageSubtitle: string;
+  projects: ProjectItem[];
 };

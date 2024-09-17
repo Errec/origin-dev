@@ -1,12 +1,12 @@
 import { sanityClient } from '@/lib/sanity-client';
-import { ProjectItem } from '@/types/project';
+import { ProjectPage } from '@/types/project';
 
-export async function getProjectItemData(): Promise<ProjectItem> {
+export async function getProjectPageData(): Promise<ProjectPage> {
   try {
     const query = `
-      *[_type == 'projectsSection'][0] {
-        sectionTitle,
-        sectionSubtitle,
+      *[_type == 'projectsPage'][0] {
+        pageTitle,
+        pageSubtitle,
         projects[] {
           photo,
           subtitle,
@@ -18,7 +18,7 @@ export async function getProjectItemData(): Promise<ProjectItem> {
     const response = await sanityClient.fetch(query);
     return response;
   } catch (error) {
-    console.error('Error fetching project item data:', error);
+    console.error('Error fetching projects page data:', error);
     throw error;
   }
 }
