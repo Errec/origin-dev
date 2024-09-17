@@ -1,3 +1,4 @@
+import BenefitsPage from './@benefits/page';
 import ContactPage from './@contact/page';
 import HeroPage from './@hero/page';
 import ProjectsPage from './@projects/page';
@@ -10,6 +11,7 @@ export default function HomePage() {
       hero={<HeroPage />}
       technologies={<TechnologiesPage />}
       projects={<ProjectsPage />}
+      benefits={<BenefitsPage />}
       contact={<ContactPage />}
     />
   );

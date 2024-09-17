@@ -1,46 +1,48 @@
-import {
-  ChatBubbleIcon,
-  ClipboardIcon,
-  ClockIcon,
-  PersonIcon,
-  PlayIcon,
-  VideoIcon,
-} from '@radix-ui/react-icons';
+import { BenefitsSection } from '@/types/benefits-section';
+import * as RadixIcons from '@radix-ui/react-icons';
+import React from 'react';
 
-export default function Benefits() {
-  const benefits = [
-    { Icon: PlayIcon, title: '300+ video lessons, 5 courses' },
-    { Icon: ClockIcon, title: '24/7 access to content' },
-    { Icon: VideoIcon, title: 'Live monthly calls' },
-    { Icon: PersonIcon, title: 'Interactive community' },
-    { Icon: ClipboardIcon, title: 'Assignments, Certifications' },
-    { Icon: ChatBubbleIcon, title: 'Personal coaching / Advanced feedback' },
-  ];
+interface BenefitsProps {
+  benefitsSection: BenefitsSection;
+}
+
+const Benefits: React.FC<BenefitsProps> = ({ benefitsSection }) => {
+  const getIconComponent = (iconName: string) => {
+    const IconComponent = (RadixIcons as any)[iconName];
+    if (!IconComponent) {
+      console.warn(`Icon not found: ${iconName}`);
+      return RadixIcons.QuestionMarkCircledIcon;
+    }
+    return IconComponent;
+  };
 
   return (
-    <section className="bg-black text-white p-8">
-      <h2 className="text-4xl font-bold text-center mb-12">
-        What expect from our projects
+    <section className="bg-black text-white pt-24">
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-center mb-16">
+        {benefitsSection.title}
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]">
-        {benefits.map(({ Icon, title }, index) => (
-          <div
-            key={index}
-            className="bg-black p-6 flex flex-col items-center relative"
-          >
-            <div className="w-12 h-12 bg-amber-400 rounded-lg flex items-center justify-center mb-4">
-              <Icon className="w-6 h-6 text-black" />
+      <div className="grid grid-cols-1 md:grid-cols-3">
+        {benefitsSection.benefits.map(({ text, icon }, index) => {
+          const Icon = getIconComponent(icon);
+          return (
+            <div
+              key={index}
+              className="py-16 px-12 flex flex-col items-center relative"
+            >
+              <Icon className="w-16 h-16 text-amber-400 mb-8" />
+              <p className="text-lg text-center font-light mb-8">{text}</p>
+              {index % 3 !== 2 && (
+                <div className="absolute top-8 right-0 w-[1px] h-[calc(100%-64px)] bg-white" />
+              )}
+              {index < 3 && (
+                <div className="absolute bottom-0 left-12 right-12 h-[1px] bg-white" />
+              )}
             </div>
-            <p className="text-center text-white">{title}</p>
-            {index % 3 !== 2 && (
-              <div className="absolute top-6 right-0 w-[1px] h-[calc(100%-48px)] bg-white" />
-            )}
-            {index < 3 && (
-              <div className="absolute bottom-0 left-6 right-6 h-[1px] bg-white" />
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
-}
+};
+
+export default Benefits;
