@@ -5,6 +5,6 @@ export {
   getBenefitsSectionData,
   getContactSectionData,
   getHeroSectionData,
-  getProjectsSectionData,
   getTechnologiesSectionData,
 } from './landingPage';
+export { getProjectItemData } from './project';
