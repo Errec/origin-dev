@@ -15,7 +15,7 @@ export default function Projects({ projectsSection }: ProjectsProps) {
   return (
     <section
       aria-labelledby="projects-title"
-      className="pt-8 px-4 sm:px-6 lg:px-8 bg-black"
+      className="px-4 sm:px-6 lg:px-8 bg-black"
     >
       <div className="max-w-8xl mx-auto">
         <h2
@@ -24,7 +24,7 @@ export default function Projects({ projectsSection }: ProjectsProps) {
         >
           {projectsSection.title.toUpperCase()}
         </h2>
-        <p className="text-[3.5vw] md:text-[2.5vw] lg:text-[1.5vw] mb-36 text-center">
+        <p className="text-[3.5vw] md:text-[2.5vw] lg:text-[1.5vw] mb-28 text-center">
           {projectsSection.subtitle}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

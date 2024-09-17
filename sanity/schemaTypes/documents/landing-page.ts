@@ -16,6 +16,11 @@ export const landingPage = defineType({
       type: 'heroSection',
     }),
     defineField({
+      name: 'benefitsSection',
+      title: 'Benefits Section',
+      type: 'benefitsSection',
+    }),
+    defineField({
       name: 'projectsSection',
       title: 'Projects Section',
       type: 'projectsSection',
