@@ -7,8 +7,8 @@ import {
   VideoIcon,
 } from '@radix-ui/react-icons';
 
-export default function Component() {
-  const features = [
+export default function Benefits() {
+  const benefits = [
     { Icon: PlayIcon, title: '300+ video lessons, 5 courses' },
     { Icon: ClockIcon, title: '24/7 access to content' },
     { Icon: VideoIcon, title: 'Live monthly calls' },
@@ -23,7 +23,7 @@ export default function Component() {
         What expect from our projects
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]">
-        {features.map(({ Icon, title }, index) => (
+        {benefits.map(({ Icon, title }, index) => (
           <div
             key={index}
             className="bg-black p-6 flex flex-col items-center relative"

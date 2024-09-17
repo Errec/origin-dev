@@ -1,6 +1,6 @@
 import InfiniteCarousel from '@/components/ui/InfiniteCarousel';
 import { urlFor } from '@/lib/sanity-client';
-import { TechnologiesSection, Technology } from '@/types/technologies-section';
+import { TechnologiesSection } from '@/types/technologies-section';
 import React from 'react';
 
 interface TechnologiesProps {
