@@ -19,6 +19,7 @@ export const projects = defineType({
       name: 'projects',
       title: 'Projects',
       type: 'array',
+      validation: (Rule) => Rule.max(9), // Limit to 9 items
       of: [
         {
           type: 'object',
