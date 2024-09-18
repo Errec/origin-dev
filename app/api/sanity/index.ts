@@ -8,4 +8,4 @@ export {
   getHeroSectionData,
   getTechnologiesSectionData,
 } from './landingPage';
-export { getProjectPageData } from './project/project';
+export { getProjectsPageData } from './projects/projects';
