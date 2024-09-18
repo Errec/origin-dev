@@ -2,7 +2,7 @@ import {seo} from './common/seo'
 import {blog} from './documents/blog'
 import {contact} from './documents/contact'
 import {landingPage} from './documents/landing-page'
-import {project} from './documents/project'
+import {projects} from './documents/projects'
 import {benefitsSection} from './objects/landingPage/benefits-section'
 import {contactSection} from './objects/landingPage/contact-section'
 import {heroSection} from './objects/landingPage/hero-section'
@@ -17,7 +17,7 @@ export const schemaTypes = [
   contactSection,
   landingPage,
   blog,
-  project,
+  projects,
   contact,
   seo,
 ]

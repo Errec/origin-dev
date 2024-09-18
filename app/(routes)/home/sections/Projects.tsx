@@ -1,5 +1,5 @@
 import MediaCard from '@/components/ui/MediaCard';
-import { ProjectsSection } from '@/types';
+import { ProjectsSection } from '@/types/projects-section';
 import React from 'react';
 
 type ProjectsProps = {
