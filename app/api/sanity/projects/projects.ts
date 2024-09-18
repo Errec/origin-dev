@@ -3,7 +3,6 @@ import { ProjectsPage } from '@/types/projects';
 
 export async function getProjectsPageData(): Promise<ProjectsPage> {
   try {
-    console.log('Executing Sanity query for projects page...');
     const query = `
       *[_type == 'projectsPage'][0] {
         pageTitle,
@@ -16,9 +15,7 @@ export async function getProjectsPageData(): Promise<ProjectsPage> {
         }
       }
     `;
-    console.log('Query:', query);
     const response = await sanityClient.fetch(query);
-    console.log('Sanity response:', JSON.stringify(response, null, 2));
     return response;
   } catch (error) {
     console.error('Error fetching project page data:', error);

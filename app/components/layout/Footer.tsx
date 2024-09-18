@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="w-full py-2 px-4 mt-auto flex justify-between items-center cursor-default bg-transparent"
+      className="z-100 relative w-full py-2 px-4 mt-auto flex justify-between items-center cursor-default bg-transparent"
       role="contentinfo"
     >
       <p className="font-light">
