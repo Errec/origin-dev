@@ -103,6 +103,16 @@ export default function ProjectsGallery({
     setSelectedProject(index);
   };
 
+  const handleModalClick = (e: React.MouseEvent) => {
+    // Close the modal if the click is on the backdrop or the image
+    if (
+      e.target === e.currentTarget ||
+      (e.target as HTMLElement).tagName === 'IMG'
+    ) {
+      setSelectedProject(null);
+    }
+  };
+
   return (
     <div
       ref={galleryRef}
@@ -156,7 +166,7 @@ export default function ProjectsGallery({
       {selectedProject !== null && (
         <div
           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[1000] transition-opacity duration-300"
-          onClick={() => setSelectedProject(null)}
+          onClick={handleModalClick}
         >
           <div
             className="bg-transparent text-white p-8 flex flex-col md:flex-row max-w-[95vw] w-full max-h-[95vh] overflow-hidden"
@@ -168,15 +178,15 @@ export default function ProjectsGallery({
                 alt={projectsPage.projects[selectedProject].subtitle}
                 width={1200}
                 height={900}
-                objectFit="cover"
-                className="rounded-md w-full h-auto"
+                className="rounded-md w-full h-auto object-cover cursor-pointer"
+                onClick={handleModalClick}
               />
             </div>
             <div className="w-full md:w-1/2 pl-0 md:pl-4 overflow-y-auto">
               <h2 className="text-3xl font-bold mb-4 text-amber-400">
                 {projectsPage.projects[selectedProject].subtitle}
               </h2>
-              <p className="text-2xl">
+              <p className="text-lg md:text-2xl">
                 {projectsPage.projects[selectedProject].description}
               </p>
             </div>
