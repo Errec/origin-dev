@@ -14,7 +14,7 @@ export default function About() {
         <div className="flex flex-col justify-center items-center h-full space-y-4">
           <span className="text-yellow-400 text-xl">ABOUT US</span>
           <h1 className="text-5xl md:text-7xl font-light text-center max-w-4xl">
-            Why we started <br /> OriginDev
+            Why we created <br /> OriginDev
           </h1>
           <span className="absolute bottom-8 text-sm">SCROLL TO EXPLORE</span>
         </div>
