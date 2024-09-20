@@ -17,10 +17,10 @@ export default async function About() {
           quality={100}
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center">
-          <span className="text-yellow-400 text-xl mb-4">
+          <span className="text-amber-400 font-normal text-4xl mb-4">
             {aboutData.pageTitle.toUpperCase()}
           </span>
-          <h1 className="text-5xl md:text-7xl font-light text-center max-w-4xl">
+          <h1 className="text-5xl md:text-7xl font-light text-center max-w-3xl">
             {aboutData.pageSubtitle}
           </h1>
           <span className="absolute bottom-8 text-sm">SCROLL TO EXPLORE</span>
@@ -28,7 +28,7 @@ export default async function About() {
       </section>
 
       {/* Second part: Styled objectives section with top padding */}
-      <section className="min-h-screen bg-gradient-to-b from-black to-gray-900 pt-36 px-8 pb-8">
+      <section className="min-h-screen bg-blackgit pt-36 px-8 pb-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-12 text-center text-yellow-400">
             Our Objectives
