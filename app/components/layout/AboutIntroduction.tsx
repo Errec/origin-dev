@@ -57,7 +57,13 @@ export default function AboutIntroduction({
 
   return (
     <section className="relative h-screen w-full scroll-container">
-      <Image src={backgroundImage} alt="Background image" fill quality={100} />
+      <Image
+        src={backgroundImage}
+        alt="Background image"
+        fill
+        className="object-cover object-center w-full h-full"
+        quality={100}
+      />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center">
         <span className="text-amber-400 font-normal text-4xl mb-4">
           {pageTitle.toUpperCase()}

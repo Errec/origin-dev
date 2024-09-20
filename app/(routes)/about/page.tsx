@@ -8,7 +8,7 @@ export default async function About() {
   const aboutData: AboutPage = await getAboutPageData();
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-black text-white relative">
       {/* First part: Full-screen background image */}
       <AboutIntroduction
         backgroundImage={aboutData.backgroundImage}
@@ -22,6 +22,6 @@ export default async function About() {
         id="about-objectives-section"
         objectives={aboutData.objectives}
       />
-    </div>
+    </main>
   );
 }

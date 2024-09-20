@@ -1,25 +1,43 @@
+'use client';
+
 import { AboutObjectivesSectionProps, Objective } from '@/types/about';
+import React, { useState } from 'react';
 
 export default function AboutObjectivesSection({
   id,
   objectives,
 }: AboutObjectivesSectionProps) {
+  const [selectedObjective, setSelectedObjective] = useState<number>(0);
+
   return (
-    <section id={id} className="bg-black pt-56 px-8 pb-8 relative">
-      <div className="max-w-6xl mx-auto relative -top-40">
-        <div className="grid md:grid-cols-2 gap-8">
+    <section
+      id={id}
+      className="bg-black flex flex-col md:flex-row h-[80vh] relative"
+    >
+      {/* Left column: List of objective titles */}
+      <div className="md:w-1/4 p-8">
+        <ul>
           {objectives.map((objective: Objective, index: number) => (
-            <div
+            <li
               key={index}
-              className="bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className={`cursor-pointer mb-4 transition-all duration-300 ${
+                selectedObjective === index
+                  ? 'text-5xl font-semibold text-amber-400'
+                  : 'text-2xl text-amber-400 hover:text-amber-300'
+              }`}
+              onClick={() => setSelectedObjective(index)}
             >
-              <h3 className="text-xl font-semibold mb-4 text-yellow-400">
-                {objective.title}
-              </h3>
-              <p className="text-gray-300">{objective.text}</p>
-            </div>
+              {objective.title}
+            </li>
           ))}
-        </div>
+        </ul>
+      </div>
+
+      {/* Right column: Selected objective content */}
+      <div className="md:w-3/4 p-8">
+        <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-tight">
+          {objectives[selectedObjective].text}
+        </h2>
       </div>
     </section>
   );
