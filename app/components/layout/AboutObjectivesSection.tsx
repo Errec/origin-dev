@@ -5,11 +5,8 @@ export default function AboutObjectivesSection({
   objectives,
 }: AboutObjectivesSectionProps) {
   return (
-    <section id={id} className="min-h-screen bg-black pt-36 px-8 pb-8">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center text-yellow-400">
-          Our Objectives
-        </h2>
+    <section id={id} className="bg-black pt-56 px-8 pb-8 relative">
+      <div className="max-w-6xl mx-auto relative -top-40">
         <div className="grid md:grid-cols-2 gap-8">
           {objectives.map((objective: Objective, index: number) => (
             <div

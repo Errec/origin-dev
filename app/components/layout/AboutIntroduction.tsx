@@ -66,13 +66,13 @@ export default function AboutIntroduction({
           {pageSubtitle}
         </h1>
         <button
-          className={`absolute bottom-8 text-sm cursor-pointer ${
+          className={`absolute bottom-20 text-sm cursor-pointer ${
             currentSection === 'top' ? 'opacity-100' : 'opacity-0'
           } transition-opacity duration-300`}
           onClick={handleClickScrollToExplore}
           aria-label="Scroll to explore"
         >
-          SCROLL TO EXPLORE
+          SCROLL TO FIND OUT
         </button>
       </div>
     </section>
