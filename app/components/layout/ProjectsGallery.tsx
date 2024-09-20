@@ -19,6 +19,7 @@ export default function ProjectsGallery({
   const galleryRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const adjustOpacityOnOverlap = useCallback(
     (img: HTMLElement, images: NodeListOf<Element>) => {
@@ -168,6 +169,17 @@ export default function ProjectsGallery({
     }
   };
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 640);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <div
       ref={galleryRef}
@@ -224,7 +236,8 @@ export default function ProjectsGallery({
           onClick={handleModalClick}
         >
           <div
-            className="bg-black bg-opacity-60 text-white p-8 rounded-lg shadow-lg flex flex-col md:flex-row max-w-[90vw] w-full max-h-[90vh] overflow-hidden"
+            className="bg-black bg-opacity-60 text-white p-8 rounded-lg shadow-lg flex flex-col md:flex-row max-w-[90vw] w-full overflow-hidden"
+            style={{ maxHeight: isSmallScreen ? '75vh' : '90vh' }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full md:w-1/2 pr-0 md:pr-4 mb-4 md:mb-0 flex justify-center items-center">
