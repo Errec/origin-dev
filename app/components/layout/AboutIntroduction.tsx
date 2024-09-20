@@ -22,6 +22,9 @@ export default function AboutIntroduction({
   const isInitialLoad = useRef(true);
 
   useEffect(() => {
+    // Scroll to the top when the component is mounted (on initial load)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const handleScroll = () => {
       const scrollThreshold = window.innerHeight * 0.5; // 50% of viewport height
       const shouldShowButton = window.scrollY < scrollThreshold;
