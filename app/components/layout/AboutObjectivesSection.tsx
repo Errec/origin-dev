@@ -16,18 +16,22 @@ export default function AboutObjectivesSection({
     >
       {/* Left column: List of objective titles */}
       <div className="md:w-1/4 p-8">
-        <ul>
+        <ul className="space-y-6">
           {objectives.map((objective: Objective, index: number) => (
             <li
               key={index}
-              className={`cursor-pointer mb-4 transition-all duration-300 ${
-                selectedObjective === index
-                  ? 'text-5xl font-semibold text-amber-400'
-                  : 'text-2xl text-amber-400 hover:text-amber-300'
-              }`}
+              className="cursor-pointer h-12 flex items-center"
               onClick={() => setSelectedObjective(index)}
             >
-              {objective.title}
+              <span
+                className={`transition-all duration-500 ease-in-out ${
+                  selectedObjective === index
+                    ? 'text-5xl font-semibold text-amber-400 opacity-100 scale-100 origin-left'
+                    : 'text-2xl text-amber-400 hover:text-amber-300 opacity-70 scale-75 origin-left'
+                }`}
+              >
+                {objective.title}
+              </span>
             </li>
           ))}
         </ul>

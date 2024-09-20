@@ -2,7 +2,7 @@
 
 import { useScrollToSection } from '@/hooks/useScrollToSection';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type AboutIntroductionProps = {
   backgroundImage: string;
@@ -18,6 +18,28 @@ export default function AboutIntroduction({
   scrollTarget,
 }: AboutIntroductionProps) {
   const { currentSection } = useScrollToSection(scrollTarget);
+  const [showButton, setShowButton] = useState(false);
+  const isInitialLoad = useRef(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollThreshold = window.innerHeight * 0.5; // 50% of viewport height
+      const shouldShowButton = window.scrollY < scrollThreshold;
+
+      if (isInitialLoad.current) {
+        isInitialLoad.current = false;
+        setShowButton(shouldShowButton);
+      } else {
+        setShowButton(shouldShowButton);
+      }
+    };
+
+    // Initial check
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     // Add custom CSS properties for transition
@@ -71,15 +93,15 @@ export default function AboutIntroduction({
         <h1 className="text-5xl md:text-7xl font-light text-center max-w-3xl">
           {pageSubtitle}
         </h1>
-        <button
-          className={`absolute bottom-20 text-sm cursor-pointer ${
-            currentSection === 'top' ? 'opacity-100' : 'opacity-0'
-          } transition-opacity duration-300`}
-          onClick={handleClickScrollToExplore}
-          aria-label="Scroll to explore"
-        >
-          SCROLL TO FIND OUT
-        </button>
+        {showButton && (
+          <button
+            className="absolute bottom-20 text-sm cursor-pointer text-white hover:text-amber-400 transition-colors duration-300"
+            onClick={handleClickScrollToExplore}
+            aria-label="Scroll to explore"
+          >
+            SCROLL TO FIND OUT
+          </button>
+        )}
       </div>
     </section>
   );
