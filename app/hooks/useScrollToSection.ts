@@ -1,32 +1,59 @@
-import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { MutableRefObject, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-gsap.registerPlugin(ScrollToPlugin);
+export function useScrollToSection(scrollTarget: string) {
+  const [currentSection, setCurrentSection] = useState('top');
+  const lastActionTime = useRef(Date.now());
 
-export function useScrollToSection(
-  scrollTarget: string,
-  hasScrolledRef: MutableRefObject<boolean>
-) {
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!hasScrolledRef.current && window.scrollY > 0) {
-        hasScrolledRef.current = true;
-        if (scrollTarget) {
-          gsap.to(window, {
-            duration: 1,
-            scrollTo: scrollTarget, // Scroll to the selector
-            ease: 'power2.inOut',
+  const scrollToSection = useCallback(
+    (direction: 'up' | 'down') => {
+      const now = Date.now();
+      if (now - lastActionTime.current < 500) return; // Debounce actions
+      lastActionTime.current = now;
+
+      if (direction === 'down' && currentSection === 'top') {
+        const targetElement = document.querySelector(scrollTarget);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.getBoundingClientRect().top + window.scrollY,
+            behavior: 'smooth',
           });
+          setCurrentSection('bottom');
         }
-        window.removeEventListener('scroll', handleScroll);
+      } else if (direction === 'up' && currentSection === 'bottom') {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        setCurrentSection('top');
+      }
+    },
+    [scrollTarget, currentSection]
+  );
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      scrollToSection(e.deltaY > 0 ? 'down' : 'up');
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        scrollToSection('down');
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        scrollToSection('up');
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [scrollTarget, hasScrolledRef]);
+  }, [scrollToSection]);
+
+  return { currentSection };
 }
