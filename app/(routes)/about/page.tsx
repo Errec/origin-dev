@@ -8,7 +8,7 @@ export default async function About() {
   const aboutData: AboutPage = await getAboutPageData();
 
   return (
-    <main className="min-h-screen bg-black text-white relative">
+    <main className="min-h-screen bg-black text-white relative overflow-auto">
       {/* First part: Full-screen background image */}
       <AboutIntroduction
         backgroundImage={aboutData.backgroundImage}
