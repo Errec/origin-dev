@@ -1,5 +1,5 @@
 import { sanityClient } from '@/lib/sanity-client';
-import { AboutPage } from '@/types'; // Assuming you've saved the type in a separate file
+import { AboutPage } from '@/types';
 
 export async function getAboutPageData(): Promise<AboutPage> {
   try {
