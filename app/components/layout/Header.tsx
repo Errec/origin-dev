@@ -3,7 +3,7 @@
 import Navbar from '@/components/common/Navbar';
 import { useHeaderScroll } from '@/hooks/useHeaderScroll';
 import { usePathname } from 'next/navigation';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 const navItems = [
   { name: 'Projects', href: '/projects' },
@@ -15,14 +15,14 @@ const navItems = [
 export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
-  const isAboutPage = pathname === '/about';
+  const isAnimated = pathname === '/about';
 
   const isHeaderVisible = useHeaderScroll(headerRef, undefined, {
-    disableHideOnScroll: isAboutPage,
+    disableHideOnScroll: isAnimated,
   });
 
   const headerClass =
-    isAboutPage || isHeaderVisible
+    isAnimated || isHeaderVisible
       ? 'opacity-100'
       : 'opacity-0 pointer-events-none';
 
