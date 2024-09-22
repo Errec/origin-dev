@@ -1,9 +1,15 @@
-import { Asset } from './hero-section'; // Adjust the import path if necessary
-
 export type ArticleData = {
   title: string;
-  content: any; // Consider using a more specific type for Portable Text content
-  titleImage: string | { asset: Asset };
+  content: any; // TODO: a more specific type for Portable Text content
+  titleImage:
+    | string
+    | {
+        asset: {
+          _id?: string;
+          _ref?: string;
+          url?: string;
+        };
+      };
   currentSlug: string;
   releaseDate: string;
 };

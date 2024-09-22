@@ -1,10 +1,7 @@
-export interface Asset {
+export interface HeroSection {
   _id?: string;
   _ref?: string;
   url?: string;
-}
-
-export interface HeroSection {
   title?: string;
   subtitle?: string;
   backgroundImage?: {

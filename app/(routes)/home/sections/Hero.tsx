@@ -1,5 +1,4 @@
 import CTAButton from '@/components/ui/CTAButton'; // Make sure this import is correct
-import { urlFor } from '@/lib/sanity-client';
 import { HeroSection } from '@/types/hero-section';
 import { ArrowRight } from 'lucide-react';
 import React, { Suspense } from 'react';
