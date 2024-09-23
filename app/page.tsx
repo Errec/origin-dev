@@ -1,48 +1,30 @@
-import Benefits from '@/(routes)/home/sections/Benefits';
-import Contact from '@/(routes)/home/sections/Contact';
-import Hero from '@/(routes)/home/sections/Hero';
-import Projects from '@/(routes)/home/sections/Projects';
-import Technologies from '@/(routes)/home/sections/Technologies';
+import HomePage from './(routes)/home/page';
 
-// Import the API functions for fetching section data
-import { getBenefitsSectionData } from '@/api/sanity/landingPage/benefits-section';
-import { getContactSectionData } from '@/api/sanity/landingPage/contact-section';
-import { getHeroSectionData } from '@/api/sanity/landingPage/hero-section';
-import { getProjectsSectionData } from '@/api/sanity/landingPage/projects-section';
-import { getTechnologiesSectionData } from '@/api/sanity/landingPage/technologies-section';
+export const revalidate = 30; // Revalidate every 30 seconds
 
-// Import types for the sections
-import { BenefitsSection } from '@/types/benefits-section';
-import { ContactSection } from '@/types/contact-section';
-import { HeroSection } from '@/types/hero-section';
-import { ProjectsSection } from '@/types/projects-section';
-import { TechnologiesSection } from '@/types/technologies-section';
+const minimumLoadTime = 5000; // 5 seconds
 
-interface HomePageProps {
-  benefitsData: BenefitsSection;
-  contactData: ContactSection & { blogPostCount: number };
-  heroData: HeroSection;
-  projectsData: ProjectsSection;
-  technologiesData: TechnologiesSection;
+async function ensureMinimumLoadTime<T>(
+  asyncFunction: () => Promise<T>
+): Promise<T> {
+  const startTime = Date.now();
+  const result = await asyncFunction();
+  const elapsedTime = Date.now() - startTime;
+
+  if (elapsedTime < minimumLoadTime) {
+    await new Promise((resolve) =>
+      setTimeout(resolve, minimumLoadTime - elapsedTime)
+    );
+  }
+
+  return result;
 }
 
-// This is now an async server-side component
-const HomePage = async () => {
-  const benefitsData = await getBenefitsSectionData();
-  const contactData = await getContactSectionData();
-  const heroData = await getHeroSectionData();
-  const projectsData = await getProjectsSectionData();
-  const technologiesData = await getTechnologiesSectionData();
+export default async function Home() {
+  await ensureMinimumLoadTime(async () => {
+    // Simulating load time to match the minimum load requirement
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
 
-  return (
-    <main>
-      <Hero heroSection={heroData} />
-      <Technologies technologiesSection={technologiesData} />
-      <Projects projectsSection={projectsData} />
-      <Benefits benefitsSection={benefitsData} />
-      <Contact contactSection={contactData} />
-    </main>
-  );
-};
-
-export default HomePage;
+  return <HomePage />;
+}
