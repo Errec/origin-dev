@@ -22,8 +22,7 @@ async function ensureMinimumLoadTime<T>(
 
 export default async function Home() {
   await ensureMinimumLoadTime(async () => {
-    // This is where your existing data fetching would occur in the parallel routes
-    // We're not actually fetching anything here, just simulating the time it might take
+    // Simulating load time to match the minimum load requirement
     await new Promise((resolve) => setTimeout(resolve, 0));
   });
 

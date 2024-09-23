@@ -1,18 +1,32 @@
-import BenefitsPage from './@benefits/page';
-import ContactPage from './@contact/page';
-import HeroPage from './@hero/page';
-import ProjectsPage from './@projects/page';
-import TechnologiesPage from './@technologies/page';
-import HomeLayout from './layout';
+import Benefits from './sections/Benefits';
+import Contact from './sections/Contact';
+import Hero from './sections/Hero';
+import Projects from './sections/Projects';
+import Technologies from './sections/Technologies';
 
-export default function HomePage() {
+// Import the API functions for fetching section data
+import { getBenefitsSectionData } from '@/api/sanity/landingPage/benefits-section';
+import { getContactSectionData } from '@/api/sanity/landingPage/contact-section';
+import { getHeroSectionData } from '@/api/sanity/landingPage/hero-section';
+import { getProjectsSectionData } from '@/api/sanity/landingPage/projects-section';
+import { getTechnologiesSectionData } from '@/api/sanity/landingPage/technologies-section';
+
+const HomePage = async () => {
+  const benefitsData = await getBenefitsSectionData();
+  const contactData = await getContactSectionData();
+  const heroData = await getHeroSectionData();
+  const projectsData = await getProjectsSectionData();
+  const technologiesData = await getTechnologiesSectionData();
+
   return (
-    <HomeLayout
-      hero={<HeroPage />}
-      technologies={<TechnologiesPage />}
-      projects={<ProjectsPage />}
-      benefits={<BenefitsPage />}
-      contact={<ContactPage />}
-    />
+    <main>
+      <Hero heroSection={heroData} />
+      <Technologies technologiesSection={technologiesData} />
+      <Projects projectsSection={projectsData} />
+      <Benefits benefitsSection={benefitsData} />
+      <Contact contactSection={contactData} />
+    </main>
   );
-}
+};
+
+export default HomePage;

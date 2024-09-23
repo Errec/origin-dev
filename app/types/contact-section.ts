@@ -15,3 +15,7 @@ export interface ContactSection {
     country: string;
   }>;
 }
+
+export interface BlogPostCount extends ContactSection {
+  blogPostCount: number;
+}
