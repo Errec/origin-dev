@@ -1,7 +1,7 @@
 export { urlFor } from '@/lib/sanity-client';
+export { getArticleData } from './/blog/article';
 export { getAboutPageData } from './about/about';
-export { getArticleData } from './article';
-export { getBlogData } from './blog';
+export { getBlogData } from './blog/blog';
 export { getContactPageData } from './contact/contact';
 export {
   getBenefitsSectionData,
