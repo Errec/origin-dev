@@ -15,11 +15,11 @@ export async function getContactSectionData(): Promise<
           openPositions,
           locations
         },
-        "blogPostCount": count(*[_type == "blog"])
+        "blogPostCount": count(*[_type == "blog"]) // Fetch blog post count here
       }
     `;
     const result = await sanityClient.fetch(query);
-    return { ...result.contactSection, blogPostCount: result.blogPostCount };
+    return { ...result.contactSection, blogPostCount: result.blogPostCount }; // Merge blogPostCount with contactSection data
   } catch (error) {
     console.error('Error fetching contact section data:', error);
     throw error;
