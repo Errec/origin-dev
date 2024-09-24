@@ -12,7 +12,7 @@ import { getHeroSectionData } from '@/api/sanity/landingPage/hero-section';
 import { getProjectsSectionData } from '@/api/sanity/landingPage/projects-section';
 import { getTechnologiesSectionData } from '@/api/sanity/landingPage/technologies-section';
 
-const minimumLoadTime = 1000; // 1 second
+const minimumLoadTime = 2000; // 2 seconds
 
 async function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
