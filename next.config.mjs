@@ -1,15 +1,15 @@
 const config = {
-  images : {
+  images: {
     remotePatterns: [
-      { 
+      {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
-        port: ''
-      }
+        port: '',
+      },
     ],
   },
   webpack(config, { dev }) {
-    if (dev) { 
+    if (dev) {
       config.devtool = 'eval-source-map'; // Fast source maps for development
     } else {
       config.devtool = 'source-map'; // Full source maps for production

@@ -4,10 +4,15 @@ import { TechnologiesSection } from '@/types/technologies-section';
 import React from 'react';
 
 interface TechnologiesProps {
-  technologiesSection: TechnologiesSection;
+  technologiesSection: TechnologiesSection | null;
 }
 
 const Technologies: React.FC<TechnologiesProps> = ({ technologiesSection }) => {
+  if (!technologiesSection) {
+    console.error('Technologies section data is missing');
+    return null;
+  }
+
   const technologies = technologiesSection.technologies.map((tech) => ({
     ...tech,
     logoUrl: tech.logo ? urlFor(tech.logo).url() : null,

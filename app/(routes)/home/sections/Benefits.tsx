@@ -3,10 +3,15 @@ import * as RadixIcons from '@radix-ui/react-icons';
 import React from 'react';
 
 interface BenefitsProps {
-  benefitsSection: BenefitsSection;
+  benefitsSection: BenefitsSection | null;
 }
 
 const Benefits: React.FC<BenefitsProps> = ({ benefitsSection }) => {
+  if (!benefitsSection) {
+    console.error('Benefits section data is missing');
+    return null;
+  }
+
   const getIconComponent = (iconName: string) => {
     const IconComponent = (RadixIcons as any)[iconName];
     if (!IconComponent) {

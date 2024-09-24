@@ -153,4 +153,17 @@
     outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
   }
+
+  @keyframes progress {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  .animate-progress {
+    animation: progress 1s linear forwards;
+  }
 }

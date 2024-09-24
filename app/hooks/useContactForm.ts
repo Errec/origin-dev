@@ -26,11 +26,9 @@ export const useContactForm = (formFields: CustomFormField[]) => {
             validator = z.string().email({ message: 'Invalid email address.' });
           }
           if (field.type === 'textarea') {
-            validator = z
-              .string()
-              .min(10, {
-                message: `${field.name} must be at least 10 characters.`,
-              });
+            validator = z.string().min(10, {
+              message: `${field.name} must be at least 10 characters.`,
+            });
           }
         }
         return { ...acc, [field.name]: validator };

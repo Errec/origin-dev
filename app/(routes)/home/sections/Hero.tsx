@@ -1,4 +1,4 @@
-import CTAButton from '@/components/ui/CTAButton'; // Make sure this import is correct
+import CTAButton from '@/components/ui/CTAButton';
 import { HeroSection } from '@/types/hero-section';
 import { ArrowRight } from 'lucide-react';
 import React, { Suspense } from 'react';
@@ -6,10 +6,19 @@ import React, { Suspense } from 'react';
 const VideoPlayer = React.lazy(() => import('@/components/ui/VideoPlayer'));
 
 interface HeroProps {
-  heroSection: HeroSection;
+  heroSection: HeroSection | null;
 }
 
 const Hero: React.FC<HeroProps> = ({ heroSection }) => {
+  if (!heroSection) {
+    console.error('Hero section data is missing');
+    return (
+      <div className="text-red-500 text-center mt-10">
+        Error: Hero section data is missing
+      </div>
+    );
+  }
+
   const videoUrl = heroSection.backgroundVideo?.asset?.url || null;
 
   return (
@@ -17,7 +26,9 @@ const Hero: React.FC<HeroProps> = ({ heroSection }) => {
       {videoUrl && (
         <Suspense
           fallback={
-            <div className="absolute top-0 left-0 w-full h-full bg-black animate-pulse flex items-center justify-center"></div>
+            <div className="absolute top-0 left-0 w-full h-full bg-black animate-pulse flex items-center justify-center">
+              Loading video...
+            </div>
           }
         >
           <VideoPlayer
@@ -32,13 +43,13 @@ const Hero: React.FC<HeroProps> = ({ heroSection }) => {
       <div className="absolute inset-0 flex items-center justify-center z-1 text-white">
         <div className="inline-block -space-y-2">
           <h1 className="text-[7vw] md:text-[6vw] lg:text-[5vw] font-light whitespace-nowrap text-center">
-            {heroSection?.title}
+            {heroSection.title || 'Welcome'}
           </h1>
           <div className="space-y-16">
             <p className="text-[3.5vw] md:text-[2.5vw] lg:text-[2vw] whitespace-nowrap ml-4">
-              {heroSection?.subtitle}
+              {heroSection.subtitle || 'Subtitle goes here'}
             </p>
-            {heroSection?.ctaButton && (
+            {heroSection.ctaButton && (
               <div className="ml-4">
                 <CTAButton
                   text={heroSection.ctaButton.text}
