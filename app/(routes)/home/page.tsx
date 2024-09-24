@@ -19,8 +19,6 @@ async function delay(ms: number): Promise<void> {
 }
 
 async function Content() {
-  const startTime = Date.now();
-
   try {
     await delay(minimumLoadTime); // Ensure minimum delay
 
