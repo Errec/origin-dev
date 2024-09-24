@@ -5,10 +5,15 @@ import Link from 'next/link';
 import React from 'react';
 
 interface ContactProps {
-  contactSection: ContactSection & { blogPostCount: number }; // Ensure blogPostCount is part of the props
+  contactSection: (ContactSection & { blogPostCount: number }) | null;
 }
 
 const Contact: React.FC<ContactProps> = ({ contactSection }) => {
+  if (!contactSection) {
+    console.error('Contact section data is missing');
+    return null;
+  }
+
   const formattedBlogCount = contactSection.blogPostCount
     .toString()
     .padStart(2, '0');
@@ -18,7 +23,6 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
       className="bg-black text-white min-h-screen flex flex-col justify-between p-8 md:p-24"
       aria-label="Contact Section"
     >
-      {/* Blog Title and Count */}
       <div className="flex-grow flex flex-col justify-center mb-12">
         <p className="text-sm uppercase tracking-wider mb-2 ml-1.5">
           {contactSection.smallTitle}
@@ -40,7 +44,6 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
         </div>
       </div>
 
-      {/* CTA and Contact Information */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
         <div className="col-span-1">
           <p className="text-lg sm:text-xl md:text-2xl mb-6 max-w-md uppercase font-light">
@@ -56,7 +59,6 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
           </div>
         </div>
 
-        {/* Business Enquiries and Open Positions */}
         <div className="col-span-1 grid grid-cols-2 gap-8">
           <div>
             <h2 className="text-sm font-bold mb-4">BUSINESS ENQUIRIES</h2>
@@ -77,7 +79,6 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
               </Link>
             </div>
           </div>
-
           <div>
             <h2 className="text-sm font-bold mb-4">OPEN POSITIONS</h2>
             <Link href={`mailto:${contactSection.openPositions?.email ?? ''}`}>
@@ -86,8 +87,6 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
               </AnimatedUnderline>
             </Link>
           </div>
-
-          {/* Locations */}
           {contactSection.locations?.map((location, index) => (
             <div key={index}>
               <h2 className="text-sm font-bold mb-4">{location.city}</h2>

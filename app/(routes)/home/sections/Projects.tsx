@@ -3,7 +3,7 @@ import { ProjectsSection } from '@/types/projects-section';
 import React from 'react';
 
 type ProjectsProps = {
-  projectsSection: ProjectsSection;
+  projectsSection: ProjectsSection | null;
 };
 
 export default function Projects({ projectsSection }: ProjectsProps) {
