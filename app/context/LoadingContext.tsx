@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import React, {
   createContext,
   ReactNode,
@@ -8,13 +9,13 @@ import React, {
   useState,
 } from 'react';
 
-// Constants
-const ANIMATION_DELAY_MS = 150;
+const ANIMATION_DELAY_MS = 300;
 
 interface LoadingContextType {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   animationReady: boolean;
+  triggerAnimation: number;
 }
 
 const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
@@ -28,17 +29,23 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [animationReady, setAnimationReady] = useState(false);
+  const [triggerAnimation, setTriggerAnimation] = useState(0);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsLoading(true);
+    setAnimationReady(false);
+    setTriggerAnimation((prev) => prev + 1);
+  }, [pathname]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
     if (!isLoading) {
-      // Set a timer to trigger animation after ANIMATION_DELAY_MS
       timer = setTimeout(() => {
         setAnimationReady(true);
       }, ANIMATION_DELAY_MS);
     } else {
-      // Reset animationReady when loading starts again
       setAnimationReady(false);
     }
 
@@ -51,6 +58,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
     isLoading,
     setIsLoading,
     animationReady,
+    triggerAnimation,
   };
 
   return (
