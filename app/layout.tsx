@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import LoadingWrapper from './components/common/LoadingWrapper'; // Client-side loading logic
 import { ThemeProvider } from './components/common/ThemeProvider';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
@@ -29,7 +30,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="flex-grow flex flex-col">{children}</main>
+          <main className="flex-grow flex flex-col">
+            <LoadingWrapper>
+              {children} {/* Wrap children with loading logic */}
+            </LoadingWrapper>
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
