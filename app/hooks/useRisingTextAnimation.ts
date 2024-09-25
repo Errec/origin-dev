@@ -1,3 +1,4 @@
+import { useLoading } from '@/context/LoadingContext';
 import { UseRisingTextAnimationProps } from '@/types/rising-text-animation';
 import gsap from 'gsap';
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -13,9 +14,14 @@ export const useRisingTextAnimation = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const { animationReady } = useLoading();
 
   const animate = useCallback(() => {
-    if (containerRef.current && (!hasAnimated || !triggerOnVisible)) {
+    if (
+      containerRef.current &&
+      (!hasAnimated || !triggerOnVisible) &&
+      animationReady
+    ) {
       gsap.fromTo(
         containerRef.current.children,
         {
@@ -34,7 +40,7 @@ export const useRisingTextAnimation = ({
         }
       );
     }
-  }, [delay, duration, stagger, hasAnimated, triggerOnVisible]);
+  }, [delay, duration, stagger, hasAnimated, triggerOnVisible, animationReady]);
 
   const resetAnimation = useCallback(() => {
     if (containerRef.current) {
@@ -52,13 +58,13 @@ export const useRisingTextAnimation = ({
 
   useLayoutEffect(() => {
     setIsClient(true);
-    if (!triggerOnVisible) {
+    if (!triggerOnVisible && animationReady) {
       animate();
     }
-  }, [animate, triggerOnVisible]);
+  }, [animate, triggerOnVisible, animationReady]);
 
   useLayoutEffect(() => {
-    if (isClient && triggerOnVisible) {
+    if (isClient && triggerOnVisible && animationReady) {
       if (isVisible) {
         animate();
       } else {
@@ -73,6 +79,7 @@ export const useRisingTextAnimation = ({
     isVisible,
     triggerOnVisible,
     memoizedTriggerOnChange,
+    animationReady,
   ]);
 
   return { containerRef, isClient };

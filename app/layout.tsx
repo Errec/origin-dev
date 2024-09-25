@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import LoadingWrapper from './components/common/LoadingWrapper';
 import { ThemeProvider } from './components/common/ThemeProvider';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
+import { LoadingProvider } from './context/LoadingContext';
 import './styles/globals.css';
 
 export const metadata: Metadata = {
@@ -22,16 +24,20 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <main className="flex-grow flex flex-col">{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <LoadingProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main className="flex-grow flex flex-col">
+              <LoadingWrapper>{children}</LoadingWrapper>
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </LoadingProvider>
       </body>
     </html>
   );

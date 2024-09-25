@@ -17,6 +17,7 @@
       "@/*": ["./app/*"],
       "@/api/*": ["./app/api/*"],
       "@/components/*": ["./app/components/*"],
+      "@/context/*": ["./app/context/*"],
       "@/content/*": ["./app/(routes)/*"],
       "@/lib/*": ["./app/lib/*"],
       "@/schemas/*": ["./app/schemas/*"],

@@ -164,6 +164,6 @@
   }
 
   .animate-progress {
-    animation: progress 1s linear forwards;
+    animation: progress 1.5s linear forwards;
   }
 }
