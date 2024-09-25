@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from 'react';
 
 interface LoadingAnimationProps {
-  isComplete: boolean;
-  isRouteChange: boolean;
+  isComplete?: boolean;
+  isRouteChange?: boolean;
 }
 
 const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
-  isComplete,
-  isRouteChange,
+  isComplete = false,
+  isRouteChange = false,
 }) => {
   const [progress, setProgress] = useState(0);
 
@@ -35,7 +35,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-50 bg-neutral-500 transition-transform duration-500 ease-in-out ${animationClass}`}
+      className={`fixed inset-0 z-50 bg-neutral-700 transition-transform duration-500 ease-in-out ${animationClass}`}
     >
       <div className="flex flex-col items-center justify-center h-full">
         <div className="relative">
