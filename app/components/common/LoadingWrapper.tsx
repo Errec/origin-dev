@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const MINIMUM_LOADING_TIME = 1500;
-const MAXIMUM_LOADING_TIME = 5000;
 
 export default function LoadingWrapper({
   children,
@@ -15,64 +14,43 @@ export default function LoadingWrapper({
 }) {
   const pathname = usePathname();
   const { isLoading, setIsLoading } = useLoading();
-  const [minLoadingComplete, setMinLoadingComplete] = useState(false);
-  const [assetsLoaded, setAssetsLoaded] = useState(false);
-
-  const checkMediaAssetsLoaded = () => {
-    const images = Array.from(document.images) as HTMLImageElement[];
-    const videos = Array.from(
-      document.getElementsByTagName('video')
-    ) as HTMLVideoElement[];
-
-    const allImagesLoaded = images.every(
-      (img) => img.complete && img.naturalWidth > 0
-    );
-    const allVideosLoaded = videos.every((video) => video.readyState >= 3);
-
-    return allImagesLoaded && allVideosLoaded;
-  };
+  const [showLoading, setShowLoading] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
+  const [isRouteChange, setIsRouteChange] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    setMinLoadingComplete(false);
-    setAssetsLoaded(false);
+    setShowLoading(true);
+    setIsComplete(false);
+    setIsRouteChange(pathname !== '/');
 
-    const minLoadingTimer = setTimeout(() => {
-      setMinLoadingComplete(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      setIsComplete(true);
     }, MINIMUM_LOADING_TIME);
 
-    const maxLoadingTimer = setTimeout(() => {
-      setAssetsLoaded(true);
-    }, MAXIMUM_LOADING_TIME);
-
-    const handleAssetLoaded = () => {
-      if (checkMediaAssetsLoaded()) {
-        setAssetsLoaded(true);
-      }
-    };
-
-    const observer = new MutationObserver(handleAssetLoaded);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    if (document.readyState === 'complete') {
-      handleAssetLoaded();
-    } else {
-      window.addEventListener('load', handleAssetLoaded);
-    }
-
-    return () => {
-      clearTimeout(minLoadingTimer);
-      clearTimeout(maxLoadingTimer);
-      window.removeEventListener('load', handleAssetLoaded);
-      observer.disconnect();
-    };
+    return () => clearTimeout(timer);
   }, [pathname, setIsLoading]);
 
   useEffect(() => {
-    if (minLoadingComplete && assetsLoaded) {
-      setIsLoading(false);
-    }
-  }, [minLoadingComplete, assetsLoaded, setIsLoading]);
+    if (isComplete) {
+      const hideTimer = setTimeout(() => {
+        setShowLoading(false);
+      }, 500); // Allow time for the curtain animation
 
-  return <>{isLoading ? <LoadingAnimation /> : children}</>;
+      return () => clearTimeout(hideTimer);
+    }
+  }, [isComplete]);
+
+  return (
+    <>
+      {showLoading && (
+        <LoadingAnimation
+          isComplete={isComplete}
+          isRouteChange={isRouteChange}
+        />
+      )}
+      {children}
+    </>
+  );
 }
