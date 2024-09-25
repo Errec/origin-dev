@@ -166,4 +166,17 @@
   .animate-progress {
     animation: progress 1.5s linear forwards;
   }
+
+  /* Loading animation specific styles */
+  .loading-text {
+    @apply text-5xl font-bold text-neutral-300;
+  }
+
+  .loading-bar {
+    @apply h-0.5 bg-neutral-600;
+  }
+
+  .loading-progress {
+    @apply h-full bg-neutral-300;
+  }
 }

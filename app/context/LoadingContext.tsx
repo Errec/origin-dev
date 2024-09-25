@@ -9,7 +9,7 @@ import React, {
   useState,
 } from 'react';
 
-const ANIMATION_DELAY_MS = 300;
+const ANIMATION_DELAY_MS = 500;
 
 interface LoadingContextType {
   isLoading: boolean;
