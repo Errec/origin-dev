@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const MINIMUM_LOADING_TIME = 1500;
-const MAXIMUM_LOADING_TIME = 5000; // 5 seconds maximum loading time
+const MAXIMUM_LOADING_TIME = 5000;
 
 export default function LoadingWrapper({
   children,
@@ -42,7 +42,7 @@ export default function LoadingWrapper({
     }, MINIMUM_LOADING_TIME);
 
     const maxLoadingTimer = setTimeout(() => {
-      setAssetsLoaded(true); // Force assets loaded after maximum time
+      setAssetsLoaded(true);
     }, MAXIMUM_LOADING_TIME);
 
     const handleAssetLoaded = () => {
@@ -51,10 +51,7 @@ export default function LoadingWrapper({
       }
     };
 
-    const observer = new MutationObserver(() => {
-      handleAssetLoaded();
-    });
-
+    const observer = new MutationObserver(handleAssetLoaded);
     observer.observe(document.body, { childList: true, subtree: true });
 
     if (document.readyState === 'complete') {
@@ -77,10 +74,5 @@ export default function LoadingWrapper({
     }
   }, [minLoadingComplete, assetsLoaded, setIsLoading]);
 
-  return (
-    <>
-      {isLoading && <LoadingAnimation />}
-      {!isLoading && children}
-    </>
-  );
+  return <>{isLoading ? <LoadingAnimation /> : children}</>;
 }
