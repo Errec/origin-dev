@@ -2,9 +2,10 @@ import { getContactPageData } from '@/api/sanity/contact/contact';
 import { getContactSectionData } from '@/api/sanity/landingPage/contact-section';
 import ContactForm from '@/components/layout/ContactForm';
 import AnimatedUnderline from '@/components/ui/AnimatedUnderline';
+import { RisingTextAnimation } from '@/components/ui/RisingTextAnimation'; // Import RisingTextAnimation
 import Link from 'next/link';
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge'; // Import twMerge if not already imported
 
 export const revalidate = 30; // Revalidate every 30 seconds
 
@@ -16,9 +17,11 @@ export default async function ContactPage() {
     <main className="bg-black text-white p-4 sm:p-6 md:p-8 lg:p-3.5 pt-24 sm:pt-24 md:pt-32 lg:pt-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-6 md:gap-12">
         <div className="flex items-start mb-2 sm:mb-6 lg:mb-0">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tighter">
-            {contactPageData.title}
-          </h1>
+          <RisingTextAnimation>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tighter">
+              {contactPageData.title}
+            </h1>
+          </RisingTextAnimation>
         </div>
         <div className="mb-2 sm:mb-0">
           <ContactForm
