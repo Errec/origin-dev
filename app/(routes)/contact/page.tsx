@@ -16,9 +16,9 @@ export default async function ContactPage() {
   return (
     <main className="bg-black text-white p-4 sm:p-6 md:p-8 lg:p-3.5 pt-24 sm:pt-24 md:pt-32 lg:pt-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-6 md:gap-12">
-        <div className="flex items-start mb-2 sm:mb-6 lg:mb-0">
+        <div className="flex items-start mb-6 md:mb-0">
           <RisingTextAnimation>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tighter">
+            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tighter">
               {contactPageData.title}
             </h1>
           </RisingTextAnimation>
