@@ -21,14 +21,10 @@ const Benefits: React.FC<BenefitsProps> = ({ benefitsSection }) => {
     return IconComponent;
   };
 
+  // Updated DashedSeparator component
   const DashedSeparator = () => (
-    <div className="w-4/5 mx-auto flex justify-between items-center md:hidden mt-8">
-      {[...Array(10)].map((_, index) => (
-        <React.Fragment key={index}>
-          <div className="w-8 h-[2px] bg-white" />
-          {index < 9 && <div className="flex-grow" />}
-        </React.Fragment>
-      ))}
+    <div className="w-full mx-auto flex justify-center items-center md:hidden mt-8">
+      <div className="w-4/5 h-px bg-white" />
     </div>
   );
 
@@ -40,6 +36,9 @@ const Benefits: React.FC<BenefitsProps> = ({ benefitsSection }) => {
       <div className="grid grid-cols-1 md:grid-cols-3">
         {benefitsSection.benefits.map(({ text, icon }, index) => {
           const Icon = getIconComponent(icon);
+          const isLastColumn = (index + 1) % 3 === 0;
+          const isLastItem = index === benefitsSection.benefits.length - 1;
+
           return (
             <div
               key={index}
@@ -47,14 +46,20 @@ const Benefits: React.FC<BenefitsProps> = ({ benefitsSection }) => {
             >
               <Icon className="w-16 h-16 text-amber-400 mb-8" />
               <p className="text-lg text-center font-light mb-8">{text}</p>
-              {index % 3 !== 2 && (
-                <div className="absolute top-8 right-0 w-[1px] h-[calc(100%-64px)] bg-white hidden md:block" />
+
+              {/* Vertical Divider (for md and above) */}
+              {!isLastColumn && (
+                <div className="absolute top-8 right-0 w-px h-[calc(100%-64px)] bg-white hidden md:block" />
               )}
-              {index < 3 && (
-                <div className="absolute bottom-0 left-12 right-12 h-[1px] bg-white hidden md:block" />
+
+              {/* Horizontal Divider (for md and above) */}
+              {index < benefitsSection.benefits.length - 3 && (
+                <div className="absolute bottom-0 left-12 right-12 h-px bg-white hidden md:block" />
               )}
-              {index < benefitsSection.benefits.length - 1 && (
-                <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-white md:hidden" />
+
+              {/* Horizontal Divider for small screens (updated) */}
+              {!isLastItem && (
+                <div className="absolute bottom-0 left-[10%] right-[10%] h-px bg-white md:hidden" />
               )}
             </div>
           );

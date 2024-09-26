@@ -1,4 +1,5 @@
 import CTAButton from '@/components/ui/CTAButton';
+import { RisingTextAnimation } from '@/components/ui/RisingTextAnimation';
 import { HeroSection } from '@/types/hero-section';
 import { ArrowRight } from 'lucide-react';
 import React, { Suspense } from 'react';
@@ -42,13 +43,17 @@ const Hero: React.FC<HeroProps> = ({ heroSection }) => {
       )}
       <div className="absolute inset-0 flex items-center justify-center z-1 text-white">
         <div className="inline-block -space-y-2">
-          <h1 className="text-[7vw] md:text-[6vw] lg:text-[5vw] font-light whitespace-nowrap text-center">
-            {heroSection.title || 'Welcome'}
-          </h1>
+          <RisingTextAnimation duration={1.5} speed={1}>
+            <h1 className="text-[7vw] md:text-[6vw] lg:text-[5vw] font-light whitespace-nowrap text-center">
+              {heroSection.title || 'Welcome'}
+            </h1>
+          </RisingTextAnimation>
           <div className="space-y-16">
-            <p className="text-[3.5vw] md:text-[2.5vw] lg:text-[2vw] whitespace-nowrap ml-4">
-              {heroSection.subtitle || 'Subtitle goes here'}
-            </p>
+            <RisingTextAnimation duration={1} speed={1.5}>
+              <p className="text-[3.5vw] md:text-[2.5vw] lg:text-[2vw] whitespace-nowrap ml-4">
+                {heroSection.subtitle || 'Subtitle goes here'}
+              </p>
+            </RisingTextAnimation>
             {heroSection.ctaButton && (
               <div className="ml-4">
                 <CTAButton

@@ -49,7 +49,7 @@ const Contact: React.FC<ContactProps> = ({ contactSection }) => {
           <p className="text-lg sm:text-xl md:text-2xl mb-6 max-w-md uppercase font-light">
             {contactSection.ctaPhrase}
           </p>
-          <div className="transform scale-75 origin-left">
+          <div className="transform scale-100 md:scale-75 origin-left">
             <CTAButton
               text="Contact Us"
               link="/contact"
