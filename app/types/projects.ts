@@ -12,6 +12,7 @@ export type Project = {
   photo: Image;
   subtitle: string;
   description: string;
+  techStack: string[];
   link: string;
 };
 

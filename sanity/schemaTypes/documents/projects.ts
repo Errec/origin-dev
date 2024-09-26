@@ -43,6 +43,12 @@ export const projects = defineType({
               type: 'text',
             }),
             defineField({
+              name: 'techStack',
+              title: 'Tech Stack',
+              type: 'array',
+              of: [{type: 'string'}],
+            }),
+            defineField({
               name: 'link',
               title: 'Project Link',
               type: 'url',

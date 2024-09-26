@@ -11,6 +11,7 @@ export async function getProjectsPageData(): Promise<ProjectsPage> {
           photo,
           subtitle,
           description,
+          techStack,
           link
         }
       }
