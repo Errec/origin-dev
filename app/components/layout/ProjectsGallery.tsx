@@ -1,20 +1,23 @@
 'use client';
+
 import ProjectModal from '@/components/ui/ProjectModal';
-import { urlFor } from '@/lib/sanity-client';
 import type { ProjectsPage as ProjectsPageType } from '@/types/projects';
 import gsap from 'gsap';
-import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const MIN_SCALE = 0.7;
 const MAX_SCALE = 1.2;
 const MOVEMENT_RANGE = 15;
 
-export default function ProjectsGallery({
-  projectsPage,
-}: {
+interface ProjectsGalleryClientProps {
   projectsPage: ProjectsPageType;
-}) {
+  initialProjectId?: string;
+}
+
+export default function ProjectsGalleryClient({
+  projectsPage,
+  initialProjectId,
+}: ProjectsGalleryClientProps) {
   const galleryRef = useRef<HTMLDivElement>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -159,35 +162,39 @@ export default function ProjectsGallery({
   }, []);
 
   return (
-    <div
-      ref={galleryRef}
-      className="fixed inset-0 overflow-hidden bg-black"
-      style={{ perspective: '1000px' }}
-    >
-      {projectsPage.projects.map((project, index) => (
-        <ProjectModal
-          key={index}
-          project={project}
-          index={index}
-          isSmallScreen={isSmallScreen}
-          onMouseEnter={() => handleImageHover(index)}
-          onMouseLeave={() => handleImageLeave(index)}
-        />
-      ))}
+    <div className="relative w-full h-screen overflow-hidden bg-black">
       <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ zIndex: hoveredProject !== null ? 50 : 150 }}
+        ref={galleryRef}
+        className="absolute inset-0"
+        style={{ perspective: '1000px' }}
       >
-        <div className="bg-black bg-opacity-50 rounded-lg p-6">
-          <h1
-            className="text-white text-4xl md:text-6xl font-bold text-center px-4"
-            style={{
-              textShadow:
-                '2px 2px 4px rgba(0,0,0,0.5), -2px -2px 4px rgba(0,0,0,0.5), 2px -2px 4px rgba(0,0,0,0.5), -2px 2px 4px rgba(0,0,0,0.5)',
-            }}
-          >
-            {projectsPage.pageSubtitle}
-          </h1>
+        {projectsPage.projects.map((project, index) => (
+          <ProjectModal
+            key={project.projectId}
+            project={project}
+            index={index}
+            isSmallScreen={isSmallScreen}
+            onMouseEnter={() => handleImageHover(index)}
+            onMouseLeave={() => handleImageLeave(index)}
+            initialProjectId={initialProjectId}
+            useQueryParams={true}
+          />
+        ))}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ zIndex: hoveredProject !== null ? 50 : 150 }}
+        >
+          <div className="bg-black bg-opacity-50 rounded-lg p-6">
+            <h1
+              className="text-white text-4xl md:text-6xl font-bold text-center px-4"
+              style={{
+                textShadow:
+                  '2px 2px 4px rgba(0,0,0,0.5), -2px -2px 4px rgba(0,0,0,0.5), 2px -2px 4px rgba(0,0,0,0.5), -2px 2px 4px rgba(0,0,0,0.5)',
+              }}
+            >
+              {projectsPage.pageSubtitle}
+            </h1>
+          </div>
         </div>
       </div>
     </div>

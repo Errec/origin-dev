@@ -13,7 +13,8 @@ import type { Project } from '@/types/projects';
 import { ExternalLink, Image as ImageIcon, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Suspense, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 interface ProjectModalProps {
   project: Project;
@@ -21,6 +22,8 @@ interface ProjectModalProps {
   isSmallScreen: boolean;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  initialProjectId?: string;
+  useQueryParams?: boolean;
 }
 
 const LazyImage = ({ project }: { project: Project }) => {
@@ -46,7 +49,7 @@ const LazyImage = ({ project }: { project: Project }) => {
         sizes="(max-width: 640px) 100vw, 50vw"
         className={`rounded-lg object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
         loading="lazy"
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
       />
     </>
   );
@@ -58,9 +61,33 @@ export default function ProjectModal({
   isSmallScreen,
   onMouseEnter,
   onMouseLeave,
+  initialProjectId,
+  useQueryParams = false,
 }: ProjectModalProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (useQueryParams) {
+      const openProjectId = searchParams.get('project') || initialProjectId;
+      setIsOpen(openProjectId === project.projectId);
+    }
+  }, [searchParams, project.projectId, initialProjectId, useQueryParams]);
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    if (useQueryParams) {
+      if (open) {
+        router.push(`?project=${project.projectId}`, { scroll: false });
+      } else {
+        router.push('?', { scroll: false });
+      }
+    }
+  };
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <div
           className="project-image-wrapper absolute w-1/3 h-1/3 flex flex-col items-start justify-center cursor-pointer"
@@ -105,11 +132,7 @@ export default function ProjectModal({
         </DialogDescription>
         <div className="flex flex-col sm:flex-row h-full rounded-lg overflow-hidden relative">
           <button
-            onClick={() =>
-              document.dispatchEvent(
-                new KeyboardEvent('keydown', { key: 'Escape' })
-              )
-            }
+            onClick={() => handleOpenChange(false)}
             className="absolute right-2 top-2 z-10 rounded-sm bg-black/50 p-1 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
           >
             <X className="h-4 w-4" />
