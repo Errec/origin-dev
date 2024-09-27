@@ -8,6 +8,7 @@ export async function getProjectsPageData(): Promise<ProjectsPage> {
         pageTitle,
         pageSubtitle,
         projects[] {
+          projectId,
           photo,
           subtitle,
           description,

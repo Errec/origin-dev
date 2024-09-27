@@ -9,6 +9,7 @@ export type Image = {
 };
 
 export type Project = {
+  projectId: string;
   photo: Image;
   subtitle: string;
   description: string;
