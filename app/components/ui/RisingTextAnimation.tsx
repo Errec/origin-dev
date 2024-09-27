@@ -49,7 +49,9 @@ export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
     }
 
     return () => {
-      gsap.killTweensOf(elements);
+      if (elements) {
+        gsap.killTweensOf(elements);
+      }
     };
   }, [animationReady, pathname, duration, delay, stagger]);
 
