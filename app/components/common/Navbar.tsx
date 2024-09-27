@@ -46,7 +46,7 @@ export default function Navbar({ items, headerVisible }: NavbarProps) {
       className="w-full flex items-center justify-between mx-auto"
       aria-label="Main navigation"
     >
-      <RisingTextAnimation triggerOnVisible isVisible={headerVisible}>
+      <RisingTextAnimation key={pathname}>
         <Link
           href="/"
           className="font-bold text-3xl bg-black dark:bg-transparent dark:text-stone-200 text-stone-100 focus:outline-none"
@@ -73,11 +73,7 @@ export default function Navbar({ items, headerVisible }: NavbarProps) {
       <div className="flex items-center space-x-4">
         {isBlogPage && <ModeToggle aria-label="Toggle Dark Mode" />}
         <div className="hidden md:block">
-          <RisingTextAnimation
-            triggerOnChange={[pathname]}
-            triggerOnVisible
-            isVisible={headerVisible}
-          >
+          <RisingTextAnimation key={pathname}>
             <ul className="flex items-center space-x-8">
               {items.map((item) => {
                 const isActive = isActiveLink(item.href);
@@ -85,9 +81,7 @@ export default function Navbar({ items, headerVisible }: NavbarProps) {
                   <li key={item.name} className="overflow-hidden">
                     <Link
                       href={item.href}
-                      className={`text-base uppercase tracking-wider relative pb-1 ${
-                        isActive ? 'active-link' : ''
-                      } block`}
+                      className={`text-base uppercase tracking-wider relative pb-1 ${isActive ? 'active-link' : ''} block`}
                       aria-current={isActive ? 'page' : undefined}
                     >
                       <AnimatedUnderline disabled={isActive}>
@@ -121,9 +115,7 @@ export default function Navbar({ items, headerVisible }: NavbarProps) {
                 <DropdownMenuItem key={item.name} asChild>
                   <Link
                     href={item.href}
-                    className={`block px-4 py-2 text-sm ${
-                      isActiveLink(item.href) ? 'bg-accent' : ''
-                    }`}
+                    className={`block px-4 py-2 text-sm ${isActiveLink(item.href) ? 'bg-accent' : ''}`}
                   >
                     {item.name}
                   </Link>

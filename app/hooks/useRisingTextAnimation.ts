@@ -1,86 +1,45 @@
 import { useLoading } from '@/context/LoadingContext';
 import { UseRisingTextAnimationProps } from '@/types/rising-text-animation';
 import gsap from 'gsap';
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const useRisingTextAnimation = ({
   delay = 0,
   duration = 0.5,
   stagger = 0.1,
-  triggerOnChange = [],
   triggerOnVisible = false,
-  isVisible = true,
+  isVisible: propIsVisible = true,
 }: UseRisingTextAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isClient, setIsClient] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const { animationReady } = useLoading();
+  const pathname = usePathname();
 
   const animate = useCallback(() => {
-    if (
-      containerRef.current &&
-      (!hasAnimated || !triggerOnVisible) &&
-      animationReady
-    ) {
-      gsap.fromTo(
-        containerRef.current.children,
-        {
-          yPercent: 100,
-          opacity: 0,
-        },
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: duration,
-          stagger: stagger,
-          delay: delay,
-          ease: 'power2.out',
-          clearProps: 'all',
-          onComplete: () => setHasAnimated(true),
-        }
-      );
-    }
-  }, [delay, duration, stagger, hasAnimated, triggerOnVisible, animationReady]);
+    const elements = containerRef.current?.children;
+    if (elements && animationReady) {
+      gsap.set(elements, { y: 100, opacity: 0 });
 
-  const resetAnimation = useCallback(() => {
-    if (containerRef.current) {
-      gsap.set(containerRef.current.children, {
-        yPercent: 0,
+      gsap.to(elements, {
+        y: 0,
         opacity: 1,
+        duration: duration,
+        stagger: stagger,
+        delay: delay,
+        ease: 'power2.out',
+        onStart: () => setIsVisible(true),
       });
     }
-  }, []);
+  }, [delay, duration, stagger, animationReady]);
 
-  const memoizedTriggerOnChange = useMemo(
-    () => triggerOnChange,
-    [triggerOnChange]
-  );
+  useEffect(() => {
+    setIsVisible(false); // Hide content immediately on route change
 
-  useLayoutEffect(() => {
-    setIsClient(true);
-    if (!triggerOnVisible && animationReady) {
+    if (!triggerOnVisible || (triggerOnVisible && propIsVisible)) {
       animate();
     }
-  }, [animate, triggerOnVisible, animationReady]);
+  }, [animate, triggerOnVisible, propIsVisible, pathname]);
 
-  useLayoutEffect(() => {
-    if (isClient && triggerOnVisible && animationReady) {
-      if (isVisible) {
-        animate();
-      } else {
-        setHasAnimated(false);
-        resetAnimation();
-      }
-    }
-  }, [
-    isClient,
-    animate,
-    resetAnimation,
-    isVisible,
-    triggerOnVisible,
-    memoizedTriggerOnChange,
-    animationReady,
-  ]);
-
-  return { containerRef, isClient };
+  return { containerRef, isVisible };
 };
