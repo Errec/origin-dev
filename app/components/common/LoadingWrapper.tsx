@@ -19,17 +19,24 @@ export default function LoadingWrapper({
   const [isRouteChange, setIsRouteChange] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    setShowLoading(true);
-    setIsComplete(false);
-    setIsRouteChange(pathname !== '/');
+    const isModalRoute = pathname.startsWith('/projects/');
+    if (!isModalRoute) {
+      setIsLoading(true);
+      setShowLoading(true);
+      setIsComplete(false);
+      setIsRouteChange(pathname !== '/');
 
-    const timer = setTimeout(() => {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setIsComplete(true);
+      }, MINIMUM_LOADING_TIME);
+
+      return () => clearTimeout(timer);
+    } else {
       setIsLoading(false);
+      setShowLoading(false);
       setIsComplete(true);
-    }, MINIMUM_LOADING_TIME);
-
-    return () => clearTimeout(timer);
+    }
   }, [pathname, setIsLoading]);
 
   useEffect(() => {

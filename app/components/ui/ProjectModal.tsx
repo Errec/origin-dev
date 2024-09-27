@@ -13,8 +13,8 @@ import type { Project } from '@/types/projects';
 import { ExternalLink, Image as ImageIcon, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
-import React, { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 interface ProjectModalProps {
   project: Project;
@@ -22,6 +22,8 @@ interface ProjectModalProps {
   isSmallScreen: boolean;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  initialProjectId?: string;
+  useQueryParams?: boolean;
 }
 
 const LazyImage = ({ project }: { project: Project }) => {
@@ -47,7 +49,7 @@ const LazyImage = ({ project }: { project: Project }) => {
         sizes="(max-width: 640px) 100vw, 50vw"
         className={`rounded-lg object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
         loading="lazy"
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
       />
     </>
   );
@@ -59,21 +61,28 @@ export default function ProjectModal({
   isSmallScreen,
   onMouseEnter,
   onMouseLeave,
+  initialProjectId,
+  useQueryParams = false,
 }: ProjectModalProps) {
   const router = useRouter();
-  const params = useParams();
+  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setIsOpen(params.projectId === project.projectId);
-  }, [params.projectId, project.projectId]);
+    if (useQueryParams) {
+      const openProjectId = searchParams.get('project') || initialProjectId;
+      setIsOpen(openProjectId === project.projectId);
+    }
+  }, [searchParams, project.projectId, initialProjectId, useQueryParams]);
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
-    if (open) {
-      router.push(`/projects/${project.projectId}`, { scroll: false });
-    } else {
-      router.push('/projects', { scroll: false });
+    if (useQueryParams) {
+      if (open) {
+        router.push(`?project=${project.projectId}`, { scroll: false });
+      } else {
+        router.push('?', { scroll: false });
+      }
     }
   };
 
