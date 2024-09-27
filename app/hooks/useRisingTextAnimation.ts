@@ -19,6 +19,7 @@ export const useRisingTextAnimation = ({
   const animate = useCallback(() => {
     const elements = containerRef.current?.children;
     if (elements && animationReady) {
+      setIsVisible(false);
       gsap.set(elements, { y: 100, opacity: 0 });
 
       gsap.to(elements, {

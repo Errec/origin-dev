@@ -25,26 +25,21 @@ export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
   const { animationReady } = useLoading();
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    setIsVisible(false);
-    setIsAnimating(true);
-
     const elements = containerRef.current?.children;
-
     if (elements && animationReady) {
+      setIsVisible(false);
       gsap.set(elements, { y: 100, opacity: 0 });
 
       gsap.to(elements, {
         y: 0,
         opacity: 1,
         duration,
-        delay,
         stagger,
+        delay,
         ease: 'power2.out',
         onStart: () => setIsVisible(true),
-        onComplete: () => setIsAnimating(false),
       });
     }
 
@@ -55,12 +50,14 @@ export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
     };
   }, [animationReady, pathname, duration, delay, stagger]);
 
-  const visibilityClass = isVisible || isAnimating ? 'visible' : 'invisible';
-
   return (
     <div
       ref={containerRef}
-      className={twMerge('overflow-hidden', visibilityClass, className)}
+      className={twMerge(
+        'overflow-hidden',
+        isVisible ? 'visible' : 'invisible',
+        className
+      )}
     >
       {children}
     </div>
