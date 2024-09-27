@@ -42,24 +42,27 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-- [] Add extra design @ about tbn page(keyboard image?)
-- [] Improve blog text output for code text boxes
-- [] organize components
-- [] error boundaries - erro components for the users
-- [] improve 404 layout
-- [] testing
-- [] phone input - countries
-- [] form backend, improve validation
-- [] organize files, folderds
-- [] remove sanity from root
-- [] organize css variables
-- [] add real assets and text
-- [] add text limit in some fields
-- [] documentation
-- [] image/videos optimization
-- [] apply zod to the rest os schemas/types
-- [] zustand?
-- [] docker
-- [] ci/cd
-- [] setup email
-- [] sanity admin route
+- [ ] Add extra design @ about tbn page(keyboard image?)
+- [ ] Improve blog text output for code text boxes
+- [ ] organize components
+- [ ] error boundaries - erro components for the users
+- [ ] improve 404 layout
+- [ ] testing
+- [ ] phone input - countries
+- [ ] form backend, improve validation
+- [ ] organize files, folderds
+- [ ] remove sanity from root
+- [ ] organize css variables
+- [ ] add real assets and text
+- [ ] add text limit in some fields
+- [ ] documentation
+- [ ] image/videos optimization
+- [ ] apply zod to the rest os schemas/types
+- [ ] zustand?
+- [ ] docker
+- [ ] ci/cd
+- [ ] setup email
+- [ ] sanity admin route
+- [ ] SEO
+- [ ] analytics
+- [ ] cache improvment 
