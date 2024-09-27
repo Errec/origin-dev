@@ -10,10 +10,10 @@ import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { urlFor } from '@/lib/sanity-client';
 import type { Project } from '@/types/projects';
-import { ExternalLink, X } from 'lucide-react';
+import { ExternalLink, Image as ImageIcon, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 
 interface ProjectModalProps {
   project: Project;
@@ -23,16 +23,34 @@ interface ProjectModalProps {
   onMouseLeave: () => void;
 }
 
-const LazyImage = ({ src, alt }: { src: string; alt: string }) => (
-  <Image
-    src={src}
-    alt={alt}
-    fill
-    sizes="(max-width: 640px) 100vw, 50vw"
-    className="rounded-lg object-cover"
-    loading="lazy"
-  />
-);
+const LazyImage = ({ project }: { project: Project }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  if (!project.photo) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded-lg">
+        <ImageIcon className="w-16 h-16 text-gray-400" />
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {isLoading && (
+        <Skeleton className="w-full h-full absolute inset-0 rounded-lg" />
+      )}
+      <Image
+        src={urlFor(project.photo).url()}
+        alt={project.subtitle || 'Project image'}
+        fill
+        sizes="(max-width: 640px) 100vw, 50vw"
+        className={`rounded-lg object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+        loading="lazy"
+        onLoadingComplete={() => setIsLoading(false)}
+      />
+    </>
+  );
+};
 
 export default function ProjectModal({
   project,
@@ -55,27 +73,35 @@ export default function ProjectModal({
         >
           <div className="relative w-full h-full p-4">
             <div className="project-image absolute inset-0">
-              <Image
-                src={urlFor(project.photo).url()}
-                alt={project.subtitle}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="rounded-xl object-cover"
-              />
+              {project.photo ? (
+                <Image
+                  src={urlFor(project.photo).url()}
+                  alt={project.subtitle || 'Project image'}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="rounded-xl object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded-xl">
+                  <ImageIcon className="w-12 h-12 text-gray-400" />
+                </div>
+              )}
             </div>
           </div>
           <p className="text-amber-400 text-2xl mt-2 text-left w-full px-2">
-            {project.subtitle}
+            {project.subtitle || 'Untitled Project'}
           </p>
         </div>
       </DialogTrigger>
       <DialogContent
-        className="max-w-[90vw] sm:max-w-[80vw] h-[90vh] sm:h-[600px] p-0 overflow-hidden bg-black/60"
+        className="max-w-[90vw] sm:max-w-[80vw] h-[90vh] sm:h-[600px] p-0 overflow-hidden bg-black/70"
         hideCloseButton
       >
-        <DialogTitle className="sr-only">{project.subtitle}</DialogTitle>
+        <DialogTitle className="sr-only">
+          {project.subtitle || 'Project Details'}
+        </DialogTitle>
         <DialogDescription className="sr-only">
-          Details about the project: {project.subtitle}
+          Details about the project: {project.subtitle || 'Untitled Project'}
         </DialogDescription>
         <div className="flex flex-col sm:flex-row h-full rounded-lg overflow-hidden relative">
           <button
@@ -91,20 +117,13 @@ export default function ProjectModal({
           </button>
           <div className="w-full sm:w-1/2 h-1/3 sm:h-full p-6 flex items-center justify-center">
             <div className="relative w-full h-full">
-              <Suspense
-                fallback={<Skeleton className="w-full h-full rounded-lg" />}
-              >
-                <LazyImage
-                  src={urlFor(project.photo).url()}
-                  alt={project.subtitle}
-                />
-              </Suspense>
+              <LazyImage project={project} />
             </div>
           </div>
           <div className="w-full sm:w-1/2 h-2/3 sm:h-full text-white p-6 flex flex-col">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-3xl font-bold text-amber-400">
-                {project.subtitle}
+                {project.subtitle || 'Untitled Project'}
               </h2>
               {isSmallScreen && project.link && (
                 <Link
@@ -118,7 +137,9 @@ export default function ProjectModal({
               )}
             </div>
             <ScrollArea className="flex-grow pr-4 mb-4">
-              <p className="text-lg sm:text-xl mb-6">{project.description}</p>
+              <p className="text-lg sm:text-xl mb-6">
+                {project.description || 'No description available.'}
+              </p>
             </ScrollArea>
             {project.techStack && project.techStack.length > 0 && (
               <div className="mt-auto">
