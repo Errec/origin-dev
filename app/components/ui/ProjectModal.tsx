@@ -13,7 +13,8 @@ import type { Project } from '@/types/projects';
 import { ExternalLink, Image as ImageIcon, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Suspense, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import React, { Suspense, useEffect, useState } from 'react';
 
 interface ProjectModalProps {
   project: Project;
@@ -59,8 +60,25 @@ export default function ProjectModal({
   onMouseEnter,
   onMouseLeave,
 }: ProjectModalProps) {
+  const router = useRouter();
+  const params = useParams();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(params.projectId === project.projectId);
+  }, [params.projectId, project.projectId]);
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    if (open) {
+      router.push(`/projects/${project.projectId}`, { scroll: false });
+    } else {
+      router.push('/projects', { scroll: false });
+    }
+  };
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <div
           className="project-image-wrapper absolute w-1/3 h-1/3 flex flex-col items-start justify-center cursor-pointer"
@@ -105,11 +123,7 @@ export default function ProjectModal({
         </DialogDescription>
         <div className="flex flex-col sm:flex-row h-full rounded-lg overflow-hidden relative">
           <button
-            onClick={() =>
-              document.dispatchEvent(
-                new KeyboardEvent('keydown', { key: 'Escape' })
-              )
-            }
+            onClick={() => handleOpenChange(false)}
             className="absolute right-2 top-2 z-10 rounded-sm bg-black/50 p-1 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
           >
             <X className="h-4 w-4" />
