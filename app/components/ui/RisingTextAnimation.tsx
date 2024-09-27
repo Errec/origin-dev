@@ -1,90 +1,68 @@
 'use client';
 
 import { useLoading } from '@/context/LoadingContext';
-import { RisingTextAnimationProps } from '@/types/rising-text-animation';
-import clsx from 'clsx';
 import gsap from 'gsap';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+
+interface RisingTextAnimationProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  duration?: number;
+  stagger?: number;
+}
 
 export const RisingTextAnimation: React.FC<RisingTextAnimationProps> = ({
   children,
   className = '',
   delay = 0,
   duration = 0.5,
-  speed = 1, // Default speed is 1 (normal speed)
   stagger = 0.1,
-  triggerOnChange = null,
-  triggerOnVisible = false,
-  isVisible = true,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { animationReady, triggerAnimation } = useLoading();
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
-
-  // Reset the animation and state on route change or when triggerOnChange changes
-  useEffect(() => {
-    setIsContentVisible(false); // Ensure it's hidden on route change or dependency change
-    setHasAnimated(false);
-  }, [triggerAnimation, triggerOnChange]);
+  const { animationReady } = useLoading();
+  const pathname = usePathname();
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    if (
-      animationReady &&
-      !hasAnimated &&
-      containerRef.current &&
-      (!triggerOnVisible || isVisible)
-    ) {
-      setHasAnimated(true);
+    setIsVisible(false);
+    setIsAnimating(true);
 
-      // Initially set the children to hidden
-      gsap.set(containerRef.current.children, {
-        y: 100,
-        opacity: 0,
-      });
+    const elements = containerRef.current?.children;
 
-      // Animate to make children visible
-      const animation = gsap.to(containerRef.current.children, {
+    if (elements && animationReady) {
+      gsap.set(elements, { y: 100, opacity: 0 });
+
+      gsap.to(elements, {
         y: 0,
         opacity: 1,
-        duration: duration,
-        delay: delay,
-        stagger: stagger,
+        duration,
+        delay,
+        stagger,
         ease: 'power2.out',
-        onStart: () => {
-          setIsContentVisible(true); // Make content visible only when animation starts
-        },
+        onStart: () => setIsVisible(true),
+        onComplete: () => setIsAnimating(false),
       });
-
-      // Adjust the speed using timeScale
-      animation.timeScale(speed);
     }
-  }, [
-    animationReady,
-    triggerAnimation,
-    isVisible,
-    duration,
-    delay,
-    speed, // Include 'speed' in dependencies
-    stagger,
-    triggerOnVisible,
-    hasAnimated,
-    triggerOnChange,
-  ]);
+
+    return () => {
+      if (elements) {
+        gsap.killTweensOf(elements);
+      }
+    };
+  }, [animationReady, pathname, duration, delay, stagger]);
+
+  const visibilityClass = isVisible || isAnimating ? 'visible' : 'invisible';
 
   return (
     <div
       ref={containerRef}
-      className={clsx(
-        'overflow-hidden',
-        className,
-        isContentVisible ? 'visible' : 'invisible'
-      )}
-      style={{ minHeight: '1em' }}
+      className={twMerge('overflow-hidden', visibilityClass, className)}
     >
-      {React.Children.map(children, (child) => (
-        <div>{child}</div>
-      ))}
+      {children}
     </div>
   );
 };

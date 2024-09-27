@@ -1,5 +1,6 @@
-import gsap from 'gsap';
-import { RefObject, useEffect, useState } from 'react';
+'use client';
+
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 interface UseHeaderScrollOptions {
   disableHideOnScroll?: boolean;
@@ -10,76 +11,60 @@ export function useHeaderScroll(
   onVisibilityChange?: (visible: boolean) => void,
   options: UseHeaderScrollOptions = {}
 ) {
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !options.disableHideOnScroll) {
-      const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
+    lastScrollY.current = window.scrollY;
 
-        let newIsVisible = true;
+    const handleScroll = () => {
+      if (!headerRef.current || options.disableHideOnScroll) return;
 
-        if (currentScrollY + windowHeight >= documentHeight - 50) {
-          // Near the bottom of the page, show the header
-          gsap.to(headerRef.current, {
-            y: '0%',
-            duration: 0.3,
-            ease: 'power2.out',
-          });
-        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          // Scrolling down, hide header
-          gsap.to(headerRef.current, {
-            y: '-100%',
-            duration: 0.3,
-            ease: 'power2.out',
-          });
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      let newIsVisible = isVisible;
+
+      if (currentScrollY + windowHeight >= documentHeight - 50) {
+        // Near the bottom of the page, show the header
+        if (!isVisible) {
+          newIsVisible = true;
+          setIsVisible(newIsVisible);
+          onVisibilityChange?.(newIsVisible);
+        }
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        // Scrolling down, hide header
+        if (isVisible) {
           newIsVisible = false;
-        } else {
-          // Scrolling up, show header
-          gsap.to(headerRef.current, {
-            y: '0%',
-            duration: 0.3,
-            ease: 'power2.out',
-          });
+          setIsVisible(newIsVisible);
+          onVisibilityChange?.(newIsVisible);
         }
-
-        setLastScrollY(currentScrollY);
-        setIsVisible(newIsVisible);
-        onVisibilityChange?.(newIsVisible);
-      };
-
-      const handleKeydown = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowDown') {
-          gsap.to(headerRef.current, {
-            y: '-100%',
-            duration: 0.3,
-            ease: 'power2.out',
-          });
-          setIsVisible(false);
-          onVisibilityChange?.(false);
-        } else if (event.key === 'ArrowUp') {
-          gsap.to(headerRef.current, {
-            y: '0%',
-            duration: 0.3,
-            ease: 'power2.out',
-          });
-          setIsVisible(true);
-          onVisibilityChange?.(true);
+      } else if (currentScrollY < lastScrollY.current) {
+        // Scrolling up, show header
+        if (!isVisible) {
+          newIsVisible = true;
+          setIsVisible(newIsVisible);
+          onVisibilityChange?.(newIsVisible);
         }
-      };
+      }
 
-      window.addEventListener('scroll', handleScroll);
-      window.addEventListener('keydown', handleKeydown);
+      lastScrollY.current = currentScrollY;
+    };
 
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-        window.removeEventListener('keydown', handleKeydown);
-      };
-    }
-  }, [lastScrollY, headerRef, onVisibilityChange, options.disableHideOnScroll]);
+    // Use requestAnimationFrame for smoother performance
+    let rafId: number;
+    const handleScrollWrapper = () => {
+      rafId = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener('scroll', handleScrollWrapper, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollWrapper);
+      cancelAnimationFrame(rafId);
+    };
+  }, [headerRef, isVisible, onVisibilityChange, options.disableHideOnScroll]);
 
   return isVisible;
 }
