@@ -5,11 +5,7 @@ import { Suspense } from 'react';
 
 export const revalidate = 30; // Revalidate every 30 seconds
 
-export default async function ProjectsPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function ProjectPage() {
   const projectsPage: ProjectsPageType = await getProjectsPageData();
 
   if (!projectsPage) {
@@ -17,15 +13,9 @@ export default async function ProjectsPage({
     return <div>No project page data available</div>;
   }
 
-  const initialProjectId =
-    typeof searchParams.project === 'string' ? searchParams.project : undefined;
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ProjectsGalleryClient
-        projectsPage={projectsPage}
-        initialProjectId={initialProjectId}
-      />
+      <ProjectsGalleryClient projectsPage={projectsPage} />
     </Suspense>
   );
 }
