@@ -7,12 +7,13 @@ import {
   DialogTrigger,
 } from '@/components/ui/Dialog';
 import { ScrollArea } from '@/components/ui/ScrollArea';
+import { Skeleton } from '@/components/ui/Skeleton';
 import { urlFor } from '@/lib/sanity-client';
 import type { Project } from '@/types/projects';
 import { ExternalLink, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 interface ProjectModalProps {
   project: Project;
@@ -21,6 +22,17 @@ interface ProjectModalProps {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }
+
+const LazyImage = ({ src, alt }: { src: string; alt: string }) => (
+  <Image
+    src={src}
+    alt={alt}
+    fill
+    sizes="(max-width: 640px) 100vw, 50vw"
+    className="rounded-lg object-cover"
+    loading="lazy"
+  />
+);
 
 export default function ProjectModal({
   project,
@@ -58,7 +70,7 @@ export default function ProjectModal({
         </div>
       </DialogTrigger>
       <DialogContent
-        className="max-w-[90vw] sm:max-w-[80vw] h-[90vh] sm:h-[600px] p-0 overflow-hidden bg-black/70"
+        className="max-w-[90vw] sm:max-w-[80vw] h-[90vh] sm:h-[600px] p-0 overflow-hidden bg-black/60"
         hideCloseButton
       >
         <DialogTitle className="sr-only">{project.subtitle}</DialogTitle>
@@ -72,20 +84,21 @@ export default function ProjectModal({
                 new KeyboardEvent('keydown', { key: 'Escape' })
               )
             }
-            className="absolute right-2 top-2 z-10 rounded-sm bg-black/70 p-1 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white md:focus:ring-transparent md:ring-transparent"
+            className="absolute right-2 top-2 z-10 rounded-sm bg-black/50 p-1 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
           >
             <X className="h-4 w-4" />
             <span className="sr-only">Close</span>
           </button>
           <div className="w-full sm:w-1/2 h-1/3 sm:h-full p-6 flex items-center justify-center">
             <div className="relative w-full h-full">
-              <Image
-                src={urlFor(project.photo).url()}
-                alt={project.subtitle}
-                fill
-                sizes="(max-width: 640px) 100vw, 50vw"
-                className="rounded-lg object-cover"
-              />
+              <Suspense
+                fallback={<Skeleton className="w-full h-full rounded-lg" />}
+              >
+                <LazyImage
+                  src={urlFor(project.photo).url()}
+                  alt={project.subtitle}
+                />
+              </Suspense>
             </div>
           </div>
           <div className="w-full sm:w-1/2 h-2/3 sm:h-full text-white p-6 flex flex-col">
