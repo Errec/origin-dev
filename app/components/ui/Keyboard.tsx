@@ -22,10 +22,10 @@ const keys = [
   ['space'],
 ];
 
-export default function Keyboard() {
+const Keyboard: React.FC = () => {
   return (
-    <div className="p-4 bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="grid gap-0.5 bg-white p-2 rounded-lg shadow-lg w-[720px]">
+    <div className="p-4 flex items-center justify-center">
+      <div className="grid gap-0.5 p-2 rounded-lg border-2 border-white">
         {keys.map((row, i) => (
           <div key={i} className="flex gap-0.5 justify-center">
             {row.map((key, j) => (
@@ -47,4 +47,6 @@ export default function Keyboard() {
       </div>
     </div>
   );
-}
+};
+
+export default Keyboard;
