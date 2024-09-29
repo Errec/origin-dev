@@ -4,6 +4,8 @@ import AboutIntroduction from '@/components/layout/AboutIntroduction';
 import AboutObjectivesSection from '@/components/layout/AboutObjectivesSection';
 import { AboutPage } from '@/types';
 
+export const revalidate = 30; // Revalidate every 30 seconds
+
 export default async function About() {
   const aboutData: AboutPage = await getAboutPageData();
 
