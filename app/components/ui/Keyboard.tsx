@@ -93,7 +93,10 @@ const Keyboard: React.FC<KeyboardProps> = ({ className, style }) => {
   return (
     <div
       className={twMerge(
-        clsx('p-4 flex items-center justify-center', className)
+        clsx(
+          'p-4 flex items-center justify-center pointer-events-none',
+          className
+        )
       )}
       style={style}
     >
@@ -103,8 +106,9 @@ const Keyboard: React.FC<KeyboardProps> = ({ className, style }) => {
             {row.map((key, j) => (
               <button
                 key={`${i}-${j}`}
+                data-key={key.toLowerCase()}
                 className={`
-                  bg-white text-black border border-gray-300 rounded
+                  bg-transparent text-white border border-white rounded
                   ${key === 'space' ? 'w-full' : 'w-10'}
                   ${['tab', 'caps lock', 'return', 'delete'].includes(key.toLowerCase()) ? 'w-16' : ''}
                   ${key === 'shift' ? 'w-20' : ''}
