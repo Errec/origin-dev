@@ -14,7 +14,7 @@ export default function AboutObjectivesSection({
   return (
     <section
       id={id}
-      className="bg-black flex flex-col md:flex-row min-h-[80vh] relative"
+      className="bg-black flex flex-col md:flex-row min-h-[80vh] relative top-12 md:top-0"
     >
       {/* Left column: List of objective titles */}
       <div className="md:w-1/4 py-4 px-4 md:py-8 md:px-8 top-12 mb-6 relative">
