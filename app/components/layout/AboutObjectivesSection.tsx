@@ -2,18 +2,52 @@
 
 import { Button } from '@/components/ui/Button';
 import Keyboard from '@/components/ui/Keyboard';
+import { useTypingAnimation } from '@/hooks/useTypingAnimation';
 import { AboutObjectivesSectionProps, Objective } from '@/types/about';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function AboutObjectivesSection({
   id,
   objectives,
 }: AboutObjectivesSectionProps) {
   const [selectedObjective, setSelectedObjective] = useState<number>(0);
+  const textRef = useRef<HTMLHeadingElement>(null);
+  const keyboardRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const { isAnimating } = useTypingAnimation({
+    text: objectives[selectedObjective].text,
+    textRef,
+    keyboardRef,
+    isVisible,
+  });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    const currentSectionRef = sectionRef.current;
+
+    if (currentSectionRef) {
+      observer.observe(currentSectionRef);
+    }
+
+    return () => {
+      if (currentSectionRef) {
+        observer.unobserve(currentSectionRef);
+      }
+    };
+  }, []);
 
   return (
     <section
       id={id}
+      ref={sectionRef}
       className="bg-black flex flex-col md:flex-row min-h-[80vh] relative top-12 md:top-0"
     >
       {/* Left column: List of objective titles */}
@@ -57,13 +91,22 @@ export default function AboutObjectivesSection({
       <div className="md:w-3/4 p-4 md:p-8 relative flex flex-col h-[38rem]">
         <div className="flex-grow overflow-auto">
           <h2
+            ref={textRef}
             className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl 
               font-light leading-tight mb-4 md:mb-8"
           >
-            {objectives[selectedObjective].text}
+            <span className="sr-only">
+              {objectives[selectedObjective].text}
+            </span>
+            <span aria-hidden="true">
+              {/* This span will be populated by the animation */}
+            </span>
           </h2>
         </div>
-        <div className="flex justify-center items-center w-full">
+        <div
+          ref={keyboardRef}
+          className="flex justify-center items-center w-full"
+        >
           <Keyboard
             className="top-0 md:top-32 relative transform scale-50 sm:scale-95 md:scale-100 lg:scale-125"
             style={{
