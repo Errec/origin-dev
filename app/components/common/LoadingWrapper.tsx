@@ -3,7 +3,7 @@
 import LoadingAnimation from '@/components/ui/LoadingAnimation';
 import { useLoading } from '@/context/LoadingContext';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const MINIMUM_LOADING_TIME = 1500;
 
