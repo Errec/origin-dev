@@ -42,7 +42,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-- [ ] Add extra design @ about tbn page(keyboard image?)
+- [x] Add extra design @ about tbn page(keyboard image?)
 - [ ] Improve blog text output for code text boxes
 - [ ] organize components
 - [ ] error boundaries - erro components for the users
@@ -58,7 +58,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [ ] documentation
 - [ ] image/videos optimization
 - [ ] apply zod to the rest os schemas/types
-- [ ] zustand?
+- [x] zustand? -> context
 - [ ] docker
 - [ ] ci/cd
 - [ ] setup email
